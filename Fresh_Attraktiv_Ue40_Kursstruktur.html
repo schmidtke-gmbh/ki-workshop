@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fresh &amp; Attraktiv Ü40 – Kursstruktur-Übersicht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:        #B84A62;
+    --brand-light:  #D67A8C;
+    --brand-soft:   #F5E2E5;
+    --gold:         #C99A4E;
+    --gold-soft:    #EFE0C2;
+    --mauve:        #3D2C35;
+    --orange:       #E8892A;
+    --orange-soft:  #FDF2E4;
+    --purple:       #7B5EA7;
+    --purple-soft:  #EEE8F6;
+    --blue:         #3A6EA8;
+    --blue-soft:    #E6EEF7;
+    --dark:         #1C1218;
+    --bg:           #F5F1EE;
+    --card:         #ffffff;
+    --text:         #2A2024;
+    --text-soft:    #6B5C63;
+    --border:       #E8DDD5;
+    --radius:       12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow Semi Condensed', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(140deg, var(--dark) 0%, var(--mauve) 60%, #5A3040 100%);
+    color: #fff;
+    padding: 64px 40px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,74,98,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,154,78,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: var(--gold-soft);
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 30px;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: 3.2em;
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 14px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 1.15em;
+    font-weight: 300;
+    color: rgba(255,255,255,0.72);
+    max-width: 600px;
+    margin: 0 auto 26px;
+    line-height: 1.5;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.78);
+    font-size: 0.8em;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  /* ─── STATS BAR ─────────────────────────────────────── */
+  .stats-bar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    gap: 0;
+  }
+  .stat {
+    text-align: center;
+    padding: 8px 28px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ─── MAIN CONTENT ───────────────────────────────────── */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ─── VORSCHLAG BANNER ──────────────────────────────── */
+  .suggestion-banner {
+    background: linear-gradient(135deg, #FEF8F0 0%, var(--orange-soft) 100%);
+    border: 1px solid #F0C98A;
+    border-left: 4px solid var(--orange);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .banner-icon { font-size: 1.35em; flex-shrink: 0; padding-top: 1px; }
+  .banner-text { font-size: 0.9em; color: var(--text); line-height: 1.5; }
+  .banner-text strong { color: var(--orange); font-weight: 700; }
+
+  /* ─── LEGEND ─────────────────────────────────────────── */
+  .legend-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .legend-block {}
+  .legend-heading {
+    font-size: 0.72em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 0.875em;
+    color: var(--text);
+  }
+  .l-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82em;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .l-video    { background: var(--gold-soft); color: #8B6820; }
+  .l-folie    { background: #FEE5D4; color: #B05A22; }
+  .l-anim     { background: var(--purple-soft); color: var(--purple); }
+  .l-download { background: var(--blue-soft); color: var(--blue); }
+  .l-vorschlag{ background: var(--orange-soft); color: var(--orange); }
+
+  .fmt-legend { display: flex; flex-direction: column; gap: 6px; }
+  .fmt-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.82em;
+    font-weight: 600;
+    width: fit-content;
+  }
+  .fp-th { background: #E6EEF7; color: #2C5282; }
+  .fp-wb { background: #E6F4EA; color: #276749; }
+  .fp-fv { background: #FEF3CD; color: #956B00; }
+
+  /* ─── PHASE HEADER ───────────────────────────────────── */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 44px 0 18px;
+  }
+  .phase-pill {
+    background: var(--mauve);
+    color: var(--gold);
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 24px;
+    white-space: nowrap;
+  }
+  .phase-line { flex: 1; height: 1px; background: var(--border); }
+  .phase-name {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--text-soft);
+    white-space: nowrap;
+  }
+
+  /* ─── MODULE CARDS ───────────────────────────────────── */
+  .module-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border-left: 4px solid var(--brand);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .module-card:hover { box-shadow: 0 4px 18px rgba(184,74,98,0.1); }
+  .module-card.open  { box-shadow: 0 6px 26px rgba(184,74,98,0.14); }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: background 0.15s;
+  }
+  .module-header:hover { background: rgba(184,74,98,0.02); }
+
+  .mod-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82em;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0;
+  }
+  .mod-info { flex: 1; min-width: 0; }
+  .mod-title {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--mauve);
+    line-height: 1.25;
+  }
+  .mod-sub {
+    font-size: 0.8em;
+    color: var(--text-soft);
+    margin-top: 2px;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+  .mod-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .mod-dur {
+    font-size: 0.78em;
+    color: var(--text-soft);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .mod-count {
+    font-size: 0.76em;
+    background: var(--brand-soft);
+    color: var(--brand);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .mod-chevron {
+    font-size: 0.85em;
+    color: var(--text-soft);
+    transition: transform 0.28s ease;
+    flex-shrink: 0;
+  }
+  .module-card.open .mod-chevron { transform: rotate(180deg); }
+
+  /* ─── LESSON LIST ────────────────────────────────────── */
+  .lessons {
+    display: none;
+    padding: 4px 20px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .module-card.open .lessons { display: block; }
+
+  .lesson {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--bg);
+  }
+  .lesson:last-child { border-bottom: none; }
+
+  .les-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .lesson.video    .les-icon { background: var(--gold-soft); color: #8B6820; }
+  .lesson.folie    .les-icon { background: #FEE5D4; color: #B05A22; }
+  .lesson.animation .les-icon { background: var(--purple-soft); color: var(--purple); }
+  .lesson.download .les-icon { background: var(--blue-soft); color: var(--blue); }
+  .lesson.vorschlag .les-icon { background: var(--orange-soft); color: var(--orange); }
+
+  .lesson.vorschlag {
+    background: linear-gradient(90deg, rgba(232,137,42,0.06) 0%, rgba(232,137,42,0.02) 100%);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    margin: 2px 0 2px -10px;
+    padding: 9px 10px 9px 14px;
+    border-bottom: none;
+  }
+
+  .les-body { flex: 1; min-width: 0; }
+  .les-title {
+    font-size: 0.93em;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+  }
+  .lesson.vorschlag .les-title { color: #7A4010; }
+
+  .les-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .les-dur {
+    font-size: 0.76em;
+    color: var(--text-soft);
+    font-weight: 400;
+  }
+
+  /* Format Badges */
+  .fb {
+    font-size: 0.68em;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.02em;
+  }
+  .fb.th { background: #E6EEF7; color: #2C5282; }
+  .fb.wb { background: #E6F4EA; color: #276749; }
+  .fb.fv { background: #FEF3CD; color: #956B00; }
+
+  /* Tag Badges */
+  .tb {
+    font-size: 0.66em;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tb.wichtig   { background: #FFEBE8; color: #C0392B; }
+  .tb.animation { background: var(--purple-soft); color: var(--purple); }
+  .tb.labor     { background: #E8F5E9; color: #276749; }
+  .tb.neu       { background: #E8F5E9; color: #1E7E44; }
+  .tb.vorschlag { background: var(--orange-soft); color: var(--orange); }
+  .tb.pdf       { background: var(--blue-soft); color: var(--blue); }
+
+  /* ─── CTA CARD ───────────────────────────────────────── */
+  .cta-card {
+    border: 2px dashed var(--orange);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin: 22px 0;
+    background: linear-gradient(135deg, var(--orange-soft) 0%, #FEF9F2 100%);
+  }
+  .cta-card.blut {
+    border-color: var(--brand);
+    background: linear-gradient(135deg, var(--brand-soft) 0%, #FDF8FA 100%);
+  }
+  .cta-card.highticket {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--gold-soft) 0%, #FBF6EC 100%);
+  }
+  .cta-label {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.66em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .cta-label.blut { background: var(--brand); }
+  .cta-label.highticket { background: var(--gold); color: var(--mauve); }
+  .cta-card h4 {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--mauve);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .cta-card p {
+    font-size: 0.88em;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .cta-card .jasmin-quote {
+    background: rgba(255,255,255,0.65);
+    border-left: 3px solid var(--brand);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 0.88em;
+    color: var(--mauve);
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .cta-card.blut .jasmin-quote { border-left-color: var(--brand); }
+  .cta-card.highticket .jasmin-quote { border-left-color: var(--gold); }
+  .cta-card .cta-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .cta-btn-wrap { margin-top: 14px; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 0.88em;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.02em;
+  }
+  .cta-btn.blut { background: var(--brand); }
+  .cta-btn.highticket { background: var(--gold); color: var(--mauve); }
+  .cta-btn.secondary-btn {
+    background: transparent;
+    border: 1.5px solid var(--text-soft);
+    color: var(--text-soft);
+  }
+
+  /* Inline upsell hint inside lesson */
+  .upsell-hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: rgba(201,154,78,0.08);
+    border: 1px solid rgba(201,154,78,0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 6px;
+    font-size: 0.8em;
+    color: #7A5B25;
+    line-height: 1.5;
+  }
+  .upsell-hint .uh-icon { flex-shrink: 0; font-size: 1em; }
+  .upsell-hint.blut-hint {
+    background: rgba(184,74,98,0.06);
+    border-color: rgba(184,74,98,0.25);
+    color: #6B2A3A;
+  }
+
+  /* ─── HINT CARD ──────────────────────────────────────── */
+  .hint-card {
+    background: linear-gradient(135deg, var(--gold-soft) 0%, #FBF5E8 100%);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    margin: 18px 0;
+  }
+  .hint-card p {
+    font-size: 0.88em;
+    color: var(--text);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .hint-card p strong { color: var(--mauve); }
+
+  /* ─── OUTRO ──────────────────────────────────────────── */
+  .outro {
+    background: linear-gradient(140deg, var(--mauve) 0%, var(--dark) 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 56px 40px;
+    text-align: center;
+    margin-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .outro::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,74,98,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .outro h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .outro .outro-sub {
+    font-size: 1em;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.55;
+    position: relative;
+  }
+  .outro-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .outro-btn {
+    display: inline-block;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.02em;
+  }
+  .outro-btn.primary   { background: var(--brand); color: #fff; }
+  .outro-btn.secondary { background: transparent; border: 2px solid rgba(255,255,255,0.28); color: rgba(255,255,255,0.82); }
+  .outro-note {
+    font-size: 0.76em;
+    color: rgba(255,255,255,0.35);
+    margin-top: 28px;
+    position: relative;
+  }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 680px) {
+    .hero { padding: 44px 20px 36px; }
+    .hero h1 { font-size: 2.2em; }
+    .stats-bar { padding: 14px 16px; }
+    .stat { padding: 8px 14px; }
+    .stat-num { font-size: 1.5em; }
+    .stat-label { font-size: 0.68em; }
+    .main { padding: 24px 14px 60px; }
+    .module-header { padding: 14px 14px; }
+    .mod-right { display: none; }
+    .lessons { padding: 4px 14px 14px; }
+    .legend-wrap { grid-template-columns: 1fr; }
+    .outro { padding: 40px 20px; border-radius: 12px; }
+    .outro h2 { font-size: 1.6em; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-badge">Online Kurs — Entwurf · Mai 2026</div>
+  <h1>Fresh &amp; Attraktiv <span>Ü40</span></h1>
+  <p class="subtitle">Die ganzheitliche Online-Masterclass für Frauen ab 40 — Hormone, Körper, Haut, Schlaf, Kraft und Mindset als ein verbundenes System.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📍 DACH-Markt</span>
+    <span class="hero-tag">👤 Jasmin Schmidtke</span>
+    <span class="hero-tag">⏱ 12-Wochen-Kern + 3 Monate Deep Integration</span>
+    <span class="hero-tag">💎 497 € · 797 € · 6.997 €</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STATS BAR
+     ═══════════════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">16</span>
+    <span class="stat-label">Module</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">45</span>
+    <span class="stat-label">Video-Lektionen</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">~8 h</span>
+    <span class="stat-label">Gesamtdauer</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">7</span>
+    <span class="stat-label">Animationen</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">16</span>
+    <span class="stat-label">Downloads/PDFs</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════════ -->
+<div class="main">
+
+  <!-- VORSCHLAG BANNER -->
+  <div class="suggestion-banner">
+    <div class="banner-icon">◆</div>
+    <div class="banner-text">
+      <strong>Agentur-Vorschläge von Schmidtke Consulting</strong> sind in der Kursstruktur orange markiert.
+      Dabei handelt es sich um zusätzliche Inhalte, PDFs, Protokolle und CTAs, die wir zur Steigerung des wahrgenommenen Kurswerts und zur Vorbereitung auf Premium-Angebote empfehlen — gerne sprechen wir einzelne Vorschläge durch.
+    </div>
+  </div>
+
+  <!-- LEGENDE: Inhaltstypen -->
+  <div class="legend-wrap">
+    <div class="legend-block">
+      <div class="legend-heading">Lektions-Typen</div>
+      <div class="legend-row"><div class="l-icon l-video">▶</div> Video-Lektion (regulärer Kursinhalt)</div>
+      <div class="legend-row"><div class="l-icon l-folie">◼</div> Folie / Grafik (Begleitmaterial)</div>
+      <div class="legend-row"><div class="l-icon l-anim">✦</div> Animation (Erklär-Animation)</div>
+      <div class="legend-row"><div class="l-icon l-download">↓</div> Download / PDF (Arbeitsmaterial)</div>
+      <div class="legend-row"><div class="l-icon l-vorschlag">◆</div> Vorschlag Schmidtke (Ergänzung)</div>
+    </div>
+    <div class="legend-block">
+      <div class="legend-heading">Video-Formate</div>
+      <div class="fmt-legend">
+        <div class="fmt-pill fp-th">🎙 Talking Head — Jasmin direkt in die Kamera</div>
+        <div class="fmt-pill fp-wb">🖊 Whiteboard — Erklärung am Whiteboard</div>
+        <div class="fmt-pill fp-fv">📊 Folien-Vortrag — Präsentation mit Slides</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       PHASE 1: FOUNDATION  (Wochen 0–4)
+       ════════════════════════════════════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-pill">Phase 1</div>
+    <div class="phase-line"></div>
+    <div class="phase-name">Foundation — Wochen 0–4</div>
+  </div>
+
+  <div class="hint-card">
+    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Vertrauen &amp; Autorität aufbauen. Die Teilnehmerin fühlt sich sofort gemeint, setzt ein sichtbares Commitment (Vorher-Foto, Workbook), und Jasmin beweist ihre Kompetenz durch Tiefe — ohne Überforderung. Jedes Modul endet mit einem Mini-Erfolgserlebnis.</p>
+  </div>
+
+  <!-- MODUL 0 -->
+  <div class="module-card" id="m0">
+    <div class="module-header" onclick="toggle('m0')">
+      <div class="mod-num">00</div>
+      <div class="mod-info">
+        <div class="mod-title">Start &amp; Willkommen</div>
+        <div class="mod-sub">Orientierung · Für wen ist dieser Kurs? · So nutzt du die Masterclass optimal</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 22 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Begrüßung von Jasmin — warum ich diesen Kurs gemacht habe</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Für wen ist dieser Kurs — und für wen nicht (ehrliche Einordnung)</div>
+          <div class="les-meta"><span class="les-dur">7 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">So nutzt du die Masterclass optimal — dein persönlicher Fahrplan</div>
+          <div class="les-meta"><span class="les-dur">6 min</span><span class="fb fv">📊 Folien-Vortrag</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Kurs-Workbook &amp; Tracking-Template (Gesamtpaket)</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 1 -->
+  <div class="module-card" id="m1">
+    <div class="module-header" onclick="toggle('m1')">
+      <div class="mod-num">01</div>
+      <div class="mod-info">
+        <div class="mod-title">Identitäts-Anker setzen</div>
+        <div class="mod-sub">Woche 1 · Vision-Übung · Self-Talk-Audit · Community-Commitment</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 35 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Wer will ich in 6 Monaten sein? — Visualisierungs-Übung</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Self-Talk-Audit: Was sagst du dir täglich über deinen Körper?</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Werte-Mapping: Von wer ich war zu wer ich werden will</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Identitäts-Workbook „Wer bin ich in 6 Monaten?"</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Community-Onboarding-Ritual — Vorher-Foto hochladen + Vorstellung (Commitment-Boost)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 2 -->
+  <div class="module-card" id="m2">
+    <div class="module-header" onclick="toggle('m2')">
+      <div class="mod-num">02</div>
+      <div class="mod-info">
+        <div class="mod-title">Dein Körper Ü40 — das System verstehen</div>
+        <div class="mod-sub">Woche 2 · Östrogen · Progesteron · Testosteron · DHEA · Cortisol · Schilddrüse</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 45 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Östrogen, Progesteron &amp; Testosteron — einfach erklärt</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="tb animation">ANIMATION</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">DHEA, Cortisol &amp; Schilddrüse — die stillen Akteure Ü40</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Symptom-Karte: Was sagt dein Körper dir gerade?</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb fv">📊 Folien-Vortrag</span></div>
+        </div>
+      </div>
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Der Hormon-Kreislauf — Zusammenspiel der Botenstoffe</div>
+          <div class="les-meta"><span class="les-dur">7 min</span><span class="tb animation">ANIMATION</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Hormon-Cheat-Sheet PDF (1 Seite — alle Hormone auf einen Blick)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 3 -->
+  <div class="module-card" id="m3">
+    <div class="module-header" onclick="toggle('m3')">
+      <div class="mod-num">03</div>
+      <div class="mod-info">
+        <div class="mod-title">Lab Literacy &amp; Symptom-Mapping</div>
+        <div class="mod-sub">Woche 3 · Die 12 wichtigsten Blutwerte · Arztgespräch meistern · Referenzbereiche verstehen</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 40 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Die 12 wichtigsten Blutwerte ab Ü40 — was du kennen musst</div>
+          <div class="les-meta"><span class="les-dur">15 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span><span class="tb labor">LABOR</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Bluttest beim Hausarzt — was du sagst, was du bekommst</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span><span class="tb labor">LABOR</span></div>
+        </div>
+      </div>
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Referenzbereich vs. Optimal-Bereich — der entscheidende Unterschied</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="tb animation">ANIMATION</span><span class="tb labor">LABOR</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Blutwert-Tracking-Vorlage &amp; Arztgespräch-Leitfaden</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span><span class="tb labor">LABOR</span></div>
+          <div class="upsell-hint blut-hint">
+            <span class="uh-icon">🩸</span>
+            <span><strong>Jasmin im Video:</strong> „Du weißt jetzt, welche Werte du brauchst. Du hast zwei Möglichkeiten: Dein Arzt — oder du lässt es bei mir machen und bekommst eine umfassende, ganzheitliche Analyse. Der Link dazu ist in der Kursbeschreibung."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 4 -->
+  <div class="module-card" id="m4">
+    <div class="module-header" onclick="toggle('m4')">
+      <div class="mod-num">04</div>
+      <div class="mod-info">
+        <div class="mod-title">Energie-Audit &amp; Quick Wins</div>
+        <div class="mod-sub">Woche 4 · 5 Sofort-Hebel · Eiweiß · Licht · Wasser · Muskeln</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 38 min</span>
+        <span class="mod-count">6 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Die 5 größten Energie-Hebel für Frauen Ü40 — Pareto für deinen Körper</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Eiweiß-Ziel: Warum 30g pro Mahlzeit der Game-Changer ist</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Blutzucker &amp; Energie — der direkte Zusammenhang</div>
+          <div class="les-meta"><span class="les-dur">6 min</span><span class="tb animation">ANIMATION</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Morgenlicht, Wasserhaushalt &amp; Muskel-Anker — die drei Morning Wins</div>
+          <div class="les-meta"><span class="les-dur">7 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 7-Tage Energie-Tracking-Tabelle</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: 7-Tage Quick-Win-Challenge-Karte (druckbar, Community-Teilen)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA NACH PHASE 1 -->
+  <div class="cta-card blut">
+    <div class="cta-label blut">🩸 Upsell — Blutanalyse</div>
+    <h4>Du weißt jetzt, was dein Körper braucht — aber weißt du, wo du gerade stehst?</h4>
+    <p>Nach Woche 4 hat die Teilnehmerin das Fundament und versteht, warum Blutwerte der entscheidende Faktor sind. Das ist der erste natürliche Upsell-Moment auf Jasmins Blutanalyse.</p>
+    <div class="jasmin-quote">
+      „Du weißt jetzt, wie dein Hormonsystem funktioniert. Aber ohne zu wissen, wo du gerade stehst, tappst du im Dunkeln. Ich biete dir die Möglichkeit, deine Werte ganzheitlich mit mir auszuwerten — nicht nur Referenzbereiche, sondern was für DICH optimal ist. Den Link findest du unten."
+    </div>
+    <p><strong>Platzierung:</strong> Trigger-E-Mail nach Modul 4 abschließen + Hinweis im Video-Abschluss von Modul 3.</p>
+    <div class="cta-options">
+      <span class="cta-btn blut">→ Blutanalyse mit Jasmin buchen</span>
+      <span class="cta-btn secondary-btn">Mehr erfahren</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       PHASE 2: RESET  (Wochen 5–8)
+       ════════════════════════════════════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-pill">Phase 2</div>
+    <div class="phase-line"></div>
+    <div class="phase-name">Reset — Wochen 5–8</div>
+  </div>
+
+  <div class="hint-card">
+    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Die Teilnehmerin erkennt die Tiefe des Problems. Ernährung, Schlaf, Bewegung und Mikronährstoffe greifen ineinander — das schafft das Gefühl: <em>„Ich brauche mehr als Einzelmaßnahmen."</em> Jedes Modul endet mit konkreten, umsetzbaren Handlungsschritten.</p>
+  </div>
+
+  <!-- MODUL 5 -->
+  <div class="module-card" id="m5">
+    <div class="module-header" onclick="toggle('m5')">
+      <div class="mod-num">05</div>
+      <div class="mod-info">
+        <div class="mod-title">Hormonfreundliche Ernährung</div>
+        <div class="mod-sub">Woche 5 · Anti-Diät-Frame · Blutzucker-Stabilität · Phyto-Östrogene · Leberunterstützung</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 42 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Anti-Diät-Frame: Warum Kalorienrechnen ab Ü40 das falsche Spiel ist</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Blutzucker-Stabilität im Alltag — praktisch erklärt</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Phyto-Östrogene &amp; Leberunterstützung — was wirklich hilft</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="tb animation">ANIMATION</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Was wirklich auf den Teller kommt — konkrete Beispiele ohne Perfektionsdruck</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 7-Tage Hormon-Menü mit 7 hormonfreundlichen Rezepten</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 6 -->
+  <div class="module-card" id="m6">
+    <div class="module-header" onclick="toggle('m6')">
+      <div class="mod-num">06</div>
+      <div class="mod-info">
+        <div class="mod-title">Schlaf, Cortisol &amp; Nervensystem</div>
+        <div class="mod-sub">Woche 6 · Cortisol-Tagesrhythmus · 4 Abendrituale · Polyvagal-Basics · Atem-Reset</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 36 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Cortisol-Tagesrhythmus — wie er dein gesamtes Leben steuert</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="tb animation">ANIMATION</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">4 Abendrituale die wirklich funktionieren — und warum</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Polyvagal-Basics &amp; Atem-Reset: 3 Minuten für dein Nervensystem</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 2-Wochen Schlaf-Protokoll &amp; Abendrituale-Planer</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 7 -->
+  <div class="module-card" id="m7">
+    <div class="module-header" onclick="toggle('m7')">
+      <div class="mod-num">07</div>
+      <div class="mod-info">
+        <div class="mod-title">Krafttraining &amp; Knochengesundheit</div>
+        <div class="mod-sub">Woche 7 · Sarkopenie · Osteoporose · 20-Min-Training zuhause · Kein Studio nötig</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 48 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Sarkopenie &amp; Osteoporose: Warum Krafttraining dein stärkstes Schutzschild ist</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Krafttraining-Mythen für Frauen Ü40 — was dich gebremst hat</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">20-Min Vollkörper-Training für Ü40 — mach mit! (zuhause, kein Studio)</div>
+          <div class="les-meta"><span class="les-dur">22 min</span><span class="fb th">🎙 Talking Head</span><span class="tb neu">NEU</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 8-Wochen Trainingsplan (3×/Woche, kein Studio nötig)</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Video-Bibliothek mit 4 weiteren Trainings-Einheiten (Oberkörper, Unterkörper, Core, Mobility)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span><span class="tb neu">NEU</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 8 -->
+  <div class="module-card" id="m8">
+    <div class="module-header" onclick="toggle('m8')">
+      <div class="mod-num">08</div>
+      <div class="mod-info">
+        <div class="mod-title">Mikronährstoffe &amp; Supplementierung</div>
+        <div class="mod-sub">Woche 8 · Vit D · B12 · Omega-3 · Magnesium · Eisen · Kollagen — was wirklich wirkt</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 36 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Was wirklich wirkt: Vit D, B12, Omega-3 — die Datenlage klar erklärt</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Magnesium, Eisen, Kollagen — wann ja, wann nein, was kaufen</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Qualität, Dosierung &amp; häufige Fehler beim Supplementieren</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Supplement-Checkliste mit Qualitätskriterien &amp; Dosierungsübersicht</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+          <div class="upsell-hint blut-hint">
+            <span class="uh-icon">⚠️</span>
+            <span><strong>Jasmin im Video (wichtiger Hinweis):</strong> „Du weißt jetzt, dass Mikronährstoffe wirklich nur auf Basis deiner Blutwerte supplementiert werden sollten. Wenn du zum Beispiel Zink nimmst und du bist schon im Überzink — haust du dir das Problem erst rein. Deshalb: entweder beim Arzt testen lassen, oder bei mir — und du bekommst eine umfassende Analyse, die genau auf dich zugeschnitten ist."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA NACH PHASE 2 -->
+  <div class="cta-card blut">
+    <div class="cta-label blut">🩸 Upsell — Blutanalyse (stärkster Moment)</div>
+    <h4>Mikronährstoffe, Hormone, Schlaf — alles hängt an deinen individuellen Werten.</h4>
+    <p>Nach Modul 8 ist dies der psychologisch stärkste Upsell-Moment: Die Teilnehmerin hat gerade gelernt, dass blindes Supplementieren schadet. Sie versteht die Komplexität — und fühlt, dass sie ihre eigenen Werte braucht.</p>
+    <div class="jasmin-quote">
+      „Du hast jetzt verstanden, warum Zink ohne Blutwert gefährlich sein kann. Oder Eisen. Oder Vitamin D in der falschen Dosis. Dieses Wissen ist wertvoll — aber es kann nichts ausrichten, wenn du nicht weißt, wo du gerade stehst. Ich mache das mit dir. Eine umfassende Blutanalyse, ausgewertet von mir, mit konkretem Plan was du jetzt brauchst — und was du weglässt."
+    </div>
+    <p><strong>Platzierung:</strong> Am Ende von Modul 8 im Video + automatische Trigger-Mail nach Abschluss. Dies ist kein separates Modul — sondern Teil des Video-Abschlusses.</p>
+    <div class="cta-options">
+      <span class="cta-btn blut">→ Blutanalyse mit Jasmin buchen</span>
+      <span class="cta-btn secondary-btn">Reicht mir der Hausarzt?</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       PHASE 3: INTEGRATION  (Wochen 9–12)
+       ════════════════════════════════════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-pill">Phase 3</div>
+    <div class="phase-line"></div>
+    <div class="phase-name">Integration — Wochen 9–12</div>
+  </div>
+
+  <div class="hint-card">
+    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Aha-Momente &amp; Differenzierung. Inhalte, die die Teilnehmerin nirgendwo sonst bekommt — Tabu-Themen, Stil, Ausstrahlung. Sie fühlt sich ermächtigt. Gleichzeitig wächst die Erkenntnis: <em>„Die Umsetzung muss zu MIR passen."</em> Vorbereitung auf die Dienstleistungs-Brücke.</p>
+  </div>
+
+  <!-- MODUL 9 -->
+  <div class="module-card" id="m9">
+    <div class="module-header" onclick="toggle('m9')">
+      <div class="mod-num">09</div>
+      <div class="mod-info">
+        <div class="mod-title">Haut von innen &amp; außen</div>
+        <div class="mod-sub">Woche 9 · Mikrobiom · Darm-Haut-Achse · 3 Wirkstoffe die zählen · Minimalistische Routine</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 32 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson animation">
+        <div class="les-icon">✦</div>
+        <div class="les-body">
+          <div class="les-title">Animation: Mikrobiom &amp; die Darm-Haut-Achse — was Hautbild wirklich bestimmt</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="tb animation">ANIMATION</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">3 Wirkstoffe die wirklich zählen — alles andere kannst du weglassen</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Minimalistische Außen-Routine Ü40 — weniger ist mehr</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb fv">📊 Folien-Vortrag</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Hautpflege-Guide „3 Wirkstoffe, 3 Schritte" (druckbar)</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 10 -->
+  <div class="module-card" id="m10">
+    <div class="module-header" onclick="toggle('m10')">
+      <div class="mod-num">10</div>
+      <div class="mod-info">
+        <div class="mod-title">Haare, Beckenboden &amp; Sexualität</div>
+        <div class="mod-sub">Woche 10 · Haarwachstum · Inkontinenz · Libido · Vaginalgesundheit — ehrlich &amp; tabufrei</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 38 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Haarwachstum ab Ü40 — ehrlich erklärt (der Hormon-Zusammenhang)</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span><span class="tb neu">NEU</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Beckenboden &amp; Inkontinenz — kein Tabu, kein Drama, nur Fakten</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span><span class="tb neu">NEU</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Libido &amp; Vaginalgesundheit — was sich verändert und was wirklich hilft</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb th">🎙 Talking Head</span><span class="tb neu">NEU</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Beckenboden-Übungsplan (täglich 5 Min — wissenschaftlich fundiert)</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 11 -->
+  <div class="module-card" id="m11">
+    <div class="module-header" onclick="toggle('m11')">
+      <div class="mod-num">11</div>
+      <div class="mod-info">
+        <div class="mod-title">Stil, Haltung &amp; Ausstrahlung</div>
+        <div class="mod-sub">Woche 11 · Garderoben-Reset · Farbtypen-Basics · Körperhaltung · Stimme &amp; Präsenz</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 36 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Garderoben-Reset: Weniger Kleidung, mehr Stil — so geht's</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Farbtypen-Basics: Was dich strahlen lässt — ohne Farbberatung</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb fv">📊 Folien-Vortrag</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Körperhaltung &amp; Stimme — der 5-Min-Tages-Reset der alles verändert</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Stil-Checkliste „Mein neuer Kleiderschrank" (Schritt für Schritt)</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Stil-Audit-Workbook — inkl. Fototafeln Farbtypen, Schnitte Ü40 (hoher wahrgenommener Wert)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 12 -->
+  <div class="module-card" id="m12">
+    <div class="module-header" onclick="toggle('m12')">
+      <div class="mod-num">12</div>
+      <div class="mod-info">
+        <div class="mod-title">Dein neues Selbst — Graduation</div>
+        <div class="mod-sub">Woche 12 · Vorher/Nachher-Reflexion · Werte-Reset · Routine festigen · Community-Abschluss</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 30 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Vorher/Nachher-Reflexion — was hat sich wirklich verändert?</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Werte-Reset: Wie du die neue Routine langfristig hältst</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb fv">📊 Folien-Vortrag</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Was kommt jetzt — dein Ausblick auf Phase 4</div>
+          <div class="les-meta"><span class="les-dur">5 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 12-Wochen-Abschluss-Reflexionsbogen &amp; Meine Erfolge</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Graduation-Foto-Vorlage für Community-Post (Social Proof-Generator, Mimetic Desire)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA: HIGH TICKET 1:1 COACHING — nach Abschluss der 12 Wochen -->
+  <div class="cta-card highticket">
+    <div class="cta-label highticket">⭐ Upsell — 1:1 Coaching mit Jasmin</div>
+    <h4>Du hast 12 Wochen investiert. Du weißt jetzt mehr über deinen Körper als die meisten Ärztinnen. Jetzt kommt der nächste Schritt.</h4>
+    <p>Die 12 Wochen haben das Fundament gelegt. Für Frauen, die ihre individuelle Situation ganzheitlich angehen wollen — mit Jasmin persönlich an ihrer Seite — ist dies der Moment, die Inner Balance Method vorzustellen.</p>
+    <div class="jasmin-quote">
+      „Du weißt jetzt, wie dein System funktioniert. Ich würde gern mit dir persönlich arbeiten — als Sparrings-Partnerin, die deinen Fall kennt, deine Werte kennt und mit dir zusammen die nächsten 6 Monate gestaltet. Wir arbeiten in kleinen Gruppen-Sessions, du bist nicht allein, aber es ist trotzdem individuell auf dich zugeschnitten. Wenn das für dich der nächste Schritt ist, findest du alle Infos unten."
+    </div>
+    <p style="margin-top:10px;"><strong>Angebotsstruktur:</strong> 6 Monate · persönliche Sessions mit Jasmin · kleine Gruppen (Sparring) · vollständige Blutanalyse + Verlaufs-Check · individuelle Protokolle · <strong>6.997 €</strong></p>
+    <p><strong>Platzierung:</strong> Video-Abschluss Modul 12 + Graduation-Live + Trigger-E-Mail „Du hast die 12 Wochen abgeschlossen". Kein harter Pitch — logische Konsequenz nach 12 Wochen Kurs.</p>
+    <div class="cta-options">
+      <span class="cta-btn highticket">→ Mit Jasmin 1:1 arbeiten — Inner Balance Method</span>
+      <span class="cta-btn secondary-btn">Erstgespräch anfragen</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       PHASE 4: DEEP INTEGRATION  (Monate 4–6)
+       ════════════════════════════════════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-pill">Phase 4</div>
+    <div class="phase-line"></div>
+    <div class="phase-name">Deep Integration — Monate 4–6</div>
+  </div>
+
+  <div class="hint-card">
+    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Lösung &amp; Brücke zur Dienstleistung. Die Teilnehmerin verfestigt ihre Routine, vertieft das Wissen — und lernt durch den Kurs selbst zu verstehen, warum individuelle Begleitung der logische nächste Schritt ist. Kein harter Pitch, sondern eine natürliche Konsequenz.</p>
+  </div>
+
+  <!-- MODUL 13 -->
+  <div class="module-card" id="m13">
+    <div class="module-header" onclick="toggle('m13')">
+      <div class="mod-num">13</div>
+      <div class="mod-info">
+        <div class="mod-title">Vertiefung Hormone &amp; Bluttest-Re-Run</div>
+        <div class="mod-sub">Monat 4 · Werte vergleichen · Was hat sich verändert · Mini-Optimierung · optionaler Lab-Call</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 28 min</span>
+        <span class="mod-count">3 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Deine Werte nach 12 Wochen — was hat sich verändert und warum</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb th">🎙 Talking Head</span><span class="tb labor">LABOR</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Mini-Optimierung: Welche Stellschrauben jetzt passen</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb labor">LABOR</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: CTA zum Lab-Insight-Gruppen-Call — „Deine Werte nach 12 Wochen, ausgewertet von Jasmin" (max. 6 Frauen, 797 €)</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span></div>
+          <div class="upsell-hint blut-hint">
+            <span class="uh-icon">🩸</span>
+            <span><strong>Jasmin im Video:</strong> „Jetzt ist der perfekte Moment für einen Re-Run deiner Blutwerte — nach 12 Wochen siehst du erstmals, was sich verändert hat. Ich lade dich ein, das gemeinsam mit mir in einer kleinen Gruppe auszuwerten. Maximal 6 Frauen, ein Termin, deine Werte im Fokus."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 14 -->
+  <div class="module-card" id="m14">
+    <div class="module-header" onclick="toggle('m14')">
+      <div class="mod-num">14</div>
+      <div class="mod-info">
+        <div class="mod-title">Mindset, Selbstwert &amp; weibliche Energie</div>
+        <div class="mod-sub">Monat 5 · Innere Kritikerin · Generationen-Glaubenssätze · Selbstfürsorge ohne Schuldgefühl</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 38 min</span>
+        <span class="mod-count">4 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Die innere Kritikerin: Wer spricht da eigentlich — und wie du sie zum Schweigen bringst</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb th">🎙 Talking Head</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Generationen-Glaubenssätze erkennen &amp; auflösen</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Selbstfürsorge ohne Schuldgefühl — die Erlaubnis, die du dir selbst gibst</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: Mindset-Workbook „Von wem ich war zu wem ich bin" — Reflexions-Übungen</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODUL 15 -->
+  <div class="module-card" id="m15">
+    <div class="module-header" onclick="toggle('m15')">
+      <div class="mod-num">15</div>
+      <div class="mod-info">
+        <div class="mod-title">10-Jahres-Vision &amp; Lebensphasen-Plan</div>
+        <div class="mod-sub">Monat 6 · Energie-Vision · Beziehungs-Vision · Karriere-Vision · Graduation-Live</div>
+      </div>
+      <div class="mod-right">
+        <span class="mod-dur">⏱ ca. 38 min</span>
+        <span class="mod-count">5 Inhalte</span>
+        <span class="mod-chevron">▼</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Energie-, Beziehungs- &amp; Karriere-Vision für die nächsten 10 Jahre</div>
+          <div class="les-meta"><span class="les-dur">12 min</span><span class="fb fv">📊 Folien-Vortrag</span><span class="tb wichtig">WICHTIG</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Stress-Test deiner Routine: Was hält unter Druck, was bricht?</div>
+          <div class="les-meta"><span class="les-dur">8 min</span><span class="fb wb">🖊 Whiteboard</span></div>
+        </div>
+      </div>
+      <div class="lesson video">
+        <div class="les-icon">▶</div>
+        <div class="les-body">
+          <div class="les-title">Das warst du — das bist du jetzt: Deine persönliche Graduation</div>
+          <div class="les-meta"><span class="les-dur">10 min</span><span class="fb th">🎙 Talking Head</span></div>
+        </div>
+      </div>
+      <div class="lesson download">
+        <div class="les-icon">↓</div>
+        <div class="les-body">
+          <div class="les-title">Download: 10-Jahres-Visions-Workbook &amp; Lebensphasen-Kompass</div>
+          <div class="les-meta"><span class="tb pdf">PDF</span></div>
+        </div>
+      </div>
+      <div class="lesson vorschlag">
+        <div class="les-icon">◆</div>
+        <div class="les-body">
+          <div class="les-title">Vorschlag: Graduation-Live mit Jasmin + weicher CTA zur „Inner Balance Method" (1:1, 6.997 €) als logischer nächster Schritt</div>
+          <div class="les-meta"><span class="tb vorschlag">VORSCHLAG</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OUTRO CTA
+       ════════════════════════════════════════════════════ -->
+  <div class="outro">
+    <h2>Du hast das Wissen. Jetzt kommt die individuelle Umsetzung.</h2>
+    <p class="outro-sub">Der Kurs hat dir gezeigt, wie dein System funktioniert. Für alles, was individuell auf dich zugeschnitten sein muss — dafür ist Jasmin da. Persönlich.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;margin:0 auto 28px;text-align:left;position:relative;">
+      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;border-left:3px solid var(--gold);">
+        <div style="font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">🩸 Blutanalyse mit Jasmin</div>
+        <div style="font-size:0.92em;color:rgba(255,255,255,0.85);line-height:1.5;">Deine Werte, ganzheitlich ausgewertet — nicht nur Referenzbereiche, sondern was für dich optimal ist. Als Gruppen-Call (max. 6 Frauen) oder individuell.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;border-left:3px solid var(--brand-light);">
+        <div style="font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-light);margin-bottom:6px;">⭐ 1:1 Coaching — Inner Balance Method</div>
+        <div style="font-size:0.92em;color:rgba(255,255,255,0.85);line-height:1.5;">6 Monate. Jasmin als Sparrings-Partnerin — in kleinen Gruppen-Sessions, die sich trotzdem wie 1:1 anfühlen. Vollständige Diagnostik, individueller Plan, persönliche Begleitung. 5–8 Plätze pro Quartal.</div>
+      </div>
+    </div>
+    <div class="outro-buttons">
+      <span class="outro-btn primary">→ Inner Balance Method anfragen</span>
+      <span class="outro-btn secondary">🩸 Blutanalyse buchen</span>
+    </div>
+    <div class="outro-note">Erstellt von Schmidtke Consulting · Kursstruktur-Entwurf für Jasmin Schmidtke · Mai 2026</div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  function toggle(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+  // Open first module by default for demo purposes
+  document.getElementById('m0').classList.add('open');
+</script>
+
+</body>
+</html>
