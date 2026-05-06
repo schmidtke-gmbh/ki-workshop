@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TABMAN – YouTube Strategie | Andreas Benner</title>
+<style>
+  :root {
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --teal-dark: #0F766E;
+    --navy: #0F172A;
+    --slate: #334155;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+    --orange: #F97316;
+    --orange-light: #FFF7ED;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --purple: #7C3AED;
+    --purple-light: #EDE9FE;
+    --yellow: #D97706;
+    --yellow-light: #FFFBEB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1E3A5F 100%);
+    color: white;
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(13,148,136,0.15);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(13,148,136,0.08);
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header h1 span { color: #5EEAD4; }
+  .header-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+  }
+  .meta-chip .icon { font-size: 18px; }
+
+  /* ── INTRO-BOX ── */
+  .intro-section {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+  .strategy-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--teal);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .strategy-box h2 { font-size: 15px; font-weight: 700; color: var(--teal-dark); margin-bottom: 10px; letter-spacing: 0.3px; }
+  .strategy-box p { font-size: 14px; color: var(--slate); line-height: 1.7; }
+  .strategy-box p strong { color: var(--navy); }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-label h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── VIDEO CARDS ── */
+  .videos-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .video-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .card-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    padding: 24px 16px;
+    font-size: 32px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+  .card-number .num-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  .card-title-area {
+    flex: 1;
+    padding: 22px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .video-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .card-title-area h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .card-title-area .alt-title {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .card-title-area .alt-title strong { font-style: normal; color: var(--slate); }
+
+  /* ── CARD BODY ── */
+  .card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  .card-section {
+    padding: 20px 22px;
+    border-right: 1px solid var(--border);
+  }
+  .card-section:last-child { border-right: none; }
+
+  .card-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .card-section-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Hook 3-Step */
+  .hook-steps { display: flex; flex-direction: column; gap: 8px; }
+  .hook-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .hook-stamp {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 800;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 5px;
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+  .hook-step p {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+  .hook-step p em {
+    font-style: italic;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* Bullet points */
+  .points-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    list-style: none;
+  }
+  .points-list li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+  .points-list li::before {
+    content: '▸';
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+  }
+  .points-list li strong { color: var(--navy); }
+
+  /* Thumbnail */
+  .thumb-box {
+    background: var(--navy);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    text-align: center;
+  }
+  .thumb-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .thumb-main {
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+  .thumb-main .highlight { padding: 2px 6px; border-radius: 4px; }
+  .thumb-vs {
+    font-size: 22px;
+    font-weight: 900;
+    color: #F97316;
+    margin: 4px 0;
+  }
+  .thumb-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+  .thumb-face {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .thumb-tip {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 7px;
+    border: 1px solid var(--border);
+  }
+  .thumb-tip strong { color: var(--slate); display: block; margin-bottom: 2px; }
+
+  /* CTA */
+  .cta-box {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-left: 3px solid;
+  }
+  .cta-box strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+
+  /* Color schemes per video */
+  .c1 { background: #0D9488; }
+  .c2 { background: #7C3AED; }
+  .c3 { background: #D97706; }
+  .c4 { background: #DC2626; }
+  .c5 { background: #16A34A; }
+  .c6 { background: #2563EB; }
+  .c7 { background: #9333EA; }
+  .c8 { background: #0891B2; }
+
+  .t1 { background: var(--teal-light); color: var(--teal-dark); }
+  .t2 { background: var(--purple-light); color: var(--purple); }
+  .t3 { background: var(--yellow-light); color: var(--yellow); }
+  .t4 { background: var(--red-light); color: var(--red); }
+  .t5 { background: var(--green-light); color: var(--green); }
+  .t6 { background: #DBEAFE; color: #1D4ED8; }
+  .t7 { background: #F3E8FF; color: #7E22CE; }
+  .t8 { background: #CFFAFE; color: #0E7490; }
+
+  .d1 { color: #0D9488; }
+  .d2 { color: #7C3AED; }
+  .d3 { color: #D97706; }
+  .d4 { color: #DC2626; }
+  .d5 { color: #16A34A; }
+  .d6 { color: #2563EB; }
+  .d7 { color: #9333EA; }
+  .d8 { color: #0891B2; }
+
+  .h0-5 { background: #475569; }
+  .h5-12 { background: #0D9488; }
+  .h12-20 { background: #F97316; }
+
+  /* Timeline bar */
+  .timeline {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    padding: 0 24px;
+  }
+  .timeline-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+  }
+  .tl-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 12px;
+    position: relative;
+  }
+  .tl-item + .tl-item::before {
+    content: '→';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .tl-week {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .tl-vids {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .tl-vids span {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 22px;
+    margin: 0 1px;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+  }
+  .footer strong { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 768px) {
+    .card-body { grid-template-columns: 1fr; }
+    .card-section { border-right: none; border-bottom: 1px solid var(--border); }
+    .card-section:last-child { border-bottom: none; }
+    .header h1 { font-size: 26px; }
+    .timeline-bar { flex-direction: column; gap: 12px; }
+    .tl-item + .tl-item::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">YouTube Strategie 2025</div>
+    <h1>TABMAN® – <span>8 Videos. Maximale Sichtbarkeit.</span></h1>
+    <p class="header-sub">Persönlicher Ablaufplan für Andreas Benner · Erstellt von Schmidtke GmbH</p>
+    <div class="header-meta">
+      <div class="meta-chip"><span class="icon">🎯</span> Nischenstrategie: E-Auto + Klasse B + Leichtwohnwagen</div>
+      <div class="meta-chip"><span class="icon">📅</span> 2 Videos pro Woche · 4 Wochen Produktion</div>
+      <div class="meta-chip"><span class="icon">🔍</span> SEO + KI-Sichtbarkeit (ChatGPT, Gemini, Claude)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ STRATEGIE ══════════ -->
+<div class="intro-section">
+  <div class="strategy-box">
+    <h2>🧭 Die Strategie dahinter</h2>
+    <p>
+      Der Ansatz: <strong>Nicht über TABMAN einsteigen – sondern über das Problem des Zuschauers.</strong>
+      Wer ein E-Auto hat, wer nur Führerschein Klasse B besitzt, wer das erste Mal einen Wohnwagen mieten will –
+      der sucht nach Antworten. Diese 8 Videos beantworten genau diese Fragen.
+      Am Ende steht der T@B als natürliche Lösung. <strong>Jedes Video ist ein Evergreen</strong> –
+      einmal produziert, bringt es dauerhaft Anfragen über YouTube, Google und KI-Suche (ChatGPT, Gemini lesen Transkripte aus).
+    </p>
+  </div>
+
+  <!-- Zeitplan -->
+  <div class="section-label">
+    <h2>Produktionsplan</h2>
+    <div class="section-line"></div>
+  </div>
+</div>
+
+<div class="timeline">
+  <div class="timeline-bar">
+    <div class="tl-item">
+      <div class="tl-week">Woche 1</div>
+      <div class="tl-vids">
+        <span class="c1">1</span>
+        <span class="c2">2</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Woche 2</div>
+      <div class="tl-vids">
+        <span class="c3">3</span>
+        <span class="c4">4</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Woche 3</div>
+      <div class="tl-vids">
+        <span class="c5">5</span>
+        <span class="c6">6</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Woche 4</div>
+      <div class="tl-vids">
+        <span class="c7">7</span>
+        <span class="c8">8</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VIDEOS ══════════ -->
+<div class="videos-grid">
+
+  <div class="section-label">
+    <h2>Die 8 Videos im Detail</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- ─── VIDEO 1 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c1">
+        <span>01</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t1">E-Auto + Wohnwagen · Vergleich</div>
+        <h3>Diese 5 E-Autos haben die beste Anhängelast – mein ehrlicher Vergleich</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Wohnwagen mit E-Auto ziehen – welche Autos eignen sich wirklich?"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Die meisten E-Autos eignen sich nicht für einen Wohnwagen – ich zeige dir, welche fünf es trotzdem tun."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Alle sagen: "E-Auto und Wohnwagen geht nicht" – zu wenig Anhängelast, zu wenig Reichweite.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Aber mit dem richtigen Auto und dem richtigen Wohnwagen ist das kein Problem. Ich habe die Zahlen verglichen.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#0D9488"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>5 gängige E-Autos vergleichen (Model Y, VW ID.4, Hyundai IONIQ 5 etc.)</li>
+          <li>Anhängelast-Tabelle: die meisten liegen <strong>unter 1 Tonne</strong></li>
+          <li>Was bedeutet das konkret fürs Ziehen?</li>
+          <li>Erkenntnis: leichte Wohnwagen wie der <strong>T@B lösen das Problem</strong></li>
+          <li>CTA: "Welches Auto hast du?" → Kommentar-Aufforderung</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#0F172A,#1E3A5F)">
+          <div class="thumb-label">RANKING</div>
+          <div class="thumb-main">5 E-AUTOS<br><span class="highlight" style="background:#DC2626">NUR 2 ✓</span></div>
+          <div class="thumb-sub">Anhängelast Vergleich 2025</div>
+          <div class="thumb-face">🚗</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Tabelle mit 5 Autos, rotes ✗ bei ungeeigneten, grünes ✓ beim T@B. Dein Gesicht rechts, überrascht.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 2 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c2">
+        <span>02</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t2">Führerschein · Erklärvideo</div>
+        <h3>Mit Führerschein Klasse B in den Wohnwagenurlaub – was ist wirklich erlaubt?</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Leergewicht, Gesamtgewicht, Stützlast – was musst du als Fahrer wissen?"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Bevor du dir einen Wohnwagen mietest: Weißt du wirklich, ob du ihn mit deinem Führerschein ziehen darfst?"</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Die meisten schauen nur aufs Leergewicht – das ist der häufigste Fehler. Führerscheinrechtlich zählt etwas anderes.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Ich erkläre dir in drei Minuten, was wirklich gilt – und dann kannst du deinen Fahrzeugschein selbst checken.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#7C3AED"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li><strong>Leergewicht ≠ zulässiges Gesamtgewicht</strong> – der Unterschied erklärt</li>
+          <li>Was darf man mit Klasse B ziehen? (max. 750 kg o. Kombination bis 3,5t)</li>
+          <li>Fahrzeugschein-Check: Wo steht was?</li>
+          <li>Stützlast: Was drückt auf die Anhängerkupplung?</li>
+          <li>T@B als Beispiel: vollbeladen noch unter dem Limit</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#1E0953,#3B1490)">
+          <div class="thumb-label">FÜHRERSCHEIN KLASSE B</div>
+          <div class="thumb-main">DARF ICH<br><span class="highlight" style="background:#7C3AED">DAS?</span></div>
+          <div class="thumb-sub">Wohnwagen ziehen – die Wahrheit</div>
+          <div class="thumb-face">📋</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Führerschein-Icon groß links, Fragezeichen, dein Gesicht nachdenklich. Klare Zahlen (750 kg / 3.500 kg) als Grafik.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 3 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c3">
+        <span>03</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t3">Tesla Model Y · Spezialvideo</div>
+        <h3>Tesla Model Y + Wohnwagen: So klappt der Familienurlaub mit Klasse B</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Wohnwagen mieten mit Tesla Model Y – alles was du wissen musst"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Du hast ein Tesla Model Y und willst damit in den Urlaub mit Wohnwagen? Ich zeige dir, ob das geht – und wie."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Viele denken: Tesla und Wohnwagen ist kompliziert – Anhängelast zu gering, Ladenetz zu dünn, Klasse B reicht nicht.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Das Model Y hat 1,6 Tonnen Anhängelast – damit passt ein leichter Wohnwagen problemlos. Hier ist mein Setup.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#D97706"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>Tesla Model Y Anhängelast: <strong>1.600 kg</strong> – reicht das?</li>
+          <li>T@B Leergewicht: weit darunter – Klasse B kein Problem</li>
+          <li>Ladenetz-Planung mit Wohnwagen (Supercharger-Abstände)</li>
+          <li>Hitch-Adapter & Anhängerkupplung: welche passt?</li>
+          <li>Praxis-Tipp: Campingplatz vs. Supercharger-Strategie</li>
+          <li>CTA: TABMAN-Verleihlink in Beschreibung</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#1C0A00,#7C3500)">
+          <div class="thumb-label">MODEL Y</div>
+          <div class="thumb-main">+ WOHNWAGEN<br><span class="highlight" style="background:#D97706">SO GEHT'S ✓</span></div>
+          <div class="thumb-sub">Mit Klasse B · 2025</div>
+          <div class="thumb-face">⚡</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Tesla + T@B nebeneinander, großes grünes Häkchen. Dein Gesicht mit Daumen hoch. Kein Text-Overload – nur die Kernbotschaft.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 4 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c4">
+        <span>04</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t4">Fehler-Video · Hohe Klickrate</div>
+        <h3>Mach nicht diesen Fehler bei der Anhängerkupplung nachrüsten – er kostet dich Geld</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Anhängerkupplung nachrüsten: Darauf musst du unbedingt achten (Dauerplus)"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Wenn du gerade eine Anhängerkupplung nachrüsten willst – schau dir zuerst dieses Video an. Es spart dir nachher Geld."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Die meisten nehmen einfach das günstigste Angebot – ATU, Werkstatt, fertig. Was sie nicht wissen: Es fehlt oft eine Leitung.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Das Dauerplus – eine einzelne Ader – muss beim Einbau verlegt werden. Nachträglich kostet sie 50+ Euro extra. Ich erkläre warum.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#DC2626"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>Warum braucht man überhaupt eine Anhängerkupplung?</li>
+          <li>Was ist das <strong>Dauerplus</strong>? Wozu braucht man es?</li>
+          <li>Der Fehler: günstigster Einbau ohne Dauerplus</li>
+          <li>Was wird nachher teuer, wenn es fehlt?</li>
+          <li>Checkliste: Was muss beim Einbau enthalten sein?</li>
+          <li>Empfehlung: Fachbetrieb vs. Baumarkt-Variante</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#3F0000,#7B0000)">
+          <div class="thumb-label" style="color:#FF6B6B">ACHTUNG</div>
+          <div class="thumb-main"><span class="highlight" style="background:#DC2626">DIESEN FEHLER</span><br>NICHT MACHEN!</div>
+          <div class="thumb-sub">Anhängerkupplung · Dauerplus</div>
+          <div class="thumb-face">⚠️</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Rotes Warnsymbol groß, dein Gesicht schockiert/warnend. "FEHLER" durchgestrichen. Eyecatcher – dieses Format hat sehr hohe CTR.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 5 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c5">
+        <span>05</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t5">Einsteiger-Frage · Evergreen</div>
+        <h3>Braucht ein Wohnwagen eine Toilette? Die ehrliche Antwort für Einsteiger</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Wohnwagen ohne Nasszelle – geht das wirklich? Meine Erfahrung"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Die häufigste Frage, die mir Erstmieter stellen: Komme ich ohne Toilette im Wohnwagen klar?"</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Viele stellen sich vor: Campingplatz = Zelten anno 1985. Matschige Wiese, dreckige Toilettenhäuschen, Einschränkung pur.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Die Realität sieht heute komplett anders aus. Ich zeige dir Campingplätze, die einem 4-Sterne-Hotel entsprechen – und die Antwort.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#16A34A"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>Warum stellen Leute diese Frage? (Einsteigersorgen)</li>
+          <li>Campingplätze 2025: <strong>Sanitäranlagen auf Hoteliniveau</strong></li>
+          <li>Bilder einblenden: schöne, moderne Plätze</li>
+          <li>Wann braucht man eine Toilette? (Ausnahmen: Medizin, Kinder nachts)</li>
+          <li>T@B ohne Nasszelle: mehr Platz, weniger Gewicht</li>
+          <li>CTA: "Schreib mir deinen Campingplatz-Favoriten!"</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#052E16,#14532D)">
+          <div class="thumb-label" style="color:#86EFAC">DIE WAHRHEIT</div>
+          <div class="thumb-main">TOILETTE<br><span class="highlight" style="background:#16A34A">NEIN ✓</span></div>
+          <div class="thumb-sub">Wohnwagen für Einsteiger</div>
+          <div class="thumb-face">🚿</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Split: Links "früher" (dunkle Toilette), rechts "heute" (modernes Sanitärgebäude). Dein Gesicht mit beruhigendem Lächeln.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 6 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c6">
+        <span>06</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t6">Wohnwagen vs. Wohnmobil · Vergleich</div>
+        <h3>Wohnwagen oder Wohnmobil? Der ehrliche Vergleich – inklusive Kostenrechnung</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Ich hatte beides – was ist wirklich besser? Meine ehrliche Meinung"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Ich hatte beides – Wohnwagen und Wohnmobil. Hier ist meine ehrliche Meinung, welches besser ist."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Alle sagen: Wohnmobil ist komfortabler, flexibler, moderner. Und ja – dafür gibt es Gründe.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Aber du bezahlst dafür dreimal so viel beim Mieten. Ob das wirklich sinnvoll ist – dazu habe ich eine klare Meinung.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#2563EB"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>Vor/Nachteile Wohnmobil: Flexibilität, kein Zugfahrzeug, aber Preis</li>
+          <li>Vor/Nachteile Wohnwagen: günstiger mieten, leichter, mehr Platz</li>
+          <li><strong>Preisvergleich: Miete Wohnmobil vs. T@B</strong> (Faktor ~3x)</li>
+          <li>Für wen ist was geeignet?</li>
+          <li>Deine persönliche Empfehlung am Ende (authentisch!)</li>
+          <li>CTA: TABMAN Verleih + "Was nutzt ihr?" Umfrage</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#0F172A,#1E3A5F)">
+          <div class="thumb-main" style="font-size:14px">WOHNWAGEN</div>
+          <div class="thumb-vs">VS</div>
+          <div class="thumb-main" style="font-size:14px">WOHNMOBIL</div>
+          <div class="thumb-sub">Was ist wirklich besser?</div>
+          <div class="thumb-face">🏕️</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Klares VS-Format: T@B links, Wohnmobil rechts. Preise drunter (z.B. "ab 59€/Tag" vs. "ab 150€/Tag"). Split-Screen wirkt.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 7 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c7">
+        <span>07</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t7">Ranking-Video · Leichte Wohnwagen</div>
+        <h3>Die besten leichten Wohnwagen für E-Autos im Ranking – wer gewinnt?</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Leichte Wohnwagen unter 750 kg Gesamtgewicht – mein Vergleich 2025"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Ich habe die ADAC-Liste der E-Auto-geeigneten Wohnwagen durchgeschaut – und nur einer hat wirklich alles."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Es gibt gerade mal zehn Wohnwagen in Deutschland, die wirklich für E-Autos und Klasse B geeignet sind.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Ich habe jeden davon bewertet – nach Preis, Gewicht, Ausstattung und Alltagstauglichkeit. Hier ist mein Ranking.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#9333EA"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li>ADAC-Liste / Marktüberblick: Welche Modelle gibt es?</li>
+          <li>Bewertungskriterien: Gewicht, Preis, Ausstattung, Design</li>
+          <li><strong>S/A/B/C Ranking</strong> – Tier-List Format (trendig)</li>
+          <li>T@B als klarer Sieger: warum?</li>
+          <li>Mieten statt kaufen als smarte Alternative</li>
+          <li>CTA: "Hast du einen anderen Favoriten?" → Kommentar</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#1A0030,#4A0090)">
+          <div class="thumb-label" style="color:#C084FC">RANKING 2025</div>
+          <div class="thumb-main">S-TIER<br><span class="highlight" style="background:#9333EA">T@B ✓</span></div>
+          <div class="thumb-sub">Leichte Wohnwagen für E-Autos</div>
+          <div class="thumb-face">🏆</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Tier-List Grafik (S/A/B/C), T@B steht allein in S-Tier. Dieses Format ist auf YouTube sehr beliebt und wird oft geklickt.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VIDEO 8 ─── -->
+  <div class="video-card">
+    <div class="card-header">
+      <div class="card-number c8">
+        <span>08</span>
+        <span class="num-label">Video</span>
+      </div>
+      <div class="card-title-area">
+        <div class="video-tag t8">Gewichte · Erklärvideo · Evergreen</div>
+        <h3>Anhängelast, Stützlast, Gesamtgewicht: Was bedeutet das wirklich – einfach erklärt</h3>
+        <div class="alt-title"><strong>Alt-Titel:</strong> "Diese Zahlen im Fahrzeugschein musst du verstehen bevor du einen Wohnwagen zieht"</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#475569"></div> Hook (erste 20 Sek.)</div>
+        <div class="hook-steps">
+          <div class="hook-step">
+            <span class="hook-stamp h0-5">0–5s</span>
+            <p><em>"Anhängelast, Stützlast, Gesamtgewicht – klingt kompliziert. Ist es nicht. Ich erkläre dir alle drei in drei Minuten."</em></p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h5-12">5–12s</span>
+            <p>Fast jeder, der das erste Mal einen Wohnwagen mietet, ist von den Begriffen im Fahrzeugschein überfordert.</p>
+          </div>
+          <div class="hook-step">
+            <span class="hook-stamp h12-20">12–20s</span>
+            <p>Dabei ist es ganz einfach – wenn man einmal verstanden hat, was was bedeutet. Und dann weißt du sofort, ob du es darfst.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#0891B2"></div> Inhalt & Stichpunkte</div>
+        <ul class="points-list">
+          <li><strong>Anhängelast</strong>: Was dein Auto maximal ziehen darf</li>
+          <li><strong>Gesamtgewicht</strong>: Leer + Zuladung – was führerscheinrechtlich zählt</li>
+          <li><strong>Stützlast</strong>: Druck auf die Kupplung – warum die Beladung wichtig ist</li>
+          <li>Praxisbeispiel: T@B richtig beladen, Stützlast nicht überschreiten</li>
+          <li>Fahrzeugschein: Wo stehen diese Werte? (Screenshot/Grafik)</li>
+          <li>CTA: "Frag mich in den Kommentaren, ob dein Auto passt"</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-title"><div class="dot" style="background:#F97316"></div> Thumbnail-Idee</div>
+        <div class="thumb-box" style="background:linear-gradient(135deg,#0C1520,#0F3A5F)">
+          <div class="thumb-label" style="color:#67E8F9">EINFACH ERKLÄRT</div>
+          <div class="thumb-main">750 KG<br><span class="highlight" style="background:#0891B2">DARF ICH?</span></div>
+          <div class="thumb-sub">Anhängelast · Stützlast · Klasse B</div>
+          <div class="thumb-face">📖</div>
+        </div>
+        <div class="thumb-tip">
+          <strong>🎨 Canva-Tipp:</strong>
+          Fahrzeugschein-Ausschnitt mit Zahlen hervorgehoben, dein Finger zeigt drauf. Einfache Infografik mit den drei Begriffen.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /videos-grid -->
+
+<!-- FOOTER -->
+<div class="footer">
+  Erstellt von <strong>Schmidtke GmbH</strong> für <strong>Andreas Benner · TABMAN®</strong> ·
+  YouTube-Strategie · Mai 2025 · Alle Videos: 2 Videos/Woche · Produktion: 4 Wochen
+</div>
+
+</body>
+</html>
