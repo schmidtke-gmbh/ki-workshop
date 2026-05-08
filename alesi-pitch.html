@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnership Meeting – Dr. André Alesi × Schmidtke GmbH</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@font-face {
+  font-family: 'SK Modernist';
+  src: url('https://aosparadox.github.io/fonts/sk-modernist-regular-webfont.woff') format('woff');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SK Modernist';
+  src: url('https://aosparadox.github.io/fonts/sk-modernist-bold-webfont.woff') format('woff');
+  font-weight: 700;
+}
+
+:root {
+  --navy:       #07162A;
+  --navy-light: #0c1f3a;
+  --navy-card:  #0f2847;
+  --navy-surf:  #132d4f;
+  --blue:       #3B9AE8;
+  --blue-dk:    #277DC1;
+  --red:        #E62F1F;
+  --gold:       #D4A574;
+  --green:      #34D399;
+  --white:      #ffffff;
+  --t2:         rgba(255,255,255,.85);
+  --t3:         rgba(255,255,255,.60);
+  --t4:         rgba(255,255,255,.25);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%; overflow:hidden;
+  font-family: 'SK Modernist', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════
+   DECK NAVIGATION BAR (top)
+══════════════════════════════════════════════ */
+.deck-nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  height: 56px;
+  background: rgba(7,22,42,.96);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items:center; justify-content:space-between;
+  padding: 0 2rem;
+  backdrop-filter: blur(20px);
+}
+.deck-brand {
+  font-size:1.35rem; font-weight:800; color:var(--white);
+  letter-spacing:-0.5px; text-decoration:none;
+}
+.deck-brand span { color:var(--gold); }
+.deck-meta { display:flex; align-items:center; gap:1.5rem; }
+.slide-title-label { font-size:.78rem; color:var(--t3); font-weight:700; letter-spacing:.06em; }
+.slide-counter {
+  font-size:.78rem; font-weight:700; color:var(--t3);
+  background: rgba(255,255,255,.06);
+  padding:.25rem .7rem; border-radius:20px;
+}
+
+/* ══════════════════════════════════════════════
+   DECK (slide container)
+══════════════════════════════════════════════ */
+#deck {
+  position: fixed;
+  top: 56px; bottom: 52px; left: 0; right: 0;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 2.5rem 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(40px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.slide.exit-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  pointer-events: none;
+}
+
+/* Hero slide gets special BG */
+.slide.slide-hero {
+  background:
+    radial-gradient(ellipse at 75% 25%, rgba(59,154,232,.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 80%, rgba(230,47,31,.09) 0%, transparent 45%),
+    var(--navy);
+}
+.slide.slide-hero::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(59,154,232,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,154,232,.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* bg-light slides get a subtle grid too */
+.slide.bg-light::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Alternating light bg for variety */
+.slide.bg-light { background: var(--navy-light); }
+
+/* ══════════════════════════════════════════════
+   BOTTOM CONTROLS
+══════════════════════════════════════════════ */
+.deck-controls {
+  position: fixed;
+  bottom: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  background: rgba(7,22,42,.96);
+  border-top: 1px solid rgba(212,165,116,.12);
+  display: flex; align-items:center; justify-content:center; gap:1.5rem;
+  backdrop-filter: blur(20px);
+}
+
+.nav-btn {
+  width: 36px; height: 36px; border-radius:50%;
+  background: rgba(212,165,116,.12);
+  border: 1px solid rgba(212,165,116,.25);
+  color: var(--gold); font-size:1rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:.2s; font-family:inherit;
+}
+.nav-btn:hover { background: rgba(212,165,116,.25); }
+.nav-btn:disabled { opacity:.3; cursor:default; }
+
+#dots { display:flex; gap:.5rem; align-items:center; }
+.dot {
+  width:7px; height:7px; border-radius:50%;
+  background: rgba(255,255,255,.2);
+  cursor:pointer; transition:.2s;
+}
+.dot.active { background: var(--gold); width:22px; border-radius:4px; }
+
+/* ══════════════════════════════════════════════
+   SLIDE TYPOGRAPHY & SHARED COMPONENTS
+══════════════════════════════════════════════ */
+.section-label {
+  font-size:.72rem; font-weight:700; letter-spacing:.22em;
+  color: var(--blue); margin-bottom:.5rem;
+}
+.section-label.red   { color:var(--red); }
+.section-label.gold  { color:var(--gold); }
+.section-label.green { color:var(--green); }
+
+h1 { font-size:clamp(2rem,4.5vw,3.4rem); font-weight:700; line-height:1.1; }
+h2 { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; line-height:1.15; }
+h3 { font-size:1.05rem; font-weight:700; }
+
+.lead {
+  color:var(--t2); font-size:1rem; line-height:1.65;
+  max-width:640px; margin-top:.6rem;
+}
+
+/* ── STAT CARDS ── */
+.stat-grid { display:grid; gap:1rem; }
+.stat-grid-4 { grid-template-columns:repeat(4,1fr); }
+.stat-grid-3 { grid-template-columns:repeat(3,1fr); }
+.stat-grid-2 { grid-template-columns:repeat(2,1fr); }
+
+.stat-card {
+  background: var(--navy-card);
+  border: 1px solid rgba(59,154,232,.15);
+  border-radius:14px; padding:1.3rem 1.1rem;
+  position:relative; overflow:hidden;
+}
+.stat-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: var(--blue);
+}
+.stat-card.red::before   { background:var(--red); }
+.stat-card.gold::before  { background:var(--gold); }
+.stat-card.green::before { background:var(--green); }
+.stat-value { font-size:1.9rem; font-weight:700; line-height:1.1; margin-bottom:.2rem; }
+.stat-label { font-size:.8rem; color:var(--t2); font-weight:700; }
+.stat-sub   { font-size:.72rem; color:var(--t3); margin-top:.15rem; }
+
+/* ── CARDS ── */
+.card-grid { display:grid; gap:1rem; }
+.card-grid-3 { grid-template-columns:repeat(3,1fr); }
+.card-grid-2 { grid-template-columns:repeat(2,1fr); }
+.card-grid-4 { grid-template-columns:repeat(4,1fr); }
+
+.card {
+  background: var(--navy-card);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius:14px; padding:1.3rem 1.2rem;
+}
+.card p { font-size:.88rem; color:var(--t2); line-height:1.6; margin-top:.4rem; }
+.accent-line { height:2px; border-radius:2px; margin-bottom:.9rem; }
+
+/* ── RULE ROWS ── */
+.rule-row {
+  display:flex; gap:.75rem; align-items:flex-start;
+  padding:.65rem 0; border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:.87rem;
+}
+.rule-row:last-child { border:none; padding-bottom:0; }
+.rule-arrow { color:var(--blue); font-weight:700; flex-shrink:0; margin-top:.05rem; }
+.rule-text  { color:var(--t2); line-height:1.5; }
+
+/* ── FUNNEL ── */
+.funnel { display:flex; gap:0; align-items:stretch; }
+.funnel-step {
+  flex:1; background:var(--navy-card); padding:1.2rem .9rem;
+  text-align:center; position:relative;
+  border:1px solid rgba(255,255,255,.08);
+}
+.funnel-step:first-child { border-radius:12px 0 0 12px; }
+.funnel-step:last-child  { border-radius:0 12px 12px 0; }
+.funnel-step::after {
+  content:'›'; position:absolute; right:-11px; top:50%;
+  transform:translateY(-50%); font-size:1.3rem; color:var(--blue);
+  z-index:2; background:var(--navy-card); width:22px; text-align:center;
+}
+.funnel-step:last-child::after { display:none; }
+.funnel-step.hi { background:var(--red); border-color:var(--red); }
+.funnel-step.hi::after { background:var(--red); }
+.funnel-step.gr { background:rgba(52,211,153,.15); border-color:rgba(52,211,153,.3); }
+.funnel-step.gr::after { background:rgba(12,31,58,.8); }
+.fn { font-size:.65rem; color:var(--t3); font-weight:700; letter-spacing:.1em; }
+.ft { font-size:.85rem; font-weight:700; margin:.3rem 0 .15rem; }
+.fs { font-size:.72rem; color:var(--t2); }
+
+/* ── PLATFORM CARDS ── */
+.platform-wrap { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.platform-card {
+  background:var(--navy-card); border:1px solid rgba(255,255,255,.08);
+  border-radius:14px; overflow:hidden;
+}
+.platform-header {
+  padding:1rem 1.2rem; display:flex; align-items:center; gap:.7rem;
+}
+.platform-icon {
+  width:36px; height:36px; border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem; font-weight:700; flex-shrink:0;
+}
+.platform-body { padding:.2rem 1.2rem 1.2rem; }
+.platform-big  { font-size:1.8rem; font-weight:700; line-height:1; }
+.platform-lbl  { font-size:.76rem; color:var(--t3); margin-bottom:.8rem; margin-top:.1rem; }
+.platform-bar-wrap { height:3px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; margin-bottom:.8rem; }
+.platform-bar  { height:100%; border-radius:3px; transition:width 1.5s ease; }
+.platform-desc { font-size:.82rem; color:var(--t2); line-height:1.5; }
+
+/* ── TOP VIDEOS LIST ── */
+.video-list { display:flex; flex-direction:column; gap:.5rem; margin-top:.8rem; }
+.video-row {
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--navy-surf); border-radius:8px;
+  padding:.55rem 1rem; font-size:.82rem;
+}
+.video-row .views { font-weight:700; color:var(--blue); white-space:nowrap; }
+
+/* ── TIMELINE ── */
+.timeline { position:relative; padding-left:1.8rem; }
+.timeline::before {
+  content:''; position:absolute; left:.45rem; top:.3rem;
+  width:2px; bottom:0; background:linear-gradient(to bottom,var(--blue),rgba(59,154,232,.1));
+}
+.tl-item { position:relative; margin-bottom:1.2rem; }
+.tl-dot {
+  position:absolute; left:-1.55rem; top:.3rem;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--blue); border:2px solid var(--navy-light);
+}
+.tl-item.now .tl-dot { background:var(--gold); box-shadow:0 0 8px rgba(212,165,116,.5); }
+.tl-month { font-size:.68rem; color:var(--t3); font-weight:700; letter-spacing:.08em; }
+.tl-text  { font-size:.85rem; color:var(--t2); margin-top:.1rem; line-height:1.5; }
+.tl-text strong { color:var(--white); }
+
+/* ── BENCHMARK ── */
+.bench-split { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; }
+.walker-card {
+  background:linear-gradient(135deg,rgba(59,154,232,.12),rgba(59,154,232,.04));
+  border:1px solid rgba(59,154,232,.25); border-radius:14px; padding:1.8rem;
+}
+.ws { display:flex; align-items:baseline; gap:1rem; margin-bottom:.85rem; }
+.ws .num { font-size:1.5rem; font-weight:700; color:var(--blue); min-width:90px; line-height:1; }
+.ws .desc { font-size:.83rem; color:var(--t2); line-height:1.45; }
+.walker-quote {
+  background:rgba(59,154,232,.08); border-left:3px solid var(--blue);
+  border-radius:0 8px 8px 0; padding:.8rem 1rem;
+  font-size:.83rem; color:var(--t2); line-height:1.6; margin-top:1.2rem;
+}
+.andre-card {
+  background:linear-gradient(135deg,rgba(212,165,116,.1),rgba(212,165,116,.03));
+  border:1px solid rgba(212,165,116,.25); border-radius:14px; padding:1.8rem;
+}
+.pot-step { display:flex; gap:.85rem; align-items:flex-start; margin-bottom:1rem; }
+.pot-num {
+  width:24px; height:24px; border-radius:50%;
+  background:var(--gold); color:var(--navy); font-weight:700; font-size:.75rem;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.pot-text strong { display:block; font-size:.88rem; }
+.pot-text span   { font-size:.78rem; color:var(--t2); }
+.goal-box {
+  background:rgba(212,165,116,.1); border:1px solid rgba(212,165,116,.25);
+  border-radius:10px; padding:.9rem 1rem; margin-top:1rem;
+}
+.goal-box .glbl { font-size:.7rem; color:var(--gold); font-weight:700; margin-bottom:.3rem; letter-spacing:.1em; }
+.goal-box .gtxt { font-size:.83rem; color:var(--t2); line-height:1.5; }
+
+/* ── PARTNER / SCENARIO ── */
+.partner-split { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.partner-card {
+  background:var(--navy-card); border-radius:14px; padding:1.8rem;
+  border:1px solid rgba(255,255,255,.08);
+}
+.partner-card h3 { font-size:.7rem; letter-spacing:.2em; color:var(--blue); margin-bottom:.7rem; }
+.partner-big { font-size:2.2rem; font-weight:700; line-height:1.1; margin-bottom:.3rem; }
+.partner-desc { font-size:.83rem; color:var(--t2); }
+
+.scenario-wrap { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.2rem; }
+.scenario { border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.08); }
+.sch { padding:.7rem 1rem; font-size:.8rem; font-weight:700; text-align:center; }
+.scb { background:var(--navy-card); }
+.scr {
+  display:flex; justify-content:space-between;
+  padding:.5rem 1rem; border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:.8rem;
+}
+.scr:last-child { border:none; }
+.scr .k { color:var(--t3); }
+.scr .v { font-weight:700; }
+.sct { display:flex; justify-content:space-between; padding:.7rem 1rem; font-weight:700; font-size:.88rem; }
+
+/* ── WIN-WIN ── */
+.ww-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:1.2rem; align-items:center; margin-top:1.5rem; }
+.ww-badge {
+  width:70px; height:70px; border-radius:50%;
+  background:var(--blue); display:flex; align-items:center; justify-content:center;
+  font-size:.65rem; font-weight:700; text-align:center; line-height:1.3;
+  margin:0 auto; box-shadow:0 0 28px rgba(59,154,232,.4);
+}
+.ww-col { background:var(--navy-card); border-radius:14px; padding:1.5rem; }
+.ww-col h3 { font-size:.7rem; letter-spacing:.15em; padding:.35rem .9rem; border-radius:5px; display:inline-block; margin-bottom:1rem; }
+.ww-col.andre h3 { background:rgba(59,154,232,.15); color:var(--blue); }
+.ww-col.sk h3    { background:rgba(230,47,31,.15);  color:var(--red); }
+.ww-item { display:flex; gap:.6rem; margin-bottom:.8rem; align-items:flex-start; }
+.ww-check { font-weight:700; flex-shrink:0; margin-top:.05rem; }
+.ww-text strong { display:block; font-size:.87rem; }
+.ww-text span   { font-size:.77rem; color:var(--t3); }
+
+/* ── RULE CARDS ── */
+.rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.rule-card { background:var(--navy-card); border-radius:12px; padding:1.3rem; border:1px solid rgba(255,255,255,.07); }
+.rule-card h4 { font-size:.68rem; letter-spacing:.15em; font-weight:700; margin-bottom:.8rem; }
+.rule-card.blue  h4 { color:var(--blue); }
+.rule-card.red   h4 { color:var(--red); }
+.rule-card.gold  h4 { color:var(--gold); }
+.rule-card.green h4 { color:var(--green); }
+.ri { display:flex; gap:.55rem; font-size:.83rem; color:var(--t2); margin-bottom:.55rem; line-height:1.5; }
+.ri span:first-child { color:var(--blue); font-weight:700; flex-shrink:0; }
+
+/* ── NEXT STEPS ── */
+.step-row {
+  display:grid; grid-template-columns:auto 1fr auto;
+  gap:1rem; align-items:center;
+  background:var(--navy-card); border-radius:10px;
+  padding:1rem 1.3rem; margin-bottom:.6rem;
+  border:1px solid rgba(255,255,255,.06);
+}
+.step-circle {
+  width:32px; height:32px; border-radius:50%;
+  background:var(--blue); display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:.82rem; flex-shrink:0;
+}
+.step-content strong { display:block; font-size:.9rem; margin-bottom:.15rem; }
+.step-content span   { font-size:.82rem; color:var(--t2); }
+.step-time {
+  background:rgba(59,154,232,.15); color:var(--blue);
+  border-radius:20px; padding:.25rem .8rem; font-size:.75rem; font-weight:700; white-space:nowrap;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display:inline-block; background:var(--red); color:var(--white);
+  border:none; border-radius:100px; padding:.65rem 1.6rem;
+  font-family:inherit; font-size:.88rem; font-weight:700;
+  cursor:pointer; text-decoration:none; transition:.3s;
+}
+.btn-primary:hover { background:#c92518; box-shadow:0 6px 24px rgba(230,47,31,.3); transform:translateY(-1px); }
+.btn-ghost {
+  display:inline-block; background:transparent; color:var(--t2);
+  border:1px solid rgba(255,255,255,.2); border-radius:100px; padding:.65rem 1.6rem;
+  font-family:inherit; font-size:.88rem; font-weight:700;
+  cursor:pointer; text-decoration:none; transition:.2s;
+}
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── INSIGHT CHIPS ── */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin-top:1.2rem; }
+.chip {
+  background:var(--navy-surf); border:1px solid rgba(255,255,255,.07);
+  border-radius:10px; padding:.9rem 1rem;
+}
+.chip .cv { font-size:1.3rem; font-weight:700; color:var(--blue); }
+.chip .cl { font-size:.75rem; color:var(--t2); margin-top:.15rem; }
+
+/* ── META ADS BUDGET BOX ── */
+.budget-box {
+  background:linear-gradient(135deg,rgba(230,47,31,.12),rgba(230,47,31,.04));
+  border:1px solid rgba(230,47,31,.3); border-radius:12px; padding:1.2rem 1.4rem;
+}
+.budget-box .blbl { font-size:.7rem; letter-spacing:.15em; color:var(--red); font-weight:700; margin-bottom:.4rem; }
+.budget-box .bval { font-size:2rem; font-weight:700; }
+.budget-box .bdesc { font-size:.82rem; color:var(--t2); margin-top:.3rem; line-height:1.5; }
+
+/* ── CLOSING ── */
+.slide-closing {
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 60% 50%, rgba(59,154,232,.15) 0%, transparent 60%),
+    var(--navy);
+  justify-content:center; align-items:center;
+}
+.slide-closing::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(59,154,232,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,154,232,.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.closing-title { font-size:clamp(1.8rem,4vw,3rem); font-weight:700; line-height:1.1; max-width:680px; margin:0 auto 1.2rem; }
+.closing-title span { color:var(--blue); }
+
+/* ── HERO BADGE ── */
+.hero-badge {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:rgba(59,154,232,.15); border:1px solid rgba(59,154,232,.3);
+  border-radius:50px; padding:.3rem .9rem;
+  font-size:.75rem; font-weight:700; color:var(--blue); letter-spacing:.08em;
+  margin-bottom:1.2rem;
+}
+.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--blue); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+
+/* ── SERVICES GRID ── */
+.service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.9rem; }
+.service-card {
+  background:var(--navy-card); border:1px solid rgba(255,255,255,.07);
+  border-radius:12px; padding:1.1rem 1rem;
+}
+.service-card .si { font-size:1.2rem; margin-bottom:.5rem; }
+.service-card h4  { font-size:.85rem; font-weight:700; margin-bottom:.3rem; }
+.service-card p   { font-size:.78rem; color:var(--t3); line-height:1.5; }
+
+/* ── AGENDA ── */
+.agenda-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem; margin-top:1.5rem; }
+.agenda-item {
+  background:var(--navy-card); border:1px solid rgba(255,255,255,.07);
+  border-radius:12px; padding:1.2rem 1rem;
+  border-top:2px solid var(--blue);
+}
+.agenda-item.r { border-top-color:var(--red); }
+.agenda-item.g { border-top-color:var(--gold); }
+.agenda-item.gr { border-top-color:var(--green); }
+.a-num { font-size:.7rem; color:var(--t3); font-weight:700; margin-bottom:.4rem; }
+.a-title { font-size:.88rem; font-weight:700; color:var(--white); }
+.a-sub { font-size:.75rem; color:var(--t3); margin-top:.25rem; }
+
+/* ── HIGHLIGHT BOX ── */
+.hl-box {
+  background:rgba(212,165,116,.08); border:1px solid rgba(212,165,116,.25);
+  border-radius:10px; padding:.9rem 1.1rem;
+}
+.hl-box .hl-lbl { font-size:.7rem; color:var(--gold); font-weight:700; letter-spacing:.1em; margin-bottom:.3rem; }
+.hl-box .hl-txt { font-size:.85rem; color:var(--t2); line-height:1.5; }
+</style>
+</head>
+<body>
+
+<!-- ══════ TOP NAV ══════ -->
+<div class="deck-nav">
+  <span class="deck-brand">schmidtke<span>.</span></span>
+  <div class="deck-meta">
+    <span class="slide-title-label" id="slide-title-label">Start</span>
+    <span class="slide-counter" id="counter">1 / 16</span>
+  </div>
+</div>
+
+<!-- ══════ SLIDES ══════ -->
+<div id="deck">
+
+<!-- ─── SLIDE 1: HERO ─── -->
+<section class="slide slide-hero active" data-title="Start">
+  <div style="max-width:780px;margin:0 auto;width:100%;text-align:center">
+    <div class="hero-badge" style="justify-content:center">Partnership Meeting · Mai 2026 · Vertraulich</div>
+    <h1 style="margin-bottom:1.2rem;margin-top:.8rem">Gemeinsam bauen wir<br><span style="color:var(--blue)">Deutschlands führendes</span><br>Schlafprodukt.</h1>
+    <p class="lead" style="max-width:580px;margin:0 auto">Dr. André Alesi bringt 20+ Jahre Schlafexpertise und eine aktive Community. Schmidtke GmbH bringt Full-Service Marketing, Funnel-Aufbau, Meta Ads und Newsletter-Aufbau — auf echter 50/50-Partnerschaftsbasis.</p>
+    <div style="display:flex;gap:.9rem;margin-top:2rem;justify-content:center">
+      <button class="btn-primary" onclick="goTo(2)">Analyse ansehen</button>
+      <button class="btn-ghost" onclick="goTo(10)">Partnerschaftsmodell</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 2: AGENDA ─── -->
+<section class="slide bg-light" data-title="Agenda">
+  <div style="max-width:1000px;margin:0 auto;width:100%">
+    <p class="section-label">AGENDA</p>
+    <h2 style="margin-bottom:.4rem">Was wir heute besprechen</h2>
+    <p class="lead" style="margin-bottom:0">Von der Bestandsanalyse bis zur Partnerschaft — ein klares Bild, was möglich ist.</p>
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <div class="a-num">01</div>
+        <div class="a-title">YouTube-Analyse</div>
+        <div class="a-sub">Kanal-Performance, Top-Videos, Learnings</div>
+      </div>
+      <div class="agenda-item r">
+        <div class="a-num">02</div>
+        <div class="a-title">Instagram & TikTok</div>
+        <div class="a-sub">Aktuelle Zahlen & Potenzial</div>
+      </div>
+      <div class="agenda-item g">
+        <div class="a-num">03</div>
+        <div class="a-title">Benchmark</div>
+        <div class="a-sub">Matthew Walker — was im deutschen Markt möglich ist</div>
+      </div>
+      <div class="agenda-item gr">
+        <div class="a-num">04</div>
+        <div class="a-title">Konzept & Kurs</div>
+        <div class="a-sub">„Endlich gut schlafen" · 499 € · Funnel</div>
+      </div>
+      <div class="agenda-item" style="border-top-color:var(--red)">
+        <div class="a-num">05</div>
+        <div class="a-title">Meta Ads & Budget</div>
+        <div class="a-sub">Wachstumsstrategie · min. 150 €/Tag</div>
+      </div>
+      <div class="agenda-item" style="border-top-color:var(--blue)">
+        <div class="a-num">06</div>
+        <div class="a-title">Newsletter & Community</div>
+        <div class="a-sub">E-Mail + WhatsApp als Retention-Kanal</div>
+      </div>
+      <div class="agenda-item" style="border-top-color:var(--gold)">
+        <div class="a-num">07</div>
+        <div class="a-title">Partnerschaftsmodell</div>
+        <div class="a-sub">50/50 · Spielregeln · WIN-WIN</div>
+      </div>
+      <div class="agenda-item" style="border-top-color:var(--green)">
+        <div class="a-num">08</div>
+        <div class="a-title">Nächste Schritte</div>
+        <div class="a-sub">Timeline · wer macht was · wann</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 3: YOUTUBE CHART ─── -->
+<section class="slide" data-title="YouTube — Bestandsanalyse">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">01 · BESTANDSANALYSE</p>
+    <h2 style="margin-bottom:.4rem">YouTube-Kanal im Aufbau</h2>
+    <p class="lead" style="margin-bottom:1.2rem">Start: Februar 2026 · 3 Monate · 19 Videos · 100% organisch · 0 € Werbebudget</p>
+    <div style="background:var(--navy-card);border:1px solid rgba(59,154,232,.12);border-radius:14px;padding:1.5rem 1.8rem">
+      <h3 style="margin-bottom:.25rem">Top Videos nach Aufrufen</h3>
+      <p style="font-size:.8rem;color:var(--t3);margin-bottom:1rem">vidIQ-Daten Stand 08.05.2026 · organische Reichweite</p>
+      <div style="height:260px;position:relative">
+        <canvas id="ytChart"></canvas>
+      </div>
+      <div class="chips">
+        <div class="chip">
+          <div class="cv">250</div>
+          <div class="cl">Aufrufe — Melatonin-Video · stärkster neuer Content</div>
+        </div>
+        <div class="chip">
+          <div class="cv">19</div>
+          <div class="cl">Videos in ~3 Monaten · konsequente Posting-Frequenz</div>
+        </div>
+        <div class="chip">
+          <div class="cv">~21</div>
+          <div class="cl">Ø vidIQ-Score · solide SEO-Grundlage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 4: YOUTUBE STRATEGIE ─── -->
+<section class="slide bg-light" data-title="YouTube — Strategie & Learnings">
+  <div style="max-width:1060px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:1.8rem">
+    <div>
+      <p class="section-label">YOUTUBE-WACHSTUM</p>
+      <h2 style="margin-bottom:.8rem">YouTube ist ein Marathon</h2>
+      <div class="timeline">
+        <div class="tl-item now">
+          <div class="tl-dot"></div>
+          <div class="tl-month">MONAT 1–3 · WIR SIND HIER</div>
+          <div class="tl-text">Fundament legen — SEO, Konsistenz, erste Treffer. <strong>Basis ist gelegt.</strong></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-month">MONAT 4–8</div>
+          <div class="tl-text">Algorithmus erkennt Muster → <strong>erste echte Empfehlungsreichweite</strong>. Views steigen exponentiell.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-month">MONAT 9–18</div>
+          <div class="tl-text">Kanal läuft halbautomatisch. <strong>Evergreen-Videos liefern täglich neue Leads</strong> für Kurs & Webinar.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-month">MONAT 18+</div>
+          <div class="tl-text">YouTube als <strong>passiver Traffic-Kanal</strong> — Meta Ads skalieren oben drauf.</div>
+        </div>
+      </div>
+      <div style="background:rgba(59,154,232,.08);border:1px solid rgba(59,154,232,.2);border-radius:10px;padding:.9rem 1.1rem;margin-top:1rem;font-size:.82rem;color:var(--t2);line-height:1.6">
+        Strategie: <strong style="color:var(--white)">2 Videos/Woche</strong> — André dreht, sein Cutter schneidet. Schmidtke übernimmt die YouTube-Strategie: Keyword-Recherche, Titel, Thumbnails, SEO und Veröffentlichungs-Planung.
+      </div>
+    </div>
+    <div>
+      <p class="section-label">LEARNINGS AUS DEM KANAL</p>
+      <h2 style="margin-bottom:.8rem">Was gut funktioniert</h2>
+      <div class="rule-row">
+        <span class="rule-arrow">▲</span>
+        <span class="rule-text"><strong style="color:var(--white)">Schmerzpunkt-Videos performen</strong> — konkrete Fragen wie „warum wache ich um 3 Uhr auf?" schlagen allgemeinen Info-Content deutlich.</span>
+      </div>
+      <div class="rule-row">
+        <span class="rule-arrow">▲</span>
+        <span class="rule-text"><strong style="color:var(--white)">Melatonin = viraler Magnet</strong> — kontroverse Wissenschaftsthemen generieren 2× mehr organischen Traffic.</span>
+      </div>
+      <div class="rule-row">
+        <span class="rule-arrow">▲</span>
+        <span class="rule-text"><strong style="color:var(--white)">Evergreen-Potenzial klar erkennbar</strong> — Schlaf-Grundlagen-Videos performen langfristig. Ziel: gezielt Evergreen-Content aufbauen.</span>
+      </div>
+      <div class="rule-row">
+        <span class="rule-arrow">▲</span>
+        <span class="rule-text"><strong style="color:var(--white)">vidIQ Score ~21</strong> — SEO-Grundlage ist solid. Ausbau mit strukturiertem Keyword-Plan geplant.</span>
+      </div>
+      <div class="rule-row">
+        <span class="rule-arrow">▲</span>
+        <span class="rule-text"><strong style="color:var(--white)">Cross-Publishing</strong> — YouTube-Content wird automatisch zu TikTok-Clips und Instagram-Reels repurposed.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 5: INSTAGRAM ─── -->
+<section class="slide" data-title="Instagram — Reale Zahlen">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">02 · SOCIAL MEDIA — INSTAGRAM</p>
+    <h2 style="margin-bottom:.4rem">@andre.schlafen · Instagram</h2>
+    <p class="lead" style="margin-bottom:1.2rem">131 Beiträge · <strong style="color:var(--white)">6.662 Follower</strong> · organisch aufgebaut · Highlights: Sleep Basics, Sleep Tipps, Fragen, Vorträge</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div class="card">
+        <div class="accent-line" style="background:linear-gradient(90deg,#f09433,#e6683c,#dc2743)"></div>
+        <h3 style="margin-bottom:1rem">Top Reels nach Views</h3>
+        <div class="video-list">
+          <div class="video-row">
+            <span>Dein Nervensystem schläft nicht</span>
+            <span class="views" style="color:var(--gold)">104.000</span>
+          </div>
+          <div class="video-row">
+            <span>5 Schlafmythen, die ich täglich höre</span>
+            <span class="views">6.269</span>
+          </div>
+          <div class="video-row">
+            <span>Trotz Schlaf erschöpft?</span>
+            <span class="views">4.946</span>
+          </div>
+          <div class="video-row">
+            <span>Schlafprobleme sind oft weiblich</span>
+            <span class="views">4.135</span>
+          </div>
+        </div>
+        <div style="background:rgba(212,165,116,.1);border:1px solid rgba(212,165,116,.25);border-radius:8px;padding:.7rem .9rem;margin-top:.9rem">
+          <div style="font-size:.7rem;color:var(--gold);font-weight:700;margin-bottom:.2rem">VIRALER TREFFER</div>
+          <div style="font-size:.82rem;color:var(--t2)">„Dein Nervensystem schläft nicht" erreichte <strong style="color:var(--white)">104.000 Views</strong> — das zeigt das Potenzial mit mehr Struktur und Posting-Konsistenz.</div>
+        </div>
+      </div>
+      <div>
+        <div class="stat-grid stat-grid-2" style="margin-bottom:1rem">
+          <div class="stat-card" style="border-top:2px solid #e6683c">
+            <div class="stat-value" style="font-size:1.5rem">6.662</div>
+            <div class="stat-label">Follower</div>
+            <div class="stat-sub">100% organisch</div>
+          </div>
+          <div class="stat-card" style="border-top:2px solid #e6683c">
+            <div class="stat-value" style="font-size:1.5rem">131</div>
+            <div class="stat-label">Beiträge</div>
+            <div class="stat-sub">Reels + Karussell</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="accent-line" style="background:linear-gradient(90deg,#f09433,#dc2743)"></div>
+          <h3 style="margin-bottom:.8rem">Was wir aufbauen</h3>
+          <div class="ri"><span>→</span><span>Strukturierter Reels-Kalender: 4–5 Posts/Woche</span></div>
+          <div class="ri"><span>→</span><span>Short-form Clips aus YouTube-Material (Re-Purposing)</span></div>
+          <div class="ri"><span>→</span><span>Storys zur Community-Bindung & Fragen-Interaktion</span></div>
+          <div class="ri"><span>→</span><span>Meta Ads zielen auch auf IG-Follower-Aufbau ab</span></div>
+          <div class="ri"><span>→</span><span>Ziel: 30.000 Follower in 2–3 Jahren (Walker: 182K organisch)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 6: TIKTOK ─── -->
+<section class="slide bg-light" data-title="TikTok — Reale Zahlen">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">02 · SOCIAL MEDIA — TIKTOK</p>
+    <h2 style="margin-bottom:.4rem">@andre.schlafen · TikTok</h2>
+    <p class="lead" style="margin-bottom:1.2rem"><strong style="color:var(--white)">6.903 Follower · 107,9K Likes</strong> — und ein Video mit 1,3 Millionen Views. TikTok-Algorithmus belohnt Schlaf-Expertise-Content massiv.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div class="card">
+        <div class="accent-line" style="background:linear-gradient(90deg,#00f2ea,#ff0050)"></div>
+        <h3 style="margin-bottom:1rem">Top Videos nach Views</h3>
+        <div class="video-list">
+          <div class="video-row">
+            <span>Stress und Schlaf</span>
+            <span class="views" style="color:var(--gold)">1.300.000</span>
+          </div>
+          <div class="video-row">
+            <span>Nachtschicht & Schlaf</span>
+            <span class="views">308.100</span>
+          </div>
+          <div class="video-row">
+            <span>Bist du nachts wach?</span>
+            <span class="views">297.200</span>
+          </div>
+          <div class="video-row">
+            <span>5 Schlafmythen, die ich täglich höre</span>
+            <span class="views">6.269</span>
+          </div>
+        </div>
+        <div style="background:rgba(230,47,31,.1);border:1px solid rgba(230,47,31,.25);border-radius:8px;padding:.7rem .9rem;margin-top:.9rem">
+          <div style="font-size:.7rem;color:var(--red);font-weight:700;margin-bottom:.2rem">BEWEIS: REICHWEITE IST DA</div>
+          <div style="font-size:.82rem;color:var(--t2)">1,3 Mio. Views mit einem einzigen Video — <strong style="color:var(--white)">ohne Ads, ohne Boosting</strong>. Das zeigt: der Algorithmus liebt das Thema. Das Potenzial ist da — jetzt braucht es die richtige Struktur.</div>
+        </div>
+      </div>
+      <div>
+        <div class="stat-grid stat-grid-2" style="margin-bottom:1rem">
+          <div class="stat-card" style="border-top:2px solid #ff0050">
+            <div class="stat-value" style="font-size:1.5rem">6.903</div>
+            <div class="stat-label">Follower</div>
+            <div class="stat-sub">@andre.schlafen</div>
+          </div>
+          <div class="stat-card" style="border-top:2px solid #00f2ea">
+            <div class="stat-value" style="font-size:1.5rem">107,9K</div>
+            <div class="stat-label">Likes gesamt</div>
+            <div class="stat-sub">hohe Engagement-Rate</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:1rem">
+          <div class="accent-line" style="background:linear-gradient(90deg,#00f2ea,#ff0050)"></div>
+          <h3 style="margin-bottom:.8rem">Cross-Plattform Strategie</h3>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;text-align:center;margin-top:.5rem">
+            <div style="background:var(--navy-surf);border-radius:8px;padding:.8rem .6rem">
+              <div style="font-weight:700;color:#FF0000;font-size:.8rem">YOUTUBE</div>
+              <div style="font-size:.7rem;color:var(--t2);margin-top:.2rem">Langform<br>10–20 Min.</div>
+            </div>
+            <div style="text-align:center;font-size:1.2rem;color:var(--t3);display:flex;align-items:center;justify-content:center">→</div>
+            <div style="background:var(--navy-surf);border-radius:8px;padding:.8rem .6rem">
+              <div style="font-weight:700;color:#ff0050;font-size:.8rem">TIKTOK</div>
+              <div style="font-size:.7rem;color:var(--t2);margin-top:.2rem">30–90 Sek.<br>Hook + Insight</div>
+            </div>
+          </div>
+          <div style="text-align:center;font-size:1.2rem;color:var(--t3);margin:.4rem 0">↓</div>
+          <div style="background:var(--navy-surf);border-radius:8px;padding:.8rem;text-align:center">
+            <div style="font-weight:700;font-size:.8rem;background:linear-gradient(90deg,#f09433,#dc2743);-webkit-background-clip:text;-webkit-text-fill-color:transparent">INSTAGRAM</div>
+            <div style="font-size:.7rem;color:var(--t2);margin-top:.2rem">Reel + Karussell · Community</div>
+          </div>
+          <p style="font-size:.78rem;color:var(--t2);margin-top:.8rem">André dreht <strong style="color:var(--white)">einmal</strong> — sein Cutter schneidet, Schmidtke plant, optimiert und koordiniert die Veröffentlichung auf allen 3 Kanälen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 7: BENCHMARK ─── -->
+<section class="slide" data-title="Benchmark — Matthew Walker">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">03 · BENCHMARK</p>
+    <h2 style="margin-bottom:.4rem">Was ist möglich — Der Matthew Walker Effekt</h2>
+    <p class="lead" style="margin-bottom:1.2rem">Prof. Dr. Matthew Walker ist der amerikanische André Alesi. Was er erreicht hat, zeigt das Potenzial des deutschen Markts.</p>
+
+    <div class="bench-split">
+      <div class="walker-card">
+        <h3 style="font-size:.7rem;letter-spacing:.15em;color:var(--blue);margin-bottom:1rem">MATTHEW WALKER — WAS ER AUFGEBAUT HAT</h3>
+        <div class="ws"><span class="num">16 Mio.</span><span class="desc">Views — TED Talk „Sleep is Your Superpower" · einer der meistgeklickten TED-Talks</span></div>
+        <div class="ws"><span class="num">182K</span><span class="desc">Instagram-Follower @drmattwalker — komplett organisch, Expertise-Content</span></div>
+        <div class="ws"><span class="num">51 Mio.+</span><span class="desc">YouTube-Views über Gastauftritte (Huberman Lab, Joe Rogan, Talks at Google)</span></div>
+        <div class="ws"><span class="num">1,5 Mio.</span><span class="desc">Buchverkäufe „Why We Sleep" — 34 Sprachen, Weltbestseller</span></div>
+        <div class="ws"><span class="num">MasterClass</span><span class="desc">Eigener Online-Kurs — eines der profitabelsten Kursformate weltweit</span></div>
+        <div class="walker-quote">
+          „Matthew Walker hat kein großes Werbebudget gehabt — er hat <strong>Vertrauen durch Expertise</strong> aufgebaut. Genau das macht André bereits. Jetzt braucht es den Marketing-Hebel."
+        </div>
+      </div>
+      <div class="andre-card">
+        <h3 style="font-size:.7rem;letter-spacing:.15em;color:var(--gold);margin-bottom:1rem">ANDRÉ ALESI — SEIN POTENZIAL</h3>
+        <div class="pot-step">
+          <div class="pot-num">1</div>
+          <div class="pot-text">
+            <strong>Starke Ausgangsbasis</strong>
+            <span>20+ Jahre Expertise, Institut für Schlaf & Regeneration seit 2015, aktive Community auf YouTube, Instagram & TikTok — schlägt 95% der Konkurrenz.</span>
+          </div>
+        </div>
+        <div class="pot-step">
+          <div class="pot-num">2</div>
+          <div class="pot-text">
+            <strong>Nahezu kein direkter Wettbewerb auf Deutsch</strong>
+            <span>Walker dominiert Englisch. Der deutschsprachige Schlaf-Expertenmarkt ist faktisch unbesetzt auf dem Niveau, das André erreichen kann.</span>
+          </div>
+        </div>
+        <div class="pot-step">
+          <div class="pot-num">3</div>
+          <div class="pot-text">
+            <strong>YouTube + Meta Ads = 3–5× schneller als Walker</strong>
+            <span>Walker wuchs organisch über Jahre. André kann mit gezieltem Ad-Budget und strukturiertem Content deutlich schneller skalieren.</span>
+          </div>
+        </div>
+        <div class="pot-step">
+          <div class="pot-num">4</div>
+          <div class="pot-text">
+            <strong>Kurs + Webinar + Community</strong>
+            <span>Walker hat MasterClass. André bekommt sein eigenes „Endlich gut schlafen"-System — entwickelt und vermarktet mit Schmidtke GmbH.</span>
+          </div>
+        </div>
+        <div class="goal-box">
+          <div class="glbl">REALISTISCHES 3-JAHRES-ZIEL</div>
+          <div class="gtxt">50.000+ YouTube-Abonnenten · 30K+ Instagram-Follower · Kurs mit 500+ Teilnehmern/Jahr · Der „Matthew Walker von Deutschland"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 8: PRODUKT / KURS ─── -->
+<section class="slide bg-light" data-title="Produktkonzept — Endlich gut schlafen">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">04 · PRODUKTKONZEPT</p>
+    <h2 style="margin-bottom:.4rem">„Endlich gut schlafen" — Der Kurs</h2>
+    <p class="lead" style="margin-bottom:1rem">Evidenzbasierter Online-Kurs für Menschen mit akuten Schlafproblemen. 30–58 Jahre, DACH. Leidensdruck ist enorm — Zahlungsbereitschaft hoch.</p>
+
+    <div class="stat-grid stat-grid-4" style="margin-bottom:1.2rem">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--red);font-size:1.5rem">499–800 €</div>
+        <div class="stat-label">Einmalpreis</div>
+        <div class="stat-sub">Exakter Preis wird A/B getestet</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~34%</div>
+        <div class="stat-label">der Deutschen</div>
+        <div class="stat-sub">leiden unter Schlafstörungen (RKI)</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-value">28 Mrd.</div>
+        <div class="stat-label">€ Schaden/Jahr</div>
+        <div class="stat-sub">durch Schlafmangel in Deutschland</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-value">5 Module</div>
+        <div class="stat-label">+ Bonus Community</div>
+        <div class="stat-sub">8–10 Wochen Programm</div>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-3">
+      <div class="card">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <div style="font-size:.68rem;color:var(--blue);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">MODUL 1</div>
+        <h3>Schlafwissenschaft verstehen</h3>
+        <p>Circadianer Rhythmus, Schlafphasen, Chronotyp — die biologischen Grundlagen, die kein Arzt erklärt hat.</p>
+      </div>
+      <div class="card">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <div style="font-size:.68rem;color:var(--blue);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">MODUL 2</div>
+        <h3>Einschlafen optimieren</h3>
+        <p>Cortisolabbau, Licht, Temperatur, Abendroutine — sofort umsetzbare Protokolle mit messbarer Wirkung.</p>
+      </div>
+      <div class="card">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <div style="font-size:.68rem;color:var(--blue);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">MODUL 3</div>
+        <h3>Durchschlafen & Tiefschlaf</h3>
+        <p>Schlaffenster, Supplement-Protokoll, Umgebungsoptimierung — warum früh ins Bett alles schlimmer macht.</p>
+      </div>
+      <div class="card">
+        <div class="accent-line" style="background:var(--gold)"></div>
+        <div style="font-size:.68rem;color:var(--gold);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">MODUL 4</div>
+        <h3>Stress & Hyperarousal</h3>
+        <p>CBT-I-Techniken, NSDR-Protokoll, Gedankenstopp — das mentale System hinter chronischer Insomnie.</p>
+      </div>
+      <div class="card">
+        <div class="accent-line" style="background:var(--gold)"></div>
+        <div style="font-size:.68rem;color:var(--gold);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">MODUL 5</div>
+        <h3>Langfristige Schlafgesundheit</h3>
+        <p>Performance, Ernährung, Sport, biometrisches Monitoring — wie man nie wieder zurückfällt.</p>
+      </div>
+      <div class="card" style="border-color:rgba(52,211,153,.25);background:linear-gradient(135deg,rgba(52,211,153,.08),var(--navy-card))">
+        <div class="accent-line" style="background:var(--green)"></div>
+        <div style="font-size:.68rem;color:var(--green);font-weight:700;letter-spacing:.1em;margin-bottom:.4rem">BONUS</div>
+        <h3 style="color:var(--green)">Community + Live-Calls</h3>
+        <p>Private Community, 2× monatlich Live-Coaching mit André — Teilnehmer bleiben dran und empfehlen weiter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 9: FUNNEL + NEWSLETTER ─── -->
+<section class="slide" data-title="Vermarktungs-Funnel">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">05 · FUNNEL & COMMUNITY-AUFBAU</p>
+    <h2 style="margin-bottom:.4rem">Der Vermarktungs-Funnel</h2>
+    <p class="lead" style="margin-bottom:1.2rem">Von der ersten Anzeige bis zur loyalen Community — ein System, das 24/7 läuft.</p>
+
+    <!-- Newsletter ab Tag 1 -->
+    <div class="card" style="border-color:rgba(212,165,116,.25);margin-bottom:1rem">
+      <div class="accent-line" style="background:var(--gold)"></div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center">
+        <div style="background:rgba(212,165,116,.12);border:1px solid rgba(212,165,116,.25);border-radius:10px;padding:.7rem 1.1rem;text-align:center;white-space:nowrap">
+          <div style="font-size:.65rem;color:var(--gold);font-weight:700;letter-spacing:.12em;margin-bottom:.2rem">AB TAG 1</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--white)">Newsletter-Aufbau</div>
+        </div>
+        <p style="font-size:.86rem;color:var(--t2);line-height:1.6;margin:0">Ads werden ab Start für den <strong style="color:var(--white)">Listen-Aufbau via Lead Magnet</strong> eingesetzt. Jeder neue Subscriber wird langfristig auf Webinare, Kurse und weitere Angebote gepitcht. Die E-Mail-Liste wächst parallel zu jeder Kampagne — unabhängig von Algorithmen.</p>
+      </div>
+    </div>
+
+    <div class="funnel" style="margin-bottom:1rem">
+      <div class="funnel-step" style="border-color:rgba(212,165,116,.3);background:rgba(212,165,116,.06)">
+        <div class="fn" style="color:var(--gold)">01</div>
+        <div class="ft">LEAD MAGNET</div>
+        <div class="fs">„5 Schlaf-Fehler"<br>→ Newsletter-Eintrag</div>
+      </div>
+      <div class="funnel-step">
+        <div class="fn">02</div>
+        <div class="ft">TRAFFIC</div>
+        <div class="fs">Meta Ads +<br>YouTube organisch</div>
+      </div>
+      <div class="funnel-step">
+        <div class="fn">03</div>
+        <div class="ft">LANDING PAGE</div>
+        <div class="fs">Webinar-Anmeldung<br>verkaufspsychologisch</div>
+      </div>
+      <div class="funnel-step">
+        <div class="fn">04</div>
+        <div class="ft">WEBINAR (LIVE)</div>
+        <div class="fs">Mehrere Termine +<br>später Evergreen</div>
+      </div>
+      <div class="funnel-step hi">
+        <div class="fn" style="color:rgba(255,255,255,.7)">05</div>
+        <div class="ft">KAUF · ab 499 €</div>
+        <div class="fs">Preis wird A/B getestet<br>Conversion 5–10%</div>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-2">
+      <div class="card" style="border-color:rgba(59,154,232,.2)">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <h3 style="margin-bottom:.7rem">E-Mail Newsletter — Kernkanal</h3>
+        <div class="ri"><span>→</span><span>Lead Magnete (Gratis-Guide, Checkliste, Mini-Kurs) holen Leads in die Liste</span></div>
+        <div class="ri"><span>→</span><span>Automatisierte Sequenz: Vertrauen → Webinar-Einladung → Kauf-Pitch</span></div>
+        <div class="ri"><span>→</span><span>Regelmäßiger Newsletter: Schlaf-Tipps, Studien, Autorität aufbauen</span></div>
+        <div class="ri"><span>→</span><span>Jeder neue Webinar-Termin geht direkt an die bestehende Liste — kein Cold Traffic nötig</span></div>
+        <div style="background:rgba(59,154,232,.08);border-radius:8px;padding:.6rem .9rem;margin-top:.6rem;font-size:.8rem;color:var(--t2)">
+          Ziel: <strong style="color:var(--white)">5.000+ Subscribers in Jahr 1</strong> — der wertvollste Kanal im System.
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(52,211,153,.2)">
+        <div class="accent-line" style="background:var(--green)"></div>
+        <h3 style="margin-bottom:.7rem">Community — nach dem Kauf</h3>
+        <div class="ri"><span>→</span><span>Private Community für Kurs-Teilnehmer — direkter Zugang zu André</span></div>
+        <div class="ri"><span>→</span><span>Plattform: WhatsApp oder LearningSuit.io — wird im Aufbau entschieden</span></div>
+        <div class="ri"><span>→</span><span>Audio-Nachrichten, Schlaf-Tipps, persönliche Bindung</span></div>
+        <div class="ri"><span>→</span><span>Community als Testimonial-Motor & Upsell-Kanal für Folgeprodukte</span></div>
+        <div style="background:rgba(52,211,153,.08);border-radius:8px;padding:.6rem .9rem;margin-top:.6rem;font-size:.8rem;color:var(--t2)">
+          Ziel: <strong style="color:var(--white)">500+ aktive Mitglieder</strong> — Community die bleibt und weiterempfiehlt.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 10: META ADS ─── -->
+<section class="slide bg-light" data-title="Meta Ads — Strategie & Budget">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label red">06 · META ADS — WACHSTUMSSTRATEGIE</p>
+    <h2 style="margin-bottom:.4rem">Meta Ads als Wachstumsbeschleuniger</h2>
+    <p class="lead" style="margin-bottom:1.2rem">YouTube braucht Zeit. Meta Ads liefern sofort qualifizierte Leads für das Webinar — der schnellste Weg zum ersten Kurs-Kauf.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem">
+      <div>
+        <div class="budget-box" style="margin-bottom:1.2rem">
+          <div class="blbl">WERBEBUDGET — VARIABEL</div>
+          <div class="bval">Flexibel &amp; ergebnisbasiert</div>
+          <div class="bdesc">Kein festes Budget von Anfang an. Es wird schrittweise skaliert, wenn der Funnel validiert ist. André trägt das Werbebudget — es wird vor der Gewinnverteilung vom Umsatz abgezogen.</div>
+        </div>
+        <div class="card">
+          <div class="accent-line" style="background:var(--red)"></div>
+          <h3 style="margin-bottom:.6rem">Budget-Phasen</h3>
+          <div class="ri"><span>→</span><span><strong style="color:var(--white)">Phase 1:</strong> €50/Tag — Funnel testen, erste Conversions validieren</span></div>
+          <div class="ri"><span>→</span><span><strong style="color:var(--white)">Phase 2:</strong> €100–150/Tag — skalieren nach bewiesenem ROAS</span></div>
+          <div class="ri"><span>→</span><span><strong style="color:var(--white)">Phase 3+:</strong> Budget wächst mit dem Funnel — gemeinsam entschieden</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1rem">
+          <div class="accent-line" style="background:var(--blue)"></div>
+          <h3 style="margin-bottom:.6rem">Zielgruppe (Targeting)</h3>
+          <div class="ri"><span>→</span><span>DACH · 30–58 Jahre · alle Geschlechter</span></div>
+          <div class="ri"><span>→</span><span>Interessen: Gesundheit, Wohlbefinden, Stressabbau</span></div>
+          <div class="ri"><span>→</span><span>Lookalike: bestehende Instagram-Follower</span></div>
+          <div class="ri"><span>→</span><span>Retargeting: YouTube-Zuschauer & Website-Besucher</span></div>
+        </div>
+        <div class="card">
+          <div class="accent-line" style="background:var(--gold)"></div>
+          <h3 style="margin-bottom:.6rem">Creative-Strategie</h3>
+          <div class="ri"><span>→</span><span>Talking-Head Videos von André — authentisch & expertenhaft</span></div>
+          <div class="ri"><span>→</span><span>Pain-Point-Hook: „Wachst du um 3 Uhr auf?"</span></div>
+          <div class="ri"><span>→</span><span>Webinar-Einladung als weicher CTA — kein Hardsell</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="height:100%">
+          <div class="accent-line" style="background:var(--green)"></div>
+          <h3 style="margin-bottom:.6rem">Was Schmidtke liefert</h3>
+          <div class="ri"><span>→</span><span>Kampagnen-Setup & laufende Optimierung</span></div>
+          <div class="ri"><span>→</span><span>A/B-Testing: Headlines, Creatives, Audiences</span></div>
+          <div class="ri"><span>→</span><span>Landingpage-Optimierung für maximale Conversion</span></div>
+          <div class="ri"><span>→</span><span>Webinar-Funnel: Anmeldung → E-Mail → Reminder</span></div>
+          <div class="ri"><span>→</span><span>Monatliches Reporting: CPA, CPL, ROAS, Nettogewinn</span></div>
+          <div class="ri"><span>→</span><span>André hat jederzeit Einsicht in alle Ad-Accounts</span></div>
+          <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:8px;padding:.6rem .9rem;margin-top:.8rem;font-size:.8rem;color:var(--t2)">
+            <strong style="color:var(--green)">Werbekosten</strong> werden vom Umsatz abgezogen, bevor der Gewinn 50/50 gesplittet wird — kein Eigenrisiko für André.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 11: PARTNERSCHAFT 50/50 ─── -->
+<section class="slide" data-title="Partnerschaftsmodell — 50/50">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label red">07 · PARTNERSCHAFTSMODELL</p>
+    <h2 style="margin-bottom:.4rem">Wir wachsen gemeinsam</h2>
+    <p class="lead" style="margin-bottom:1.2rem">Kein klassisches Agentur-Modell. Echte Partnerschaft — wenn André gewinnt, gewinnen wir. Wenn wir gewinnen, gewinnt André.</p>
+
+    <!-- Central 50/50 badge -->
+    <div style="text-align:center;margin-bottom:1.2rem">
+      <div style="display:inline-block;background:linear-gradient(135deg,rgba(59,154,232,.15),rgba(230,47,31,.1));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.8rem 2.5rem">
+        <div style="font-size:3rem;font-weight:700;line-height:1;letter-spacing:-2px"><span style="color:var(--blue)">50</span><span style="color:var(--t3);font-size:2rem;margin:0 .3rem">/</span><span style="color:var(--red)">50</span></div>
+        <div style="font-size:.75rem;color:var(--t3);font-weight:700;letter-spacing:.1em;margin-top:.3rem">NETTOGEWINN-SPLIT — NACH ABZUG ALLER DIREKTEN KOSTEN</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem">
+      <div class="card" style="border-color:rgba(59,154,232,.25)">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <h3 style="margin-bottom:.7rem;color:var(--blue)">Dr. André Alesi bringt mit</h3>
+        <div class="ri"><span style="color:var(--blue)">✓</span><span>20+ Jahre Schlafexpertise & wissenschaftliche Glaubwürdigkeit</span></div>
+        <div class="ri"><span style="color:var(--blue)">✓</span><span>Video-Content — dreht selbst, hat eigenen Cutter</span></div>
+        <div class="ri"><span style="color:var(--blue)">✓</span><span><strong style="color:var(--white)">Erste Erfolge:</strong> 1,3 Mio. TikTok-Views, 104K Instagram-Reel — die Basis ist da</span></div>
+        <div class="ri"><span style="color:var(--blue)">✓</span><span>Aktive Community auf YouTube, Instagram & TikTok</span></div>
+        <div class="ri"><span style="color:var(--blue)">✓</span><span>Werbebudget (Ad Spend) — investiert in das gemeinsame Wachstum</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(230,47,31,.25)">
+        <div class="accent-line" style="background:var(--red)"></div>
+        <h3 style="margin-bottom:.7rem;color:var(--red)">Schmidtke GmbH bringt mit</h3>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>Full-Service Marketing: Meta Ads, Funnel, Landing Pages, E-Mail, Community</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>Kurs-Aufbau & Webinar-System — Konzept bis Launch</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>YouTube-Strategie: Keywords, Thumbnails, SEO, Cutter-Briefing & Analyse</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span><strong style="color:var(--white)">Expertennetzwerk:</strong> Copywriter, Kurs-Entwickler, Content-Spezialisten</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span><strong style="color:var(--white)">Praxiserprobte Learnings</strong> aus laufenden Kursaufbau-Projekten — kein Start von Null</span></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem">
+      <div class="card" style="border-color:rgba(212,165,116,.2);background:linear-gradient(135deg,rgba(212,165,116,.06),var(--navy-card))">
+        <div class="accent-line" style="background:var(--gold)"></div>
+        <h3 style="margin-bottom:.5rem">Deal-Prinzip</h3>
+        <div class="ri"><span>→</span><span>Gleichberechtigte Partner — kein Auftraggeber/Auftragnehmer</span></div>
+        <div class="ri"><span>→</span><span>Gemeinsame strategische Entscheidungen — monatliches Meeting</span></div>
+        <div class="ri"><span>→</span><span>Profit-Definition: transparent & schriftlich (nächste Slide)</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(52,211,153,.2)">
+        <div class="accent-line" style="background:var(--green)"></div>
+        <h3 style="margin-bottom:.5rem">Was beide aufbauen</h3>
+        <div class="ri"><span>→</span><span>Nachhaltige Marke: André als Deutschlands Schlaf-Experte #1</span></div>
+        <div class="ri"><span>→</span><span>Skalierbares Kurs-System mit Evergreen-Potenzial</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(59,154,232,.2)">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <h3 style="margin-bottom:.5rem">Transparenz & Schutz</h3>
+        <div class="ri"><span>→</span><span>André hat jederzeit Einsicht in alle Konten & Zahlen</span></div>
+        <div class="ri"><span>→</span><span>Monatliches Reporting: Umsatz, Kosten, Gewinn, Auszahlung</span></div>
+        <div class="ri"><span>→</span><span>Schriftlicher Vertrag — fair und beidseitig schützend</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 12: PROFIT-DEFINITION ─── -->
+<section class="slide bg-light" data-title="Profit-Definition — 100% Transparent">
+  <div style="max-width:980px;margin:0 auto;width:100%">
+    <p class="section-label gold">07b · PROFIT-DEFINITION</p>
+    <h2 style="margin-bottom:.2rem">Vergütung — transparent & fair</h2>
+    <p style="color:var(--t2);font-size:.88rem;margin-bottom:.9rem">Zwei Bausteine sichern beide Seiten ab: eine feste Kostenbasis für Schmidtke und ein gemeinsamer Erfolgsanteil.</p>
+
+    <!-- TWO-PART COMPENSATION STRUCTURE -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.9rem">
+
+      <!-- BLOCK 1: Fixed monthly fee -->
+      <div style="background:linear-gradient(135deg,rgba(230,47,31,.1),rgba(230,47,31,.04));border:1px solid rgba(230,47,31,.3);border-radius:14px;padding:1rem 1.2rem">
+        <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.55rem">
+          <div style="background:var(--red);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">1</div>
+          <div>
+            <div style="font-size:.62rem;color:var(--red);font-weight:700;letter-spacing:.12em">MONATLICHE MINDESTPAUSCHALE</div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--white)">Fixe Kostenbasis für Schmidtke</div>
+          </div>
+        </div>
+        <p style="font-size:.81rem;color:var(--t2);line-height:1.55;margin-bottom:.6rem">Schmidtke erhält monatlich im Voraus eine vereinbarte Pauschale zur Deckung der laufenden Betriebskosten (Team, Tools, Strategie). Betrag wird gemeinsam festgelegt.</p>
+        <div style="background:rgba(230,47,31,.08);border-radius:8px;padding:.5rem .8rem;font-size:.78rem;color:var(--t2);line-height:1.5">
+          <strong style="color:var(--white)">Anrechnung:</strong> Die Pauschale wird auf Schmidtkes Erfolgsanteil angerechnet — André zahlt nie doppelt. Übersteigt der Gewinnanteil die Pauschale, gilt der höhere Betrag.
+        </div>
+      </div>
+
+      <!-- BLOCK 2: Profit share -->
+      <div style="background:linear-gradient(135deg,rgba(59,154,232,.1),rgba(59,154,232,.03));border:1px solid rgba(59,154,232,.3);border-radius:14px;padding:1rem 1.2rem">
+        <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.55rem">
+          <div style="background:var(--blue);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">2</div>
+          <div>
+            <div style="font-size:.62rem;color:var(--blue);font-weight:700;letter-spacing:.12em">ERFOLGSABHÄNGIGE VERGÜTUNG</div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--white)">50% des Nettogewinns</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.35rem;margin-bottom:.6rem;flex-wrap:wrap">
+          <span style="background:var(--navy-card);border-radius:6px;padding:.25rem .55rem;font-size:.75rem;font-weight:700">Umsatz</span>
+          <span style="color:var(--gold);font-weight:700">−</span>
+          <span style="background:rgba(212,165,116,.12);border-radius:6px;padding:.25rem .55rem;font-size:.75rem;color:var(--gold);font-weight:700">Werbekosten</span>
+          <span style="color:var(--gold);font-weight:700">−</span>
+          <span style="background:rgba(212,165,116,.12);border-radius:6px;padding:.25rem .55rem;font-size:.75rem;color:var(--gold);font-weight:700">Vertriebskosten</span>
+          <span style="color:var(--t3);font-weight:700">=</span>
+          <span style="background:rgba(59,154,232,.15);border-radius:6px;padding:.25rem .55rem;font-size:.75rem;color:var(--blue);font-weight:700">Nettogewinn ÷ 2</span>
+        </div>
+        <div style="background:rgba(59,154,232,.08);border-radius:8px;padding:.5rem .8rem;font-size:.78rem;color:var(--t2);line-height:1.5">
+          <strong style="color:var(--white)">Abzugsfähig (André trägt):</strong> Meta Ad Spend, Zahlungsanbieter ~2–3%, vereinbarte Direktkosten.<br>
+          <strong style="color:var(--t3)">Nicht abzugsfähig:</strong> Schmidtkes Personalkosten, Software, Overhead.
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: Example + two protection cards in 3 columns -->
+    <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:.9rem">
+      <div class="card" style="border-color:rgba(212,165,116,.2);background:rgba(212,165,116,.04);padding:1rem 1.1rem">
+        <div class="accent-line" style="background:var(--gold)"></div>
+        <div style="font-size:.64rem;color:var(--gold);font-weight:700;letter-spacing:.1em;margin-bottom:.6rem">RECHENBEISPIEL</div>
+        <div style="display:grid;grid-template-columns:1fr auto;font-size:.81rem;gap:.18rem .5rem;color:var(--t2)">
+          <span>Umsatz (20 × 499 €)</span><span style="text-align:right;font-weight:700;color:var(--white)">9.980 €</span>
+          <span style="color:var(--gold)">− Werbekosten (André)</span><span style="text-align:right;color:var(--gold)">− 4.500 €</span>
+          <span style="color:var(--gold)">− Vertriebskosten (~2%)</span><span style="text-align:right;color:var(--gold)">− 200 €</span>
+          <div style="grid-column:1/-1;height:1px;background:rgba(255,255,255,.1);margin:.18rem 0"></div>
+          <span style="font-weight:700;color:var(--white)">= Nettogewinn</span><span style="text-align:right;font-weight:700;color:var(--white)">5.280 €</span>
+          <div style="grid-column:1/-1;height:1px;background:rgba(255,255,255,.06);margin:.12rem 0"></div>
+          <span style="color:var(--blue)">André (50%)</span><span style="text-align:right;color:var(--blue);font-weight:700">2.640 €</span>
+          <span style="color:var(--red)">Schmidtke (50%)</span><span style="text-align:right;color:var(--red);font-weight:700">2.640 €</span>
+        </div>
+        <div style="font-size:.74rem;color:var(--t3);margin-top:.5rem;line-height:1.4">Mindestpauschale in Schmidtkes 50% enthalten — kein Doppelzahlung.</div>
+      </div>
+      <div class="card" style="border-color:rgba(52,211,153,.2);padding:1rem 1.1rem">
+        <div class="accent-line" style="background:var(--green)"></div>
+        <div style="font-size:.64rem;color:var(--green);font-weight:700;letter-spacing:.1em;margin-bottom:.55rem">ANDRÉS SCHUTZ</div>
+        <div class="ri"><span style="color:var(--t3)">✕</span><span>Keine versteckten Agentur-Kosten abzugsfähig</span></div>
+        <div class="ri"><span style="color:var(--t3)">✕</span><span>Kein Overhead, keine internen Pauschalkosten</span></div>
+        <div class="ri"><span style="color:var(--green)">✓</span><span>Jederzeit Einsicht in alle Zahlen & Werbekonten</span></div>
+        <div class="ri"><span style="color:var(--green)">✓</span><span>Monatliches Reporting — keine Überraschungen</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(230,47,31,.2);padding:1rem 1.1rem">
+        <div class="accent-line" style="background:var(--red)"></div>
+        <div style="font-size:.64rem;color:var(--red);font-weight:700;letter-spacing:.1em;margin-bottom:.55rem">SCHMIDTKES SICHERHEIT</div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>Mindestpauschale deckt Betriebskosten — auch in der Aufbauphase</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>Betrag wird gemeinsam im Vertrag festgelegt</span></div>
+        <div class="ri"><span style="color:var(--red)">✓</span><span>Anrechnung auf Erfolgsanteil — faire Balance</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 13 (ehem. 12): LAUNCH-POTENZIAL ─── -->
+<section class="slide bg-light" data-title="Launch-Potenzial">
+  <div style="max-width:960px;margin:0 auto;width:100%">
+    <p class="section-label gold">08 · LAUNCH-POTENZIAL</p>
+    <h2 style="margin-bottom:.4rem">Was beim ersten Launch realistisch ist</h2>
+    <p class="lead" style="margin-bottom:1.4rem">Kein hochgegriffenes Versprechen — sondern was gut strukturierte Kurs-Launches in vergleichbaren Märkten tatsächlich einbringen.</p>
+
+    <!-- Big number highlight -->
+    <div style="text-align:center;margin-bottom:1.4rem">
+      <div style="display:inline-block;background:linear-gradient(135deg,rgba(212,165,116,.12),rgba(212,165,116,.04));border:1px solid rgba(212,165,116,.3);border-radius:20px;padding:1.4rem 3rem">
+        <div style="font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.15em;margin-bottom:.4rem">REALISTISCHES ZIEL — ERSTER LAUNCH</div>
+        <div style="font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1;color:var(--white)">20.000 – 50.000 €</div>
+        <div style="font-size:.85rem;color:var(--t2);margin-top:.5rem">Umsatz im ersten Launch-Fenster</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem">
+      <div class="card" style="border-color:rgba(59,154,232,.2)">
+        <div class="accent-line" style="background:var(--blue)"></div>
+        <h3 style="margin-bottom:.7rem">Warum das realistisch ist</h3>
+        <div class="ri"><span>→</span><span>Andrés bestehende Community ist bereits warm — kein Start bei Null</span></div>
+        <div class="ri"><span>→</span><span>1,3 Mio. TikTok-Views beweisen: das Thema zieht Masse</span></div>
+        <div class="ri"><span>→</span><span>Schlaf ist Massenmarkt — Leidensdruck & Zahlungsbereitschaft sind hoch</span></div>
+        <div class="ri"><span>→</span><span>Live-Webinar mit mehreren Terminen maximiert die Reichweite</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(212,165,116,.25);background:rgba(212,165,116,.04)">
+        <div class="accent-line" style="background:var(--gold)"></div>
+        <h3 style="margin-bottom:.7rem">Was den Unterschied macht</h3>
+        <div class="ri"><span style="color:var(--gold)">→</span><span>Funnel-Qualität: gut gebaute Landing Page + E-Mail-Sequenz</span></div>
+        <div class="ri"><span style="color:var(--gold)">→</span><span>Kurs-Preis: 499–800 € — wird vor dem Launch A/B getestet</span></div>
+        <div class="ri"><span style="color:var(--gold)">→</span><span>Newsletter-Liste: je mehr Subscriber, desto mehr Reichweite ohne Ad-Kosten</span></div>
+        <div class="ri"><span style="color:var(--gold)">→</span><span>Webinar-Qualität: André als Experte — das ist seine Stärke</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(52,211,153,.2)">
+        <div class="accent-line" style="background:var(--green)"></div>
+        <h3 style="margin-bottom:.7rem">Langfristige Perspektive</h3>
+        <div class="ri"><span style="color:var(--green)">→</span><span>Ab Monat 9+ liefert YouTube täglich kostenlose Leads</span></div>
+        <div class="ri"><span style="color:var(--green)">→</span><span>E-Mail-Liste wächst mit jedem Webinar — CPL sinkt laufend</span></div>
+        <div class="ri"><span style="color:var(--green)">→</span><span>Webinar kann zu Evergreen-Format werden — läuft automatisiert</span></div>
+        <div class="ri"><span style="color:var(--green)">→</span><span>Jeder Launch baut auf dem vorherigen auf — Momentum aufbauen</span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(212,165,116,.07);border:1px solid rgba(212,165,116,.15);border-radius:10px;padding:.9rem 1.2rem;margin-top:1rem;font-size:.85rem;color:var(--t2);line-height:1.6">
+      <strong style="color:var(--white)">Wichtig:</strong> Die genauen Zahlen hängen von Preis, Ad-Budget, Webinar-Konversion und Newsletter-Listengröße ab — das ermitteln wir gemeinsam in der Aufbauphase und passen die Strategie laufend an.
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 13: WIN-WIN ─── -->
+<section class="slide" data-title="WIN-WIN — Klare Vorteile">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label gold">09 · WIN-WIN</p>
+    <h2 style="margin-bottom:1.2rem">Klare Vorteile — für beide Seiten</h2>
+
+    <div class="ww-grid">
+      <div class="ww-col andre">
+        <h3>DR. ANDRÉ ALESI</h3>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Kein Marketing-Eigenaufwand</strong><span>Schmidtke baut alles auf — André konzentriert sich auf Inhalte & Patienten</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Skalierbare passive Einnahmen</strong><span>Kurs läuft 24/7 — auch wenn André schläft</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Alle Inhalte bleiben sein Eigentum</strong><span>Videos, Expertise, Marke — 100% André Alesi</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Eigene E-Mail-Liste & WhatsApp-Community</strong><span>André bekommt eine Community, die ihm gehört — unabhängig von Social-Media-Algorithmen</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Marken-Aufbau parallel zum Umsatz</strong><span>YouTube + Instagram + TikTok wachsen — Autorität steigt dauerhaft</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Transparentes Reporting</strong><span>Jeder Cent nachvollziehbar — monatliches Meeting mit allen KPIs</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--blue)">✓</span>
+          <div class="ww-text"><strong>Zugang zu einem Expertennetzwerk</strong><span>Copywriter, Kurs-Entwickler & Content-Spezialisten — kein Aufbau aus dem Nichts</span></div>
+        </div>
+      </div>
+
+      <div class="ww-badge">WIN<br>WIN</div>
+
+      <div class="ww-col sk">
+        <h3>SCHMIDTKE GMBH</h3>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Echter Anteil am Erfolg</strong><span>Kein Stunden-Abrechnen — wir wachsen mit André</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Starke Case Study</strong><span>Erfolgreiche Health-Expert-Skalierung als Referenz für weitere Partnerships</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Langfristige Zusammenarbeit</strong><span>Kein Einmal-Projekt — echte strategische Partnerschaft mit Wachstumspotenzial</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Bewiesener Massenmarkt</strong><span>Schlaf betrifft 34% der Deutschen — Matthew Walker zeigt, wie groß es werden kann</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Exklusiver Partner im DACH-Markt</strong><span>Gegenseitige Exklusivität im Schlafkurs-Segment sichert die Partnerschaft ab</span></div>
+        </div>
+        <div class="ww-item">
+          <span class="ww-check" style="color:var(--red)">✓</span>
+          <div class="ww-text"><strong>Steigendes passives Einkommen</strong><span>Je besser der Funnel optimiert wird, desto mehr verdienen beide Seiten</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 14: SPIELREGELN ─── -->
+<section class="slide bg-light" data-title="Spielregeln der Partnerschaft">
+  <div style="max-width:1060px;margin:0 auto;width:100%">
+    <p class="section-label">10 · SPIELREGELN</p>
+    <h2 style="margin-bottom:.4rem">Klare Regeln — klare Köpfe</h2>
+    <p class="lead" style="margin-bottom:1.2rem">Abgeleitet aus unserem Kooperationsvertrag-Framework — schriftlich, fair, beidseitig schützend.</p>
+
+    <div class="rules-grid">
+      <div class="rule-card blue">
+        <h4>EXKLUSIVITÄT (GEGENSEITIG)</h4>
+        <div class="ri"><span>→</span><span>André beauftragt keine andere Agentur für Paid Ads oder Funnels während der Laufzeit</span></div>
+        <div class="ri"><span>→</span><span>Schmidtke GmbH geht keine neue Kooperation mit direkten Schlafkurs-Konkurrenten im DACH-Raum ein</span></div>
+        <div class="ri"><span>→</span><span>Schutz für beide Seiten — Fokus und Vertrauen als Grundlage</span></div>
+      </div>
+      <div class="rule-card gold">
+        <h4>EIGENTUM & IP</h4>
+        <div class="ri"><span>→</span><span>Videos, Inhalte, Expertise, Marke André Alesi: 100% André</span></div>
+        <div class="ri"><span>→</span><span>Funnel-Strukturen, Ads, Landingpages, Automatisierungen: Schmidtke GmbH</span></div>
+        <div class="ri"><span>→</span><span>E-Mail-Liste und WhatsApp-Community: gehören André</span></div>
+        <div class="ri"><span>→</span><span>Weiternutzung nach Vertragsende: nur nach separater Vereinbarung</span></div>
+      </div>
+      <div class="rule-card green">
+        <h4>LAUFZEIT & KÜNDIGUNG</h4>
+        <div class="ri"><span>→</span><span>Mindestlaufzeit: 6 Monate (Aufbau braucht Zeit — keine schnellen Entscheidungen)</span></div>
+        <div class="ri"><span>→</span><span>Danach: 8 Wochen Kündigungsfrist zum Monatsende</span></div>
+        <div class="ri"><span>→</span><span>Außerordentlich: bei Zahlungsverzug oder schwerer Pflichtverletzung</span></div>
+        <div class="ri"><span>→</span><span>Verlängerung: automatisch, wenn nicht gekündigt — kein Neu-Verhandeln nötig</span></div>
+      </div>
+      <div class="rule-card red">
+        <h4>REPORTING & TRANSPARENZ</h4>
+        <div class="ri"><span>→</span><span>Monatliches Reporting: Umsatz, Ad Spend, Nettogewinn, Auszahlungen</span></div>
+        <div class="ri"><span>→</span><span>André hat jederzeit Einsicht in alle Zahlen und Werbekonten</span></div>
+        <div class="ri"><span>→</span><span>Strategiemeeting monatlich — gemeinsame Entscheidungen, keine Überraschungen</span></div>
+        <div class="ri"><span>→</span><span>Auszahlung des Gewinnanteils: monatlich nach Clearing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 15: NEXT STEPS ─── -->
+<section class="slide" data-title="Nächste Schritte">
+  <div style="max-width:900px;margin:0 auto;width:100%">
+    <p class="section-label green">11 · NÄCHSTE SCHRITTE</p>
+    <h2 style="margin-bottom:.4rem">So starten wir</h2>
+    <p class="lead" style="margin-bottom:1.4rem">Klarer Plan — von heute bis zum ersten Live-Webinar.</p>
+
+    <div>
+      <div class="step-row">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <strong>Partnerschafts-Agreement fixieren</strong>
+          <span>Modell, Konditionen, Exklusivität, Laufzeit — gemeinsam festlegen und schriftlich vereinbaren</span>
+        </div>
+        <div class="step-time">nach dem Meeting</div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <strong>Kurs-Konzept & Struktur abstimmen</strong>
+          <span>Module, Inhalte, Preis-Range, Webinar-Konzept — Andrés Expertise in ein klares System bringen</span>
+        </div>
+        <div class="step-time">Phase 1</div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <strong>Funnel, Landing Page & Newsletter-System aufbauen</strong>
+          <span>Lead Magnet, E-Mail-Sequenzen, Community-Plattform — technischer Aufbau, verkaufspsychologisches Design</span>
+        </div>
+        <div class="step-time">Phase 2</div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle" style="background:var(--red)">4</div>
+        <div class="step-content">
+          <strong>Meta Ads starten — Funnel validieren</strong>
+          <span>Creatives, Targeting, Conversion-Tracking — Daten sammeln, Funnel optimieren, schrittweise skalieren</span>
+        </div>
+        <div class="step-time">Phase 3</div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle" style="background:var(--green)">5</div>
+        <div class="step-content">
+          <strong>Erster Launch — Live-Webinar</strong>
+          <span>Mehrere Webinar-Termine, Community aufbauen, auswerten & optimieren — Ziel: 20.000–50.000 € Umsatz im ersten Fenster</span>
+        </div>
+        <div class="step-time">Launch-Phase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE 16: CLOSING ─── -->
+<section class="slide slide-closing" data-title="Abschluss">
+  <div style="width:100%;max-width:800px;margin:0 auto;text-align:center">
+    <p class="section-label" style="justify-content:center;display:flex">SCHMIDTKE GMBH × DR. ANDRÉ ALESI</p>
+    <h1 class="closing-title" style="margin-top:.8rem">
+      Gemeinsam werden wir<br><span>Deutschlands führende Stimme</span><br>für Schlaf.
+    </h1>
+    <p style="color:var(--t2);font-size:1rem;margin-bottom:2rem;line-height:1.65">Matthew Walker hat es für Englisch bewiesen. André Alesi hat die Expertise, die Community und das Vertrauen — Schmidtke GmbH bringt den Marketing-Hebel. Jetzt entscheiden wir gemeinsam, ob wir das aufbauen.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;margin-bottom:2.5rem">
+      <button class="btn-primary" onclick="goTo(1)">Präsentation nochmal</button>
+      <button class="btn-ghost" onclick="goTo(10)">Partnerschaftsmodell</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.4rem;align-items:center">
+      <span style="font-size:.8rem;color:var(--t3);font-weight:700;letter-spacing:.1em">ANSPRECHPARTNER</span>
+      <span style="font-size:1rem;font-weight:700">Fabian Schmidtke · Geschäftsführer Schmidtke GmbH · Rottweil</span>
+      <a href="mailto:fabian@schmidtke-gmbh.de" style="color:var(--blue);font-size:.95rem;font-weight:700;text-decoration:none">fabian@schmidtke-gmbh.de</a>
+      <span style="font-size:.78rem;color:var(--t3);margin-top:.4rem">Vertraulich · Nur für Dr. André Alesi</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- #deck -->
+
+<!-- ══════ BOTTOM CONTROLS ══════ -->
+<div class="deck-controls">
+  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592;</button>
+  <div id="dots"></div>
+  <button class="nav-btn" id="next-btn" onclick="navigate(1)">&#8594;</button>
+</div>
+
+<!-- ══════ SCRIPTS ══════ -->
+<script>
+// ─── SLIDE MANAGEMENT ───
+const slides = Array.from(document.querySelectorAll('.slide'));
+const totalSlides = slides.length;
+let current = 0;
+let chartCreated = false;
+
+const slideLabels = slides.map(s => s.dataset.title || '');
+
+function updateUI() {
+  document.getElementById('counter').textContent = `${current + 1} / ${totalSlides}`;
+  document.getElementById('slide-title-label').textContent = slideLabels[current];
+
+  // Dots
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+
+  // Prev/Next buttons
+  document.getElementById('prev-btn').disabled = current === 0;
+  document.getElementById('next-btn').disabled = current === totalSlides - 1;
+
+  // Chart: initialize when YouTube slide becomes visible (slide index 2)
+  if (current === 2 && !chartCreated) {
+    setTimeout(initChart, 100);
+    chartCreated = true;
+  }
+
+  // Animate platform bars when social slide is active
+  if (current === 4 || current === 5) {
+    setTimeout(() => {
+      document.querySelectorAll('.platform-bar').forEach(b => {
+        b.style.width = (b.dataset.width || 0) + '%';
+      });
+    }, 400);
+  }
+}
+
+function navigate(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= totalSlides) return;
+
+  // Hide current slide
+  slides[current].classList.remove('active');
+  if (dir > 0) slides[current].classList.add('exit-left');
+
+  // Show target slide — always strip exit-left first so going back works
+  slides[next].classList.remove('exit-left');
+  slides[next].classList.add('active');
+  current = next;
+  updateUI();
+}
+
+function goTo(slideNum) {
+  slides[current].classList.remove('active');
+  current = Math.min(Math.max(slideNum - 1, 0), totalSlides - 1);
+  slides[current].classList.remove('exit-left');
+  slides[current].classList.add('active');
+  updateUI();
+}
+
+// ─── BUILD DOTS ───
+const dotsEl = document.getElementById('dots');
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i + 1);
+  dotsEl.appendChild(d);
+});
+
+// ─── KEYBOARD NAVIGATION ───
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') navigate(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   || e.key === 'PageUp')   navigate(-1);
+  if (e.key === 'Home') goTo(1);
+  if (e.key === 'End')  goTo(totalSlides);
+});
+
+// ─── INITIAL UI ───
+updateUI();
+
+// ─── YOUTUBE CHART ───
+function initChart() {
+  const canvas = document.getElementById('ytChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Forscher warnen! Melatonin',
+        'Müde trotz genug Schlaf',
+        'Immer nachts aufwachen',
+        'Müde, aber wach',
+        'Darum liegst du wach',
+        'Müde trotz 8h Schlaf',
+        'Schlaftracker — wie genau?',
+        'Bettwäsche waschen?',
+        'Melatonin überbewertet!',
+        'Warum du nachts aufwachst',
+      ],
+      datasets: [{
+        label: 'Aufrufe',
+        data: [250, 149, 149, 135, 126, 123, 109, 94, 78, 67],
+        backgroundColor: [
+          'rgba(59,154,232,.9)',
+          'rgba(59,154,232,.85)',
+          'rgba(59,154,232,.80)',
+          'rgba(59,154,232,.76)',
+          'rgba(59,154,232,.72)',
+          'rgba(59,154,232,.68)',
+          'rgba(59,154,232,.64)',
+          'rgba(59,154,232,.60)',
+          'rgba(59,154,232,.56)',
+          'rgba(59,154,232,.52)',
+        ],
+        borderRadius: 5,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: c => ` ${c.parsed.x.toLocaleString('de-DE')} Aufrufe`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,.06)' },
+          ticks: { color: 'rgba(255,255,255,.6)', font: { size: 11 } },
+          border: { color: 'rgba(255,255,255,.1)' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,.8)', font: { size: 11 } },
+          border: { color: 'transparent' }
+        }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
