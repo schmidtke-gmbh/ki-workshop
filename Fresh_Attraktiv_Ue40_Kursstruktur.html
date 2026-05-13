@@ -98,6 +98,21 @@
     margin: 0 auto 26px;
     line-height: 1.5;
   }
+  .hero-transformation {
+    display: inline-block;
+    background: rgba(201,154,78,0.15);
+    border: 1px solid rgba(201,154,78,0.35);
+    border-radius: 10px;
+    padding: 12px 24px;
+    margin: 0 auto 24px;
+    font-size: 1.05em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 680px;
+  }
+  .hero-transformation span { color: var(--gold); font-weight: 700; font-style: normal; }
   .hero-tags {
     display: flex;
     gap: 10px;
@@ -111,6 +126,69 @@
     font-weight: 500;
     padding: 5px 14px;
     border-radius: 20px;
+  }
+
+  /* ─── TRANSFORMATIONS-REISE ──────────────────────────── */
+  .journey-bar {
+    background: var(--mauve);
+    padding: 28px 32px;
+    overflow-x: auto;
+  }
+  .journey-inner {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    max-width: 960px;
+    margin: 0 auto;
+    min-width: 600px;
+  }
+  .journey-step {
+    flex: 1;
+    text-align: center;
+    padding: 14px 12px;
+    position: relative;
+  }
+  .journey-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.25);
+    font-size: 1.3em;
+    z-index: 1;
+  }
+  .journey-step:last-child::after { display: none; }
+  .js-phase {
+    font-size: 0.62em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 5px;
+    display: block;
+  }
+  .js-state {
+    font-size: 0.82em;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+    font-style: italic;
+    display: block;
+    line-height: 1.3;
+  }
+  .js-state.from { color: rgba(255,255,255,0.4); }
+  .js-label {
+    font-size: 0.88em;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.35;
+    display: block;
+  }
+  .journey-step.active .js-label { color: var(--gold); }
+  .journey-step.active {
+    background: rgba(201,154,78,0.1);
+    border-radius: 10px;
   }
 
   /* ─── STATS BAR ─────────────────────────────────────── */
@@ -636,6 +714,9 @@
   <div class="hero-badge">Online Kurs — Entwurf · Mai 2026</div>
   <h1>Fresh &amp; Attraktiv <span>Ü40</span></h1>
   <p class="subtitle">Die ganzheitliche Online-Masterclass für Frauen ab 40 — Hormone, Körper, Haut, Schlaf, Kraft und Mindset als ein verbundenes System.</p>
+  <div class="hero-transformation">
+    „In 12 Wochen wieder <span>energiegeladen, weiblich und selbstsicher</span> fühlen — ohne Diätstress, Überforderung oder blindes Supplementieren."
+  </div>
   <div class="hero-tags">
     <span class="hero-tag">📍 DACH-Markt</span>
     <span class="hero-tag">👤 Jasmin Schmidtke</span>
@@ -667,6 +748,39 @@
   <div class="stat">
     <span class="stat-num">16</span>
     <span class="stat-label">Downloads/PDFs</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TRANSFORMATIONS-REISE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="journey-bar">
+  <div class="journey-inner">
+    <div class="journey-step">
+      <span class="js-phase">Start</span>
+      <span class="js-state from">„Ich bin erschöpft,<br/>weiß nicht warum."</span>
+      <span class="js-label">Verwirrt &amp; erschöpft</span>
+    </div>
+    <div class="journey-step active">
+      <span class="js-phase">Phase 1 — Wochen 1–4</span>
+      <span class="js-state">„Ich verstehe endlich,<br/>was in mir vorgeht."</span>
+      <span class="js-label">Klarheit über den eigenen Körper</span>
+    </div>
+    <div class="journey-step">
+      <span class="js-phase">Phase 2 — Wochen 5–8</span>
+      <span class="js-state">„Ich fühle mich<br/>das erste Mal anders."</span>
+      <span class="js-label">Erste sichtbare Veränderung</span>
+    </div>
+    <div class="journey-step">
+      <span class="js-phase">Phase 3 — Wochen 9–12</span>
+      <span class="js-state">„Das bin wirklich ich —<br/>nicht mehr jemand anderes."</span>
+      <span class="js-label">Neue Identität verankert</span>
+    </div>
+    <div class="journey-step">
+      <span class="js-phase">Phase 4 — Monate 4–6</span>
+      <span class="js-state">„Ich will noch tiefer<br/>gehen — mit Jasmin."</span>
+      <span class="js-label">Individuelle Optimierung</span>
+    </div>
   </div>
 </div>
 
@@ -714,7 +828,7 @@
   </div>
 
   <div class="hint-card">
-    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Vertrauen &amp; Autorität aufbauen. Die Teilnehmerin fühlt sich sofort gemeint, setzt ein sichtbares Commitment (Vorher-Foto, Workbook), und Jasmin beweist ihre Kompetenz durch Tiefe — ohne Überforderung. Jedes Modul endet mit einem Mini-Erfolgserlebnis.</p>
+    <p><strong>Wo die Teilnehmerin gerade steht:</strong> Erschöpft, verwirrt, frustriert — sie hat schon viel probiert, nichts hat dauerhaft gewirkt. Sie zweifelt, ob es für sie überhaupt noch geht. <strong>Was diese Phase bewirkt:</strong> Zum ersten Mal versteht sie, was in ihrem Körper wirklich passiert. Das Chaos bekommt einen Namen — und damit eine Lösung. Sie fühlt sich nicht mehr allein damit.</p>
   </div>
 
   <!-- MODUL 0 -->
@@ -1004,7 +1118,7 @@
   </div>
 
   <div class="hint-card">
-    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Die Teilnehmerin erkennt die Tiefe des Problems. Ernährung, Schlaf, Bewegung und Mikronährstoffe greifen ineinander — das schafft das Gefühl: <em>„Ich brauche mehr als Einzelmaßnahmen."</em> Jedes Modul endet mit konkreten, umsetzbaren Handlungsschritten.</p>
+    <p><strong>Wo die Teilnehmerin gerade steht:</strong> Sie versteht ihr System — und setzt das erste Mal gezielt an. Nicht alles auf einmal, sondern mit Priorität. <strong>Was diese Phase bewirkt:</strong> Nach 6–8 Wochen merkt sie es zum ersten Mal körperlich. Mehr Energie. Besser schlafen. Irgendwas stimmt anders. Sie glaubt zum ersten Mal, dass das wirklich für sie geht.</p>
   </div>
 
   <!-- MODUL 5 -->
@@ -1234,7 +1348,7 @@
   </div>
 
   <div class="hint-card">
-    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Aha-Momente &amp; Differenzierung. Inhalte, die die Teilnehmerin nirgendwo sonst bekommt — Tabu-Themen, Stil, Ausstrahlung. Sie fühlt sich ermächtigt. Gleichzeitig wächst die Erkenntnis: <em>„Die Umsetzung muss zu MIR passen."</em> Vorbereitung auf die Dienstleistungs-Brücke.</p>
+    <p><strong>Wo die Teilnehmerin gerade steht:</strong> Die Veränderung ist spürbar — aber sie will mehr als Gesundheit. Sie will sich wieder wie <em>sie selbst</em> fühlen. Haut, Haare, Stil, Ausstrahlung, Sexualität — Themen, über die niemand spricht. <strong>Was diese Phase bewirkt:</strong> Sie verankert eine neue Identität. Nicht „jünger", sondern: endlich wieder sie. Das ist der Peak-Moment des gesamten Kurses.</p>
   </div>
 
   <!-- MODUL 9 -->
@@ -1461,7 +1575,7 @@
   </div>
 
   <div class="hint-card">
-    <p><strong>Verkaufspsychologisches Ziel dieser Phase:</strong> Lösung &amp; Brücke zur Dienstleistung. Die Teilnehmerin verfestigt ihre Routine, vertieft das Wissen — und lernt durch den Kurs selbst zu verstehen, warum individuelle Begleitung der logische nächste Schritt ist. Kein harter Pitch, sondern eine natürliche Konsequenz.</p>
+    <p><strong>Wo die Teilnehmerin gerade steht:</strong> Sie hat sich verändert — und merkt: das hier will sie nicht mehr loslassen. Das Fundament steht. Jetzt geht es um Feintuning, um Tiefer-Gehen, um die Fragen, die nur individuell beantwortet werden können. <strong>Was diese Phase bewirkt:</strong> Die Routine wird zum Lebensstil. Und für viele Frauen entsteht hier der natürliche Wunsch: <em>„Ich will das jetzt mit Jasmin persönlich weiterführen."</em></p>
   </div>
 
   <!-- MODUL 13 -->
