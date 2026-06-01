@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webinar-Header — 10 Ideen · Jasmin Schmidtke CI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F4;--text-dark:#2D2B30;--text-body:#5A5550;--text-muted:#808080;
+    --accent:#BFA492;--green-btn:#6B8C5A;--green-hover:#7A9E68;--border:#DDD6CE;
+    --grid-line:rgba(150,130,110,0.12);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Poppins',system-ui,sans-serif;background:#EDE7E1;color:var(--text-dark);line-height:1.5}
+  .page{max-width:1180px;margin:0 auto;padding:40px 22px 80px}
+  .page-head{text-align:center;margin-bottom:14px}
+  .page-head h1{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(1.6rem,3.4vw,34px);color:var(--text-dark)}
+  .page-head h1 .accent{color:var(--accent);font-style:italic}
+  .page-head p{color:var(--text-body);font-size:15px;max-width:680px;margin:10px auto 0}
+  .insight{max-width:680px;margin:0 auto 34px;background:rgba(191,164,146,.13);border:1px solid rgba(191,164,146,.4);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--text-body);text-align:center}
+  .insight strong{color:var(--accent)}
+
+  .idea{margin-bottom:30px}
+  .idea-label{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 4px 10px}
+  .idea-num{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;color:var(--accent)}
+  .idea-title{font-weight:600;font-size:15px;color:var(--text-dark)}
+  .idea-note{font-size:13px;color:var(--text-muted)}
+
+  .mock{position:relative;background:var(--cream);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 10px 34px rgba(60,40,30,.10)}
+  .mock::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:52px 52px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 65% at 55% 40%,rgba(0,0,0,.55) 0%,rgba(0,0,0,.22) 48%,transparent 78%);
+    mask-image:radial-gradient(ellipse 70% 65% at 55% 40%,rgba(0,0,0,.55) 0%,rgba(0,0,0,.22) 48%,transparent 78%);}
+  .mock .browser{position:relative;z-index:2;display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.5)}
+  .dot{width:11px;height:11px;border-radius:50%;background:#d9cfc6}
+  .browser .url{margin-left:12px;font-size:12px;color:var(--text-muted);background:#fff;border:1px solid var(--border);border-radius:30px;padding:4px 14px}
+  .hero{position:relative;z-index:1;padding:54px 50px}
+
+  .row2{display:grid;grid-template-columns:1.25fr .9fr;gap:36px;align-items:center}
+  .center{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+
+  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(191,164,146,.12);border:1.5px solid rgba(191,164,146,.35);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--accent);margin-bottom:20px;width:fit-content}
+  .badge.dark{background:rgba(45,43,48,.06);border-color:rgba(45,43,48,.18);color:var(--text-dark)}
+  .star{color:var(--accent)}
+
+  .h{font-family:'Playfair Display',Georgia,serif;font-weight:700;line-height:1.05;color:var(--text-dark);font-size:clamp(2rem,3.7vw,49px);margin-bottom:20px}
+  .h .accent{color:var(--accent);font-style:italic}
+  .sub{font-size:17px;color:#4D4D4D;line-height:1.5;max-width:570px;margin-bottom:28px}
+  .center .sub{margin-left:auto;margin-right:auto}
+
+  .cta{display:inline-flex;align-items:center;gap:9px;background:var(--green-btn);color:#fff;border:none;border-radius:257px;padding:14px 30px;font-family:'Poppins';font-size:15px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none;width:fit-content}
+  .cta:hover{background:var(--green-hover);transform:translateY(-1px)}
+  .cta .arrow{transition:transform .3s}
+  .cta:hover .arrow{transform:translateX(4px)}
+  .micro{font-size:12.5px;color:var(--text-muted);margin-top:12px}
+
+  .form{max-width:480px}
+  .center .form{margin:0 auto}
+  .input-row{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:3px 3px 3px 16px;margin-bottom:12px}
+  .input-row input{flex:1;border:none;outline:none;background:transparent;font-family:'Poppins';font-size:14px;color:var(--text-dark);padding:11px 0}
+  .input-row .cta{padding:11px 22px;font-size:14px}
+
+  .learn{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-direction:column;gap:11px}
+  .center .learn{align-items:flex-start;display:inline-flex;text-align:left}
+  .learn li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--text-body)}
+  .learn .tick{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(107,140,90,.13);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .learn .tick svg{width:12px;height:12px;stroke:var(--green-btn);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+  .event{display:flex;flex-wrap:wrap;gap:14px 26px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:26px;width:fit-content}
+  .event .it{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text-dark);font-weight:500}
+  .event .it span{font-size:11px;color:var(--text-muted);display:block;font-weight:400}
+  .event .ic{font-size:18px}
+
+  .trust{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:26px}
+  .trust .t{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--text-body);background:rgba(255,255,255,.7);border:1px solid var(--border);border-radius:50px;padding:6px 14px}
+
+  .arch-wrap{display:flex;justify-content:center;align-items:flex-end;position:relative}
+  .arch{position:relative;width:330px;max-width:100%}
+  .arch-img{width:100%;aspect-ratio:468/657;border-radius:999px 999px 0 0;overflow:hidden;background:#E2D9D0}
+  .arch-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .rbadge{position:absolute;top:-12px;left:-46px;width:132px;height:132px;z-index:3}
+  .rbadge .ring{position:absolute;inset:0;animation:spin 20s linear infinite}
+  .rbadge svg{width:100%;height:100%;overflow:visible}
+  .rbadge .bt{font-family:'Poppins';font-size:7.4px;font-weight:400;letter-spacing:1.7px;fill:rgba(47,47,48,.55)}
+  .rbadge .strr{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .rbadge .strr svg{width:34%;height:34%}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .sparkle{position:absolute;bottom:24px;right:-18px;width:34px;height:34px;animation:osc 5s ease-in-out infinite;z-index:3}
+  @keyframes osc{0%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}100%{transform:rotate(-15deg)}}
+
+  @media(max-width:860px){
+    .hero{padding:38px 26px}
+    .row2{grid-template-columns:1fr;gap:26px;text-align:center}
+    .row2>div{display:flex;flex-direction:column;align-items:center}
+    .arch-wrap{order:-1}
+    .badge,.cta,.form,.event{margin-left:auto;margin-right:auto}
+    .sub{margin-left:auto;margin-right:auto}
+    .learn{align-items:flex-start;display:inline-flex;text-align:left}
+    .arch{width:240px}
+    .browser .url{font-size:10px}
+  }
+
+  /* iPhone */
+  @media(max-width:520px){
+    .page{padding:26px 14px 56px}
+    .page-head h1{font-size:25px}
+    .page-head p{font-size:13.5px}
+    .insight{font-size:12.5px;padding:12px 14px;margin-bottom:26px}
+    .idea{margin-bottom:22px}
+    .idea-label{gap:6px 10px;margin-bottom:8px}
+    .idea-num{font-size:17px}
+    .idea-title{font-size:13.5px}
+    .idea-note{font-size:11.5px;flex-basis:100%}
+    .mock{border-radius:14px}
+    .browser{padding:9px 12px}
+    .browser .url{font-size:9px;padding:3px 10px}
+    .dot{width:9px;height:9px}
+    .hero{padding:30px 18px}
+    .badge{font-size:11.5px;padding:7px 14px;margin-bottom:16px;line-height:1.3}
+    .h{font-size:clamp(1.65rem,7.4vw,2rem);margin-bottom:15px}
+    .sub{font-size:14.5px;margin-bottom:22px}
+    .cta{padding:13px 24px;font-size:14px;width:100%;justify-content:center}
+    /* E-Mail-Feld: untereinander statt nebeneinander */
+    .input-row{flex-direction:column;align-items:stretch;padding:6px;gap:6px;background:transparent;border:none}
+    .input-row input{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:13px 14px;width:100%}
+    .input-row .cta{width:100%;padding:13px;font-size:14px}
+    .learn li{font-size:14px}
+    .event{gap:12px 18px;padding:14px 16px;width:100%}
+    .event .it{font-size:13px}
+    .trust{justify-content:center}
+    .trust .t{font-size:12px}
+    .arch{width:200px}
+    .rbadge{width:100px;height:100px;top:-8px;left:-26px}
+    .sparkle{width:26px;height:26px;right:-10px;bottom:16px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-head">
+    <h1>Webinar-Header — <span class="accent">10 Ideen</span></h1>
+    <p>Alle in Jasmins CI (Cream, Playfair &amp; Poppins, Akzent-Beige, grüner Button, Bogen-Foto).</p>
+  </div>
+  <div class="insight">
+    <strong>Zielgruppen-Logik:</strong> Die kalte Frau Ü40 will keine „Beratung" und kein „Wechseljahre"-Thema — sie denkt <em>„so ist das halt mit 40"</em>. Jeder Header spricht darum ihre <strong>spürbaren Symptome</strong> an (müde, Gewicht, Schlaf, gereizt) und bricht den Glaubenssatz: <strong>Es ist NICHT einfach dein Alter — und du musst dich nicht damit abfinden.</strong>
+  </div>
+
+  <!-- IDEE 1 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">01</span><span class="idea-title">Mechanismus + Resignations-Bruch</span><span class="idea-note">Neugier auf die Ursache — „und es ist nicht mein Alter."</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar · [Datum]</div>
+          <h1 class="h">3 Gründe, warum du ab 40 ständig <span class="accent">müde</span> bist — und keiner ist dein Alter</h1>
+          <p class="sub">Energie weg, der Schlaf schlecht, das Gewicht hält sich hartnäckig? Das ist kein „normales Älterwerden". Live zeigt dir Jasmin, was wirklich dahintersteckt — und die 3 Hebel, die es verändern. Ohne Diät.</p>
+          <a class="cta" href="#">Kostenlosen Platz sichern <span class="arrow">→</span></a>
+          <div class="micro">100 % kostenlos · Aufzeichnung inklusive</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="rbadge"><div class="ring"><svg viewBox="0 0 100 100"><defs><path id="cp1" d="M 14 50 A 36 36 0 0 1 86 50 A 36 36 0 0 1 14 50"/></defs><text class="bt"><textPath href="#cp1" startOffset="0%">Attraktiv ab 40 · aufblühen statt altern · &#160;</textPath></text></svg></div><div class="strr"><svg viewBox="0 0 62 62"><path d="M 30.983 0.01 C 30.756 1.694 29.475 11.144 26.531 19.559 C 23.826 24.98 19.617 27.528 10.339 29.375 C 8.02 29.837 0.721 30.884 0.012 30.985 C 0.973 31.123 7.562 32 14.922 33.684 C 22.975 35.997 26.462 39.738 28.66 48.429 C 29.41 51.379 30.817 60.744 30.995 61.994 C 31.036 61.738 31.494 58.297 31.693 56.991 C 33.12 47.484 34.624 42.813 37.362 39.385 C 41.323 35.822 43.501 34.759 46.591 33.822 C 49.762 32.86 60.702 31.164 61.947 30.985 C 61.561 30.925 58.313 30.511 52.267 29.496 C 45.934 28.303 41.98 26.782 39.235 24.485 C 36.392 21.507 35.354 19.377 35.354 19.377 C 33.586 15.737 32.402 10.629 31.182 1.361 Z" fill="#BFA492"/></svg></div></div>
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#2D2B30"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 2 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">02</span><span class="idea-title">Anti-Diät / „nicht deine Schuld"</span><span class="idea-note">Nimmt den Selbstvorwurf weg.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Gratis Live-Workshop für Frauen ab 40</div>
+        <h1 class="h">Das Gewicht bleibt — und du gibst <span class="accent">dir</span> die Schuld?</h1>
+        <p class="sub">Weniger essen, mehr bewegen — und trotzdem tut sich nichts. Es liegt nicht an deiner Disziplin. Live erfährst du, warum dein Körper ab 40 nach anderen Regeln spielt, und was ihm wirklich hilft.</p>
+        <a class="cta" href="#">Jetzt kostenlos anmelden <span class="arrow">→</span></a>
+        <div class="micro">Live · kostenlos · ohne Diätstress</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 3 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">03</span><span class="idea-title">Energie — Nutzen mit Lernpunkten</span><span class="idea-note">Konkret: „Das nehme ich mit."</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+          <h1 class="h">Wieder <span class="accent">wach</span> aufwachen — ab 40</h1>
+          <p class="sub">Du schiebst dich durch den Tag und ab dem Nachmittag läuft nichts mehr? Das muss nicht so bleiben — und hat nichts mit deinem Alter zu tun.</p>
+          <a class="cta" href="#">Platz sichern — kostenlos <span class="arrow">→</span></a>
+        </div>
+        <div>
+          <ul class="learn">
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Warum dir ab 40 die Energie fehlt — die wahre Ursache</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Die 3 schnellsten Hebel für spürbar mehr Energie</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Was du ab morgen früh sofort umsetzen kannst</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Der häufigste Fehler, der dich täglich Kraft kostet</li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 4 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">04</span><span class="idea-title">Schlaf — „gehört das jetzt dazu?"</span><span class="idea-note">Bricht die Resignation beim Top-Symptom.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge dark"><span>🔴</span> Live · [Datum] · 19:30 Uhr</div>
+        <h1 class="h">Nachts um 3 wach — und du denkst, das <span class="accent">gehört jetzt dazu</span>?</h1>
+        <p class="sub">Tut es nicht. Wachliegen, kreisende Gedanken, gerädert aufstehen — dahinter steckt mehr als „schlechter Schlaf im Alter". Live zeigt dir Jasmin die Hebel, die laut Forschung wirklich greifen — jenseits von Kamillentee.</p>
+        <div class="event">
+          <div class="it"><span class="ic">📅</span><div>[Datum]<span>Live-Termin</span></div></div>
+          <div class="it"><span class="ic">🕢</span><div>19:30 Uhr<span>ca. 60 Min</span></div></div>
+          <div class="it"><span class="ic">💻</span><div>Via Zoom<span>bequem zuhause</span></div></div>
+          <div class="it"><span class="ic">🎁</span><div>Aufzeichnung<span>inklusive</span></div></div>
+        </div>
+        <a class="cta" href="#">Kostenlos teilnehmen <span class="arrow">→</span></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 5 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">05</span><span class="idea-title">Transformation / „nur noch funktionieren"</span><span class="idea-note">Erinnert ans alte Lebensgefühl — führt zum Bootcamp.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+          <h1 class="h">Wieder <span class="accent">ganz du selbst</span> — statt nur zu funktionieren</h1>
+          <p class="sub">Weißt du noch, wie sich Energie, Leichtigkeit und gute Laune angefühlt haben? Das ist mit 40 nicht vorbei. Ein Vorgeschmack auf den Weg zurück — Schritt für Schritt, ohne dich zu verbiegen.</p>
+          <a class="cta" href="#">Mehr erfahren — kostenlos <span class="arrow">→</span></a>
+          <div class="micro">Live mit Jasmin · Aufzeichnung inklusive</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#BFA492"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 6 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">06</span><span class="idea-title">Symptom-Decoder / „du bist nicht kaputt"</span><span class="idea-note">Erleichterung — alles hängt zusammen, es gibt einen Weg.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Gratis Live-Masterclass</div>
+        <h1 class="h">Müde, gereizt, das Gewicht steigt — <span class="accent">du bist nicht kaputt</span></h1>
+        <p class="sub">Diese Beschwerden wirken zufällig, hängen aber alle zusammen. Und nein — es ist nicht „einfach das Alter". Live entschlüsseln wir, was hinter deinen Symptomen steckt, und dass es einen Weg heraus gibt.</p>
+        <a class="cta" href="#">Kostenlosen Platz sichern <span class="arrow">→</span></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 7 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">07</span><span class="idea-title">Frage-Hook</span><span class="idea-note">Pattern-Interrupt — direkt im Selbstgespräch der Frau.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+        <h1 class="h"><span class="accent">Erschöpft</span>, obwohl du eigentlich alles richtig machst?</h1>
+        <p class="sub">Dann liegt es selten an dir — und schon gar nicht „am Alter, da kann man halt nichts machen". Live erfährst du, was wirklich dahintersteckt und die drei Schritte, die spürbar etwas verändern.</p>
+        <form class="form" onsubmit="return false">
+          <div class="input-row"><input type="email" placeholder="Deine E-Mail Adresse"><button class="cta">Platz sichern <span class="arrow">→</span></button></div>
+        </form>
+        <div class="micro">100 % kostenlos · jederzeit abmeldbar</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 8 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">08</span><span class="idea-title">Ganzheitlich / „alles dasselbe Problem"</span><span class="idea-note">Für die, die schon viel einzeln probiert haben.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Live-Workshop · kostenlos</div>
+          <h1 class="h">Müde, schlecht geschlafen, gereizt — <span class="accent">alles dasselbe Problem</span></h1>
+          <p class="sub">Die meisten bekämpfen jedes Symptom einzeln und wundern sich, dass nichts hält. Live zeigt dir Jasmin, wie Energie, Schlaf und Stimmung zusammenhängen — und wo der eine Hebel sitzt, der mehrere auf einmal löst.</p>
+          <a class="cta" href="#">Jetzt kostenlos sichern <span class="arrow">→</span></a>
+        </div>
+        <div>
+          <ul class="learn">
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Wie deine Beschwerden alle an einem Strang ziehen</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Der zentrale Hebel mit der größten Wirkung</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Warum Einzel-Tipps bei dir bisher verpufft sind</li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 9 (NEU) -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">09</span><span class="idea-title">Resignations-Buster (NEU)</span><span class="idea-note">Greift den Glaubenssatz der Zielgruppe frontal an: „so ist es halt mit 40."</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge dark"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+          <h1 class="h">„Das ist halt das <span class="accent">Alter</span>" — der größte Irrtum ab 40</h1>
+          <p class="sub">Müdigkeit, Gewicht, schlechter Schlaf — die meisten Frauen finden sich damit ab. Dabei sind das Signale deines Körpers, kein Schicksal. Live zeigt dir Jasmin, was er dir sagen will — und wie du gegensteuerst, bevor es mehr wird.</p>
+          <a class="cta" href="#">Platz sichern — kostenlos <span class="arrow">→</span></a>
+          <div class="micro">100 % kostenlos · Aufzeichnung inklusive</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#2D2B30"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 10 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">10</span><span class="idea-title">Aspirativ / Lebensgefühl</span><span class="idea-note">Verkauft das Gefühl danach — Hoffnung statt Problem.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+        <h1 class="h">Ab 40 beginnt deine <span class="accent">beste Zeit</span></h1>
+        <p class="sub">Kraftvoll, wach und gut gelaunt im eigenen Körper — das ist keine Frage des Alters, sondern des Wissens. Live zeigt dir Jasmin die drei Hebel, die dich genau dorthin bringen.</p>
+        <a class="cta" href="#">Kostenlos dabei sein <span class="arrow">→</span></a>
+        <div class="micro">Ohne Diät · ohne dich zu verbiegen</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:44px">
+    <strong>Block B — Energie &amp; die wahre Ursache:</strong> Diese 10 sprechen Frauen direkt an, die <strong>wieder Energie für sich selbst</strong> wollen — und stellen klar: nicht an Symptomen herumdoktern, sondern die <strong>eine wahre Ursache</strong> finden.
+  </div>
+
+  <!-- IDEE 11 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">11</span><span class="idea-title">Ursache statt Symptome (Kern)</span><span class="idea-note">Der zentrale Reframe: aufhören rumzudoktern.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+          <h1 class="h">Hör auf, an Symptomen rumzudoktern — finde die <span class="accent">wahre Ursache</span></h1>
+          <p class="sub">Mal ein Mittel gegen die Müdigkeit, mal eins für den Schlaf — und das nächste Symptom wartet schon. Live zeigt dir Jasmin, wie du bei dir als Frau die <em>eine</em> Ursache findest, statt ewig an Beschwerden herumzubasteln.</p>
+          <a class="cta" href="#">Kostenlosen Platz sichern <span class="arrow">→</span></a>
+          <div class="micro">100 % kostenlos · Aufzeichnung inklusive</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="rbadge"><div class="ring"><svg viewBox="0 0 100 100"><defs><path id="cp11" d="M 14 50 A 36 36 0 0 1 86 50 A 36 36 0 0 1 14 50"/></defs><text class="bt"><textPath href="#cp11" startOffset="0%">Attraktiv ab 40 · aufblühen statt altern · &#160;</textPath></text></svg></div><div class="strr"><svg viewBox="0 0 62 62"><path d="M 30.983 0.01 C 30.756 1.694 29.475 11.144 26.531 19.559 C 23.826 24.98 19.617 27.528 10.339 29.375 C 8.02 29.837 0.721 30.884 0.012 30.985 C 0.973 31.123 7.562 32 14.922 33.684 C 22.975 35.997 26.462 39.738 28.66 48.429 C 29.41 51.379 30.817 60.744 30.995 61.994 C 31.036 61.738 31.494 58.297 31.693 56.991 C 33.12 47.484 34.624 42.813 37.362 39.385 C 41.323 35.822 43.501 34.759 46.591 33.822 C 49.762 32.86 60.702 31.164 61.947 30.985 C 61.561 30.925 58.313 30.511 52.267 29.496 C 45.934 28.303 41.98 26.782 39.235 24.485 C 36.392 21.507 35.354 19.377 35.354 19.377 C 33.586 15.737 32.402 10.629 31.182 1.361 Z" fill="#BFA492"/></svg></div></div>
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#2D2B30"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 12 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">12</span><span class="idea-title">Energie für dich selbst</span><span class="idea-note">Sie gibt allen Energie — nur sich nicht.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Gratis Live-Workshop für Frauen ab 40</div>
+        <h1 class="h">Wieder <span class="accent">Energie</span> haben — für dich, nicht nur für alle anderen</h1>
+        <p class="sub">Du funktionierst für Familie, Job, alle — und abends ist nichts mehr für dich übrig. Live erfährst du, woher die Erschöpfung als Frau ab 40 wirklich kommt und wie du deine Energie zurückholst.</p>
+        <a class="cta" href="#">Jetzt kostenlos anmelden <span class="arrow">→</span></a>
+        <div class="micro">Live · kostenlos · endlich wieder du</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 13 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">13</span><span class="idea-title">Symptom-Whack-a-Mole</span><span class="idea-note">Ein Symptom geht, das nächste kommt.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+          <h1 class="h">Ein Symptom geht, das nächste kommt — <span class="accent">woran liegt das wirklich?</span></h1>
+          <p class="sub">Erst die Müdigkeit, dann der Schlaf, dann das Gewicht. Wer nur Symptome behandelt, jagt ewig hinterher. Live findest du den gemeinsamen Auslöser dahinter — und setzt dort an, wo es zählt.</p>
+          <a class="cta" href="#">Platz sichern — kostenlos <span class="arrow">→</span></a>
+        </div>
+        <div>
+          <ul class="learn">
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Warum Einzel-Behandlung der Symptome dich nie weiterbringt</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Die gemeinsame Ursache hinter deinen Beschwerden</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Wie du sie bei dir selbst erkennst</li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 14 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">14</span><span class="idea-title">Die eine Ursache hinter allem</span><span class="idea-note">Verbindet die Symptome zu einer Wurzel.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Gratis Live-Masterclass für Frauen ab 40</div>
+        <h1 class="h">Die <span class="accent">eine Ursache</span> hinter Müdigkeit, Gewicht und schlechter Laune</h1>
+        <p class="sub">Was sich wie drei verschiedene Probleme anfühlt, hat bei Frauen ab 40 oft dieselbe Wurzel. Live decken wir sie auf — damit du nicht länger an Symptomen herumdokterst, sondern dort ansetzt, wo wirklich alles zusammenläuft.</p>
+        <a class="cta" href="#">Kostenlosen Platz sichern <span class="arrow">→</span></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 15 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">15</span><span class="idea-title">Energie von innen / als Frau</span><span class="idea-note">Energie aus der Ursache, nicht aus Kaffee.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+          <h1 class="h">Als Frau ab 40 wieder voller <span class="accent">Energie</span> — von innen heraus</h1>
+          <p class="sub">Kein dritter Kaffee, kein neues Supplement. Echte, stabile Energie entsteht erst, wenn die Ursache stimmt. Live zeigt dir Jasmin, wo sie bei Frauen ab 40 sitzt — und wie du sie löst.</p>
+          <a class="cta" href="#">Mehr erfahren — kostenlos <span class="arrow">→</span></a>
+          <div class="micro">Live mit Jasmin · Aufzeichnung inklusive</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#BFA492"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 16 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">16</span><span class="idea-title">Nicht mehr Tabletten/Tipps</span><span class="idea-note">Gegen das „noch ein Tipp"-Gefühl.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+        <h1 class="h">Nicht noch ein Tipp, nicht noch eine Tablette — die <span class="accent">wahre Ursache</span> deiner Erschöpfung</h1>
+        <p class="sub">Du hast genug gelesen, ausprobiert und geschluckt. Live geht es nicht um den nächsten Trick, sondern darum, bei dir als Frau ab 40 die Wurzel zu finden — damit deine Energie endlich von selbst zurückkommt.</p>
+        <a class="cta" href="#">Jetzt kostenlos anmelden <span class="arrow">→</span></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 17 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">17</span><span class="idea-title">Kraft für das, was DIR wichtig ist</span><span class="idea-note">Energie mit Sinn — für ihr eigenes Leben.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar</div>
+          <h1 class="h">Endlich wieder <span class="accent">Kraft</span> für die Dinge, die DIR wichtig sind</h1>
+          <p class="sub">Abends zu erschöpft für alles, worauf du dich gefreut hast? Das muss nicht bleiben. Live findest du heraus, was dir als Frau ab 40 die Energie raubt — und wie du sie für dein Leben zurückgewinnst.</p>
+          <a class="cta" href="#">Platz sichern — kostenlos <span class="arrow">→</span></a>
+        </div>
+        <div>
+          <ul class="learn">
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Was dir als Frau ab 40 wirklich die Energie zieht</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Die Ursache finden — statt nur durchzuhalten</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Erste Schritte für mehr Kraft im Alltag</li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 18 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">18</span><span class="idea-title">Ursache finden (Frage-Hook)</span><span class="idea-note">Warum + wie man die Wurzel findet.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+        <h1 class="h">Warum bist du ständig erschöpft — und wie findest du die <span class="accent">wahre Ursache</span>?</h1>
+        <p class="sub">Die meisten raten nur. Live bekommst du als Frau ab 40 einen klaren Weg, deinen eigenen Erschöpfungs-Auslöser zu erkennen — und endlich gezielt statt blind zu handeln.</p>
+        <form class="form" onsubmit="return false">
+          <div class="input-row"><input type="email" placeholder="Deine E-Mail Adresse"><button class="cta">Platz sichern <span class="arrow">→</span></button></div>
+        </form>
+        <div class="micro">100 % kostenlos · jederzeit abmeldbar</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 19 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">19</span><span class="idea-title">Ursache &gt; Symptom (Statement)</span><span class="idea-note">Klare Haltung, selbstbewusst.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="center">
+        <div class="badge dark"><span class="star">✦</span> Live &amp; kostenlos für Frauen ab 40</div>
+        <h1 class="h">Symptome bekämpfen war gestern. Ab 40 zählt die <span class="accent">Ursache</span>.</h1>
+        <p class="sub">Mehr Energie, besserer Schlaf, klarer Kopf — nicht durch noch ein Mittel, sondern weil du verstehst, was bei dir als Frau dahintersteckt. Live zeigt dir Jasmin, wie du genau da ansetzt.</p>
+        <a class="cta" href="#">Kostenlos dabei sein <span class="arrow">→</span></a>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- IDEE 20 -->
+  <div class="idea">
+    <div class="idea-label"><span class="idea-num">20</span><span class="idea-title">Aspirativ — Energie für dich</span><span class="idea-note">Das Gefühl danach, weiblich &amp; positiv.</span></div>
+    <div class="mock">
+      <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">jasminschmidtke.de/webinar</span></div>
+      <div class="hero"><div class="row2">
+        <div>
+          <div class="badge"><span class="star">✦</span> Kostenloses Live-Webinar für Frauen ab 40</div>
+          <h1 class="h">Stell dir vor, du wachst auf und hast <span class="accent">Energie</span> — für dich</h1>
+          <p class="sub">Morgens wach, tagsüber kraftvoll, abends noch etwas übrig für das, was dir guttut. Das ist möglich — wenn du die Ursache kennst statt an Symptomen zu drehen. Live zeigt dir Jasmin den Weg dorthin.</p>
+          <a class="cta" href="#">Kostenlos teilnehmen <span class="arrow">→</span></a>
+          <div class="micro">Ohne Diät · ohne dich zu verbiegen</div>
+        </div>
+        <div class="arch-wrap">
+          <div class="arch">
+            <div class="arch-img"><img src="jasmin.jpg" alt="Jasmin Schmidtke"></div>
+            <div class="sparkle"><svg viewBox="0 0 36 36"><path d="M18 1 C18 1 19.5 14 27 18 C19.5 22 18 35 18 35 C18 35 16.5 22 9 18 C16.5 14 18 1 18 1Z" fill="#BFA492"/></svg></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
