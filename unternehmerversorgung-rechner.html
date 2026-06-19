@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webinar-Übersicht – Was ist möglich?</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2530; --line:#2a3441;
+    --txt:#e6edf3; --muted:#8b98a8; --accent:#3ba776; --accent2:#4f9cf9;
+    --warn:#e0a500; --bad:#e5534b; --good:#3ba776;
+    --radius:14px; --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 90px}
+  header.hero{padding:48px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  .kick{color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+  h1{font-size:34px;line-height:1.15;margin:12px 0 10px;font-weight:800}
+  h1 span{color:var(--accent)}
+  .sub{color:var(--muted);font-size:16px;max-width:740px}
+  .note{background:rgba(224,165,0,.09);border:1px solid rgba(224,165,0,.35);color:#f0d488;
+        padding:13px 16px;border-radius:10px;font-size:13.5px;margin:22px 0 0}
+  .note b{color:var(--warn)}
+  section{margin:46px 0}
+  h2{font-size:23px;margin-bottom:6px;font-weight:800}
+  h2 .num{color:var(--accent);font-weight:800;margin-right:8px}
+  .lead{color:var(--muted);font-size:15px;margin-bottom:22px;max-width:780px}
+
+  /* deal terms */
+  .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .term{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .term .t-h{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .term .t-b{font-size:14px;color:var(--txt)}
+  .term .t-b b{color:#fff}
+
+  /* funnel explainer */
+  .funnel{display:flex;flex-wrap:wrap;gap:10px}
+  .step{flex:1;min-width:110px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .step .s-lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .step .s-val{font-size:15px;font-weight:700;margin-top:4px}
+  .arrow{align-self:center;color:var(--accent);font-size:20px}
+
+  /* calculator */
+  .calc{display:grid;grid-template-columns:1.05fr 1fr;gap:22px}
+  @media(max-width:880px){.calc{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:18px;font-weight:700}
+  .ctrl{margin-bottom:17px}
+  .ctrl .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+  .ctrl label{font-size:14px;font-weight:600}
+  .ctrl .v{font-size:15px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+  .ctrl .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:6px;background:var(--panel2);outline:none;border:1px solid var(--line)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid #0d1117;box-shadow:0 0 0 1px var(--accent)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid #0d1117}
+  .seg{display:flex;gap:6px;margin-bottom:6px}
+  .seg button{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:7px;border-radius:8px;font-size:12.5px;cursor:pointer;font-weight:600}
+  .seg button.on{background:var(--accent);color:#06120c;border-color:var(--accent)}
+
+  /* results */
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+  .metric{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:13px 14px}
+  .metric .m-lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .metric .m-val{font-size:22px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums}
+  .pos{color:var(--good)} .neg{color:var(--bad)}
+
+  .takebox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .take{border-radius:12px;padding:16px;border:1px solid var(--line)}
+  .take.s{background:linear-gradient(160deg,rgba(59,167,118,.16),rgba(59,167,118,.04));border-color:rgba(59,167,118,.45)}
+  .take.k{background:var(--panel2)}
+  .take .tk-l{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .take .tk-v{font-size:27px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+  .take.s .tk-v{color:#56c98e}
+  .take .tk-sub{font-size:12px;color:var(--muted);margin-top:5px}
+
+  .be-box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:4px}
+  .be-box .be-h{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:9px}
+  .bar{height:26px;background:#0d1117;border-radius:7px;overflow:hidden;position:relative;border:1px solid var(--line)}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),#56c98e);transition:width .25s;border-radius:6px}
+  .bar .be-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--warn)}
+  .be-cap{font-size:12.5px;color:var(--muted);margin-top:9px}
+  .verdict{margin-top:14px;padding:12px 14px;border-radius:10px;font-weight:700;font-size:14.5px;text-align:center}
+  .verdict.ok{background:rgba(59,167,118,.13);border:1px solid rgba(59,167,118,.4);color:#7ee2b0}
+  .verdict.no{background:rgba(229,83,75,.12);border:1px solid rgba(229,83,75,.4);color:#f2a39e}
+
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-size:11.5px}
+  tbody tr:last-child td{border-bottom:none}
+  tr.total td{font-weight:800;background:var(--panel2);font-size:15px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  @media(max-width:680px){.split{grid-template-columns:1fr}.res-grid,.takebox{grid-template-columns:1fr}}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--muted);margin:3px 5px 3px 0}
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  .legend{font-size:12px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kick">Share-Deal · Deutsche Unternehmerversorgung × Schmidtke GmbH (Curator)</div>
+    <h1>Webinar-Übersicht – <span>was ist möglich?</span></h1>
+    <p class="sub">Gerechnet auf Basis des Standard-Kooperationsvertrags: 50 % Umsatzbeteiligung, 3.000 € Mindestvergütung (angerechnet), nur Ad Spend &amp; Direktkosten abzugsfähig. Alle Werte live über die Schieber anpassbar.</p>
+    <div class="note">💶 Angabe Kunde: <b>≈ 15.000 € netto pro Abschluss</b> (PKV + U-Kasse). Provisionen kommen „cash" → kaum abzugsfähige Kosten außer Ad Spend. Werte unten zur Sicherheit gegenprüfen.</div>
+  </header>
+
+  <!-- 1. DEAL -->
+  <section>
+    <h2><span class="num">01</span>Der Standard-Share-Deal</h2>
+    <p class="lead">So ist euer bestehender Kooperationsvertrag aufgebaut – das gleiche Modell als Basis hier.</p>
+    <div class="terms">
+      <div class="term"><div class="t-h">Beteiligung</div><div class="t-b"><b>50 %</b> der Berechnungsgrundlage</div></div>
+      <div class="term"><div class="t-h">Berechnungsgrundlage</div><div class="t-b">Netto-Umsatz <b>minus nur</b> Ad Spend, Zahlungsgebühren, Stornos, externe Provisionen</div></div>
+      <div class="term"><div class="t-h">Nicht abzugsfähig</div><div class="t-b"><b>Personal, Fixkosten, Software, Overhead</b> → Basis bleibt sauber</div></div>
+      <div class="term"><div class="t-h">Mindestvergütung</div><div class="t-b"><b>3.000 €/Monat</b> netto, voll auf die Beteiligung angerechnet (Sockel)</div></div>
+      <div class="term"><div class="t-h">Laufzeit</div><div class="t-b"><b>4 Monate</b> Testphase, dann +6 Monate automatisch</div></div>
+      <div class="term"><div class="t-h">Attribution</div><div class="t-b">Umsatz über die von Schmidtke betreuten <b>Funnels</b></div></div>
+    </div>
+  </section>
+
+  <!-- 2. FUNNEL -->
+  <section>
+    <h2><span class="num">02</span>Der Funnel</h2>
+    <div class="funnel" id="funnel">
+      <div class="step"><div class="s-lbl">Werbebudget</div><div class="s-val" id="f0">–</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="s-lbl">Anmeldungen</div><div class="s-val" id="f1">–</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="s-lbl">Teilnehmer</div><div class="s-val" id="f2">–</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="s-lbl">Erstgespräche</div><div class="s-val" id="f3">–</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="s-lbl">Abschlüsse</div><div class="s-val" id="f4">–</div></div>
+    </div>
+    <div class="legend">Belegte Defaults: ~4 Monate bis Launch · Ad-Budget 3–5k · Cold-Calling läuft parallel weiter (hier nicht eingerechnet → zusätzlicher Umsatz).</div>
+  </section>
+
+  <!-- 3. RECHNER -->
+  <section>
+    <h2><span class="num">03</span>Interaktiver Rechner · pro Monat (Vollbetrieb)</h2>
+    <p class="lead">Stellschrauben links, Aufteilung Schmidtke ↔ Kunde rechts in Echtzeit.</p>
+    <div class="calc">
+      <div class="card">
+        <h3>Stellschrauben</h3>
+
+        <div class="ctrl">
+          <div class="row"><label>Werbebudget / Monat (Ad Spend)</label><span class="v" id="vBudget"></span></div>
+          <input type="range" id="budget" min="0" max="15000" step="250" value="4000">
+          <div class="hint">Wird vor der Teilung abgezogen (teilen sich beide).</div>
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Kosten pro Anmeldung (CPL)</label><span class="v" id="vCpl"></span></div>
+          <input type="range" id="cpl" min="5" max="80" step="1" value="18">
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Organische Anmeldungen / Monat</label><span class="v" id="vOrg"></span></div>
+          <input type="range" id="org" min="0" max="200" step="5" value="20">
+          <div class="hint">Zusätzlich gratis über Social, Newsletter, Empfehlung.</div>
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Teilnehmer bestimmen über</label></div>
+          <div class="seg" id="modeSeg">
+            <button data-m="rate" class="on">Show-up-Rate</button>
+            <button data-m="abs">Feste Teilnehmerzahl</button>
+          </div>
+        </div>
+
+        <div class="ctrl" id="ctrlShow">
+          <div class="row"><label>Show-up-Rate</label><span class="v" id="vShow"></span></div>
+          <input type="range" id="show" min="10" max="80" step="1" value="40">
+          <div class="hint">Anteil der Angemeldeten, der live dabei ist.</div>
+        </div>
+
+        <div class="ctrl" id="ctrlTeil" style="display:none">
+          <div class="row"><label>Teilnehmer im Live-Webinar</label><span class="v" id="vTeil"></span></div>
+          <input type="range" id="teil" min="0" max="300" step="1" value="30">
+          <div class="hint" id="teilHint">Feste Zahl der live Anwesenden.</div>
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Erstgespräch-Rate (von Teilnehmern)</label><span class="v" id="vCall"></span></div>
+          <input type="range" id="call" min="3" max="60" step="1" value="22">
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Abschlussquote (von Erstgesprächen)</label><span class="v" id="vClose"></span></div>
+          <input type="range" id="close" min="5" max="70" step="1" value="22">
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Umsatz pro Abschluss (netto)</label><span class="v" id="vRev"></span></div>
+          <input type="range" id="rev" min="3000" max="25000" step="500" value="15000">
+          <div class="hint">Angabe Kunde: ≈ 15.000 € (PKV + U-Kasse).</div>
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Mindestvergütung / Monat</label><span class="v" id="vMin"></span></div>
+          <input type="range" id="min" min="0" max="10000" step="250" value="3000">
+          <div class="hint">Sockel, wird auf die Beteiligung angerechnet.</div>
+        </div>
+        <div class="ctrl">
+          <div class="row"><label>Beteiligungssatz Schmidtke</label><span class="v" id="vShare"></span></div>
+          <div class="seg" id="shareSeg">
+            <button data-s="30">30 %</button>
+            <button data-s="40">40 %</button>
+            <button data-s="50" class="on">50 %</button>
+          </div>
+          <div class="hint">Vertragsstandard: 50 %.</div>
+        </div>
+
+        <div class="ctrl">
+          <div class="row"><label>Erstes Webinar ab Monat</label><span class="v" id="vLaunch"></span></div>
+          <input type="range" id="launch" min="2" max="6" step="1" value="4">
+          <div class="hint">Davor Aufbau (nur Mindestvergütung), danach Vollbetrieb.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Aufteilung · pro Monat</h3>
+        <div class="takebox">
+          <div class="take s"><div class="tk-l">Schmidtke bekommt</div><div class="tk-v" id="rSchmidtke">–</div><div class="tk-sub" id="rSchmidtkeSub">–</div></div>
+          <div class="take k"><div class="tk-l">Kunde behält</div><div class="tk-v" id="rKunde">–</div><div class="tk-sub">nach Ad Spend &amp; Beteiligung</div></div>
+        </div>
+        <div class="res-grid">
+          <div class="metric"><div class="m-lbl">Abschlüsse / Monat</div><div class="m-val" id="rClose">–</div></div>
+          <div class="metric"><div class="m-lbl">Umsatz</div><div class="m-val pos" id="rRev">–</div></div>
+          <div class="metric"><div class="m-lbl">Berechnungsgrundlage</div><div class="m-val" id="rBase">–</div></div>
+          <div class="metric"><div class="m-lbl">Schmidtke / Abschluss</div><div class="m-val" id="rPer">–</div></div>
+        </div>
+        <div class="be-box">
+          <div class="be-h"><span>Break-Even (Kunde ≥ 0)</span><span id="beNeed">–</span></div>
+          <div class="bar"><div class="fill" id="beFill" style="width:0%"></div><div class="be-line" id="beLine" style="left:50%"></div></div>
+          <div class="be-cap" id="beCap">–</div>
+        </div>
+        <div class="verdict" id="verdict">–</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ZIELRASTER -->
+  <section>
+    <h2><span class="num">04</span>Roadmap &amp; Zielraster Jahr 1</h2>
+    <p class="lead">Aufbauphase bis zum ersten Webinar (Mindestvergütung läuft, noch kein Umsatz – Branding, Website, Videos, Funnel entstehen), danach Vollbetrieb. Folgt automatisch dem Rechner.</p>
+    <div class="funnel" id="roadmap" style="margin-bottom:24px"></div>
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>Dauer</th><th>Umsatz</th><th>Schmidtke bekommt</th><th>Kunde behält</th></tr>
+      </thead>
+      <tbody id="zielBody"></tbody>
+    </table>
+    <div class="split">
+      <div class="card" style="padding:18px">
+        <h3 style="margin-bottom:12px">Eingeschwungener Monat</h3>
+        <div class="res-grid" style="margin-bottom:0">
+          <div class="metric"><div class="m-lbl">Schmidtke / Monat</div><div class="m-val pos" id="zMonS">–</div></div>
+          <div class="metric"><div class="m-lbl">Kunde / Monat</div><div class="m-val" id="zMonK">–</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding:18px">
+        <h3 style="margin-bottom:12px">Hochrechnung 12 Monate</h3>
+        <div class="res-grid" style="margin-bottom:0">
+          <div class="metric"><div class="m-lbl">Schmidtke Jahr 1</div><div class="m-val pos" id="zYrS">–</div></div>
+          <div class="metric"><div class="m-lbl">Kunde Jahr 1</div><div class="m-val" id="zYrK">–</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend" style="margin-top:14px">
+      <span class="pill">Mindestvergütung läuft ab Monat 1</span>
+      <span class="pill">Ads &amp; Umsatz ab erstem Webinar</span>
+      <span class="pill">Technik, Kameras &amp; Regie bei Curator inklusive</span>
+      <span class="pill">Cold-Calling-Umsatz nicht enthalten</span>
+    </div>
+  </section>
+
+  <!-- 5. WIN-WIN -->
+  <section>
+    <h2><span class="num">05</span>Warum Partnerschaft statt Dienstleister</h2>
+    <p class="lead">Der Unterschied in einem Satz: Eine Agentur schreibt eine Rechnung – ein Partner verdient erst, wenn ihr verdient. Genau dasselbe Risiko, derselbe Upside.</p>
+
+    <div class="split" style="margin-bottom:22px">
+      <div class="card k-compare" style="border-color:var(--bad)">
+        <h3 style="color:#f2a39e">Klassische Agentur</h3>
+        <ul style="list-style:none;font-size:14.5px;line-height:2">
+          <li>✕ Fixe Kosten – egal ob etwas rauskommt</li>
+          <li>✕ „Antesten ohne Folgen" – Geld weg, kein Ergebnis</li>
+          <li>✕ Jede Zusatzleistung kostet extra</li>
+          <li>✕ Rechnung geschrieben, dann weg</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:var(--accent)">
+        <h3 style="color:#7ee2b0">Share-Deal mit Schmidtke</h3>
+        <ul style="list-style:none;font-size:14.5px;line-height:2">
+          <li>✓ Großes Geld erst bei echten Abschlüssen</li>
+          <li>✓ Nur 3.000 € Sockel + Ad Spend als Fixrisiko</li>
+          <li>✓ „Whatever it takes" – alles inklusive</li>
+          <li>✓ Partner, der am Ergebnis mitverdient</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="terms">
+      <div class="term"><div class="t-h">Kein fixes Risiko</div><div class="t-b">Einziger garantierter Block: <b>3.000 €/Monat</b> + Werbebudget. Schmidtke trägt das Erfolgsrisiko mit.</div></div>
+      <div class="term"><div class="t-h">Gleiche Anreize</div><div class="t-b">50/50 – Schmidtke verdient <b>nur, wenn ihr verdient</b>. Volle Power statt Einzelposten-Abrechnung.</div></div>
+      <div class="term"><div class="t-h">Saubere Kosten</div><div class="t-b">Vor der Teilung nur Ad Spend abgezogen – <b>kein</b> Personal, Software, Overhead.</div></div>
+      <div class="term"><div class="t-h">Löst das Personalproblem</div><div class="t-b">40–50 Anfragen/Monat <b>ohne neues Team</b> – schlank &amp; effizient.</div></div>
+      <div class="term"><div class="t-h">Winziger Break-Even</div><div class="t-b">Schon <b>&lt; ein halber Abschluss/Monat</b> deckt alles. Verlustrisiko nahe null.</div></div>
+      <div class="term"><div class="t-h">Ein bleibendes Asset</div><div class="t-b">Personal Brand, Website, Funnel &amp; Liste – wertvoller, weniger personenabhängig. Creatives bleiben.</div></div>
+      <div class="term"><div class="t-h">Technik &amp; Regie inklusive</div><div class="t-b">Webinar-Technik, <b>Kameras, Regie &amp; Aufnahme</b> direkt bei Curator vor Ort – kein eigenes Studio nötig.</div></div>
+    </div>
+
+    <div class="verdict ok" style="margin-top:22px;font-size:15px;text-align:left;line-height:1.6">
+      ⚖️ <b>Fair, weil symmetrisch:</b> Euer „Preis" ist die Hälfte des Netto-Umsatzes und das Durchhalten der ~4 Monate Aufbau. Genau dafür ist die Mindestvergütung niedrig und der Break-Even transparent – die Teilung greift erst, wenn real Geld da ist. Beide Seiten teilen dasselbe Risiko und denselben Gewinn.
+    </div>
+  </section>
+
+  <footer>
+    Curator · internes Arbeitsmodell für das Partnerschaftsgespräch. Szenario-Rechner auf Basis des Standard-Kooperationsvertrags (50 % / 3.000 € Mindestvergütung). Keine Garantie. Umsatz pro Abschluss &amp; Quoten vor dem Termin mit echten Zahlen final kalibrieren.
+  </footer>
+</div>
+
+<script>
+(function(){
+  const eur0 = n => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+  const num = (n,d=0) => new Intl.NumberFormat('de-DE',{maximumFractionDigits:d}).format(n);
+  const pct = n => num(n,0)+' %';
+
+  const ids = ['budget','cpl','org','show','teil','call','close','rev','min','launch'];
+  const el = {}; ids.forEach(i=>el[i]=document.getElementById(i));
+  let share = 50;
+
+  document.querySelectorAll('#shareSeg button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#shareSeg button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); share=+b.dataset.s; render();
+    });
+  });
+  let mode='rate';
+  document.querySelectorAll('#modeSeg button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#modeSeg button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); mode=b.dataset.m;
+      document.getElementById('ctrlShow').style.display = mode==='rate'?'':'none';
+      document.getElementById('ctrlTeil').style.display = mode==='abs'?'':'none';
+      render();
+    });
+  });
+  ids.forEach(i=>el[i].addEventListener('input',render));
+
+  function render(){
+    const budget=+el.budget.value, cpl=+el.cpl.value, org=+el.org.value,
+          showR=+el.show.value/100, callR=+el.call.value/100, closeR=+el.close.value/100,
+          rev=+el.rev.value, mind=+el.min.value, launch=+el.launch.value;
+
+    document.getElementById('vLaunch').textContent='Monat '+launch;
+    document.getElementById('vBudget').textContent=eur0(budget);
+    document.getElementById('vCpl').textContent=eur0(cpl);
+    document.getElementById('vOrg').textContent=num(org);
+    document.getElementById('vShow').textContent=pct(el.show.value);
+    document.getElementById('vTeil').textContent=num(el.teil.value);
+    document.getElementById('vCall').textContent=pct(el.call.value);
+    document.getElementById('vClose').textContent=pct(el.close.value);
+    document.getElementById('vRev').textContent=eur0(rev);
+    document.getElementById('vMin').textContent=eur0(mind);
+    document.getElementById('vShare').textContent=pct(share);
+
+    const anm = (cpl>0?budget/cpl:0)+org;
+    let teil;
+    if(mode==='abs'){
+      teil = +el.teil.value;
+      document.getElementById('teilHint').textContent =
+        'entspricht '+(anm>0?pct(teil/anm*100):'–')+' Show-up von '+num(anm,0)+' Anmeldungen';
+    } else {
+      teil = anm*showR;
+    }
+    const calls = teil*callR;
+    const abschl = calls*closeR;
+    const umsatz = abschl*rev;
+    const base = Math.max(0, umsatz-budget);           // Berechnungsgrundlage
+    const shareVal = base*share/100;
+    const schmidtke = Math.max(mind, shareVal);         // Mindestvergütung angerechnet
+    const kunde = umsatz - budget - schmidtke;
+    const perDeal = abschl>0 ? schmidtke/abschl : 0;
+    const floorActive = shareVal < mind;
+
+    // funnel
+    document.getElementById('f0').textContent=eur0(budget);
+    document.getElementById('f1').textContent=num(anm,0);
+    document.getElementById('f2').textContent=num(teil,0);
+    document.getElementById('f3').textContent=num(calls,1);
+    document.getElementById('f4').textContent=num(abschl,1);
+
+    // takes
+    document.getElementById('rSchmidtke').textContent=eur0(schmidtke);
+    document.getElementById('rSchmidtkeSub').textContent= floorActive
+        ? 'Mindestvergütung greift (Beteiligung wäre '+eur0(shareVal)+')'
+        : pct(share)+' der Basis';
+    const kE=document.getElementById('rKunde'); kE.textContent=eur0(kunde);
+    kE.className='tk-v '+(kunde>=0?'':'neg');
+
+    document.getElementById('rClose').textContent=num(abschl,1);
+    document.getElementById('rRev').textContent=eur0(umsatz);
+    document.getElementById('rBase').textContent=eur0(base);
+    document.getElementById('rPer').textContent= abschl>0?eur0(perDeal):'–';
+
+    // break-even: Abschlüsse, ab denen Kunde >= 0  => umsatz >= budget + mind (Sockelbereich)
+    const beAbschl = rev>0 ? (budget+mind)/rev : 0;
+    const ratio = beAbschl>0 ? abschl/beAbschl : (abschl>0?2:0);
+    document.getElementById('beFill').style.width=Math.max(0,Math.min(100,ratio*50))+'%';
+    document.getElementById('beNeed').textContent='Nötig: '+num(beAbschl,2)+' Abschl./Monat';
+    document.getElementById('beCap').textContent='Du hast '+num(abschl,1)+' Abschlüsse/Monat → '+
+      (abschl>=beAbschl ? 'klar über Break-Even' : 'es fehlen '+num(beAbschl-abschl,2)+' Abschlüsse');
+
+    const v=document.getElementById('verdict');
+    if(kunde>=0){v.className='verdict ok';v.textContent='✓ Win-Win · Schmidtke '+eur0(schmidtke)+' · Kunde '+eur0(kunde)+' pro Monat';}
+    else{v.className='verdict no';v.textContent='✕ Kunde noch im Minus ('+eur0(kunde)+') – Volumen oder Quoten zu niedrig';}
+
+    // ZIELRASTER
+    const buildMonths = launch-1;                         // Monate ohne Umsatz
+    const aktiv = 12-buildMonths;                         // Vollbetriebsmonate
+    const aufbauSchmidtke = buildMonths*mind;             // nur Mindestvergütung im Aufbau
+    const aufbauKunde = -aufbauSchmidtke;
+    const vbUmsatz = aktiv*umsatz, vbSchmidtke = aktiv*schmidtke, vbKunde = aktiv*kunde;
+    const yrUmsatz=vbUmsatz, yrSchmidtke=aufbauSchmidtke+vbSchmidtke, yrKunde=aufbauKunde+vbKunde;
+
+    const rows=[
+      ['Aufbauphase', buildMonths>1?('Monat 1–'+buildMonths):'Monat 1', 0, aufbauSchmidtke, aufbauKunde],
+      ['Vollbetrieb', 'Monat '+launch+'–12', vbUmsatz, vbSchmidtke, vbKunde],
+    ];
+
+    // Roadmap
+    const rm=[
+      ['Monat 1','Kickoff','Strategie · Angebot · Wording'],
+      ['Monat 2','Branding','Website · Videos (Aufnahme bei Curator)'],
+      ['Monat '+Math.max(2,launch-1),'Funnel & Ads','Webinar-Setup · Technik & Regie · Vorlauf'],
+      ['Monat '+launch,'🎥 Erstes Webinar','Live · erste Abschlüsse'],
+      ['ab Monat '+launch,'Skalieren','Optimieren · Leads nachlegen'],
+    ];
+    document.getElementById('roadmap').innerHTML = rm.map((s,i)=>{
+      const hl = i===3 ? 'style="border-color:var(--accent);background:linear-gradient(160deg,rgba(59,167,118,.16),rgba(59,167,118,.03))"' : '';
+      const box='<div class="step" '+hl+'><div class="s-lbl">'+s[0]+'</div><div class="s-val">'+s[1]+'</div><div style="font-size:11.5px;color:var(--muted);margin-top:3px">'+s[2]+'</div></div>';
+      return box + (i<rm.length-1 ? '<div class="arrow">→</div>' : '');
+    }).join('');
+    let html='';
+    rows.forEach(r=>{const c=r[4]>=0?'pos':'neg';
+      html+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+eur0(r[2])+'</td><td class="pos">'+eur0(r[3])+'</td><td class="'+c+'">'+eur0(r[4])+'</td></tr>';});
+    const tc=yrKunde>=0?'pos':'neg';
+    html+='<tr class="total"><td>Jahr 1 gesamt</td><td>12 Monate</td><td>'+eur0(yrUmsatz)+'</td><td class="pos">'+eur0(yrSchmidtke)+'</td><td class="'+tc+'">'+eur0(yrKunde)+'</td></tr>';
+    document.getElementById('zielBody').innerHTML=html;
+
+    document.getElementById('zMonS').textContent=eur0(schmidtke);
+    const zk=document.getElementById('zMonK'); zk.textContent=eur0(kunde); zk.className='m-val '+(kunde>=0?'pos':'neg');
+    document.getElementById('zYrS').textContent=eur0(yrSchmidtke);
+    const zyk=document.getElementById('zYrK'); zyk.textContent=eur0(yrKunde); zyk.className='m-val '+(yrKunde>=0?'pos':'neg');
+  }
+  render();
+})();
+</script>
+</body>
+</html>
