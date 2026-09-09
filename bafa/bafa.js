@@ -104,7 +104,8 @@
       var result=calculate();result.firstName=form.elements.vorname.value;sessionStorage.setItem(STORAGE_KEY,JSON.stringify(result));
       var button=document.getElementById('submitButton'),error=document.getElementById('submitError');button.disabled=true;button.textContent='Wird berechnet …';error.hidden=true;
       try{
-        if(location.protocol!=='file:'){
+        // GitHub Pages ist nur die freigegebene Vorschau und kann keine POST-Formulare verarbeiten.
+        if(location.protocol!=='file:'&&!location.hostname.endsWith('github.io')){
           var response=await fetch(location.pathname,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
           if(!response.ok)throw new Error('HTTP '+response.status);
         }
