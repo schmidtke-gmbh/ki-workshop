@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Förderhöhe berechnen | Schmidtke GmbH</title>
+  <meta name="description" content="Unverbindliche Berechnung eines möglichen staatlichen Beratungszuschusses.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="bafa.css">
+</head>
+<body class="funnel-page">
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Zurück zur Landingpage">schmidtke<span>.</span></a>
+      <p class="header-trust">Kostenlos · unverbindlich · ca. 2 Minuten</p>
+    </div>
+  </header>
+  <main id="main" class="funnel">
+    <div class="funnel__shell">
+      <div class="progress" aria-label="Fortschritt">
+        <div class="progress__meta"><span id="progressText">Schritt 1 von 4</span><span id="progressPercent">25 %</span></div>
+        <div class="progress__track"><span id="progressBar"></span></div>
+      </div>
+
+      <form id="fundingForm" class="calculator" name="foerdercheck-content-marketing" method="POST" action="bafa-ergebnis.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <p class="honeypot" aria-hidden="true"><label>Nicht ausfüllen <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <input type="hidden" name="form-name" value="foerdercheck-content-marketing">
+        <input type="hidden" name="foerderquote" id="foerderquote">
+        <input type="hidden" name="foerderbetrag" id="foerderbetrag">
+        <input type="hidden" name="eigenanteil" id="eigenanteil">
+        <input type="hidden" name="lead_klasse" id="lead_klasse">
+        <input type="hidden" name="utm_source" id="utm_source">
+        <input type="hidden" name="utm_medium" id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="utm_content" id="utm_content">
+        <input type="hidden" name="utm_term" id="utm_term">
+        <input type="hidden" name="gclid" id="gclid">
+        <input type="hidden" name="landing_page" id="landing_page">
+        <input type="hidden" name="referrer" id="referrer">
+
+        <section class="form-step is-active" data-step="1" aria-labelledby="step1-title">
+          <p class="eyebrow">Förderregion</p>
+          <h1 id="step1-title">Wo sitzt dein Unternehmen?</h1>
+          <p class="form-step__intro">Der Unternehmenssitz bestimmt, ob für die Beispielrechnung 50 oder 80 Prozent angesetzt werden.</p>
+          <div class="field-grid field-grid--two">
+            <div class="field"><label for="plz">Postleitzahl</label><input id="plz" name="plz" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="78628" required><p class="field__error">Bitte gib eine fünfstellige PLZ ein.</p></div>
+            <div class="field"><label for="bundesland">Bundesland</label><select id="bundesland" name="bundesland" required><option value="">Bitte auswählen</option><option>Baden-Württemberg</option><option>Bayern</option><option>Berlin</option><option>Brandenburg</option><option>Bremen</option><option>Hamburg</option><option>Hessen</option><option>Mecklenburg-Vorpommern</option><option>Niedersachsen</option><option>Nordrhein-Westfalen</option><option>Rheinland-Pfalz</option><option>Saarland</option><option>Sachsen</option><option>Sachsen-Anhalt</option><option>Schleswig-Holstein</option><option>Thüringen</option></select><p class="field__error">Bitte wähle das Bundesland aus.</p></div>
+          </div>
+          <div class="field conditional-region" id="regionField" hidden>
+            <label for="sonderregion">Gehört dein Unternehmenssitz zu dieser abweichenden Förderregion?</label>
+            <select id="sonderregion" name="sonderregion">
+              <option value="">Bitte auswählen</option>
+              <option value="lueneburg">Region Lüneburg</option>
+              <option value="trier">Region Trier</option>
+              <option value="leipzig">Stadt Leipzig, Landkreis Leipzig oder Nordsachsen</option>
+              <option value="nein">Nein</option>
+            </select>
+            <p class="field__hint" id="regionHint">Diese Angabe verhindert eine falsche Förderquote.</p>
+            <p class="field__error">Bitte ordne den Sitz ein.</p>
+          </div>
+          <div class="field"><label for="beratungskosten">Geplante Beratungskosten netto</label><div class="input-suffix"><input id="beratungskosten" name="beratungskosten" type="number" inputmode="decimal" min="500" max="10000" step="100" value="3500" required><span>€</span></div><p class="field__hint">Für die Beispielrechnung werden höchstens 3.500 € angesetzt.</p><p class="field__error">Bitte gib einen Betrag ab 500 € ein.</p></div>
+          <div class="form-nav"><a href="index.html" class="button button--ghost">Zurück</a><button class="button" type="button" data-next>Weiter</button></div>
+        </section>
+
+        <section class="form-step" data-step="2" aria-labelledby="step2-title" hidden>
+          <p class="eyebrow">Unternehmen</p><h2 id="step2-title">Ist dein Betrieb bereit für Wachstum?</h2><p class="form-step__intro">Mit diesen Angaben prüfen wir, ob die Beratung zu deiner aktuellen Unternehmenssituation passt.</p>
+          <fieldset class="field"><legend>Wie viele Mitarbeitende arbeiten im Unternehmen?</legend><div class="choice-grid"><label class="choice"><input type="radio" name="mitarbeiter" value="0-1" required><span>0–1</span></label><label class="choice"><input type="radio" name="mitarbeiter" value="2-5"><span>2–5</span></label><label class="choice"><input type="radio" name="mitarbeiter" value="6-20"><span>6–20</span></label><label class="choice"><input type="radio" name="mitarbeiter" value="21+"><span>21+</span></label></div><p class="field__error">Bitte wähle eine Größe aus.</p></fieldset>
+          <fieldset class="field"><legend>Gibt es ein erprobtes Angebot mit zahlenden Kunden?</legend><div class="choice-grid choice-grid--two"><label class="choice"><input type="radio" name="angebot_validiert" value="ja" required><span>Ja, regelmäßig</span></label><label class="choice"><input type="radio" name="angebot_validiert" value="nein"><span>Noch nicht</span></label></div><p class="field__error">Bitte wähle eine Antwort aus.</p></fieldset>
+          <div class="field"><label for="unternehmensalter">Seit wann besteht das Unternehmen?</label><select id="unternehmensalter" name="unternehmensalter" required><option value="">Bitte auswählen</option><option value="unter-1">Unter 1 Jahr</option><option value="1-2">1–2 Jahre</option><option value="3-5">3–5 Jahre</option><option value="6+">Mehr als 5 Jahre</option></select><p class="field__error">Bitte wähle eine Antwort aus.</p></div>
+          <div class="form-nav"><button class="button button--ghost" type="button" data-back>Zurück</button><button class="button" type="button" data-next>Weiter</button></div>
+        </section>
+
+        <section class="form-step" data-step="3" aria-labelledby="step3-title" hidden>
+          <p class="eyebrow">Vorhaben</p><h2 id="step3-title">Was soll Marketing für dich lösen?</h2><p class="form-step__intro">Deine Antworten entscheiden nicht über eine Förderung, helfen uns aber bei der fachlichen Eignung.</p>
+          <div class="field"><label for="beratungsziel">Wichtigstes Beratungsziel</label><select id="beratungsziel" name="beratungsziel" required><option value="">Bitte auswählen</option><option value="mehr-anfragen">Mehr qualifizierte Kundenanfragen</option><option value="arbeitgebermarke">Mitarbeitende gewinnen</option><option value="sichtbarkeit">Reichweite und Markenbekanntheit</option><option value="vertrieb">Marketing und Vertrieb strukturieren</option><option value="prozesse">Content-Prozesse im Team aufbauen</option><option value="sonstiges">Anderes Ziel</option></select><p class="field__error">Bitte wähle ein Ziel aus.</p></div>
+          <div class="field"><label for="marketingbudget">Monatliches Budget für Marketing und Umsetzung</label><select id="marketingbudget" name="marketingbudget" required><option value="">Bitte auswählen</option><option value="unter-500">Unter 500 €</option><option value="500-1500">500–1.500 €</option><option value="1500-3000">1.500–3.000 €</option><option value="3000-5000">3.000–5.000 €</option><option value="5000+">Über 5.000 €</option></select><p class="field__error">Bitte wähle ein Budget aus.</p></div>
+          <fieldset class="field"><legend>Wann möchtest du starten?</legend><div class="choice-grid"><label class="choice"><input type="radio" name="startzeitraum" value="sofort" required><span>Sofort</span></label><label class="choice"><input type="radio" name="startzeitraum" value="1-3"><span>1–3 Monate</span></label><label class="choice"><input type="radio" name="startzeitraum" value="3-6"><span>3–6 Monate</span></label><label class="choice"><input type="radio" name="startzeitraum" value="spaeter"><span>Später</span></label></div><p class="field__error">Bitte wähle einen Zeitraum aus.</p></fieldset>
+          <div class="form-nav"><button class="button button--ghost" type="button" data-back>Zurück</button><button class="button" type="button" data-next>Ergebnis vorbereiten</button></div>
+        </section>
+
+        <section class="form-step" data-step="4" aria-labelledby="step4-title" hidden>
+          <p class="eyebrow">Deine Berechnung ist bereit</p><h2 id="step4-title">Jetzt persönliche Beispielrechnung anzeigen</h2><p class="form-step__intro">Gib deine Kontaktdaten ein. Direkt danach siehst du den möglichen Zuschuss und deinen voraussichtlichen Eigenanteil. Wenn dein Vorhaben grundsätzlich passt, melden wir uns persönlich.</p>
+          <div class="locked-result" aria-hidden="true"><span>Möglicher Zuschuss</span><strong id="lockedAmount">•.••• €</strong><div></div><small>Ergebnis nach Kontaktangabe sichtbar</small></div>
+          <div class="field-grid field-grid--two"><div class="field"><label for="vorname">Vorname</label><input id="vorname" name="vorname" autocomplete="given-name" required><p class="field__error">Bitte gib deinen Vornamen ein.</p></div><div class="field"><label for="nachname">Nachname</label><input id="nachname" name="nachname" autocomplete="family-name" required><p class="field__error">Bitte gib deinen Nachnamen ein.</p></div></div>
+          <div class="field"><label for="unternehmen">Unternehmen</label><input id="unternehmen" name="unternehmen" autocomplete="organization" required><p class="field__error">Bitte gib dein Unternehmen ein.</p></div>
+          <div class="field-grid field-grid--two"><div class="field"><label for="email">Geschäftliche E-Mail</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required><p class="field__error">Bitte gib eine gültige E-Mail-Adresse ein.</p></div><div class="field"><label for="telefon">Telefon</label><input id="telefon" name="telefon" type="tel" inputmode="tel" autocomplete="tel" minlength="7" required><p class="field__error">Bitte gib eine vollständige Telefonnummer ein.</p></div></div>
+          <label class="consent"><input type="checkbox" name="datenschutz_bestaetigt" value="ja" required><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.</span></label><p class="field__error consent-error">Bitte bestätige die Datenschutzerklärung.</p>
+          <p class="form-note">Du erhältst eine persönliche Ersteinschätzung – keine automatische Förderzusage.</p>
+          <div class="form-nav"><button class="button button--ghost" type="button" data-back>Zurück</button><button class="button" id="submitButton" type="submit">Beispielrechnung anzeigen</button></div>
+          <p class="submit-error" id="submitError" role="alert" hidden>Die Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder kontaktiere uns direkt.</p>
+        </section>
+      </form>
+      <noscript><p class="noscript">Für die direkte Berechnung wird JavaScript benötigt. Das Formular kann dennoch klassisch abgesendet werden; wir senden dir die Einschätzung anschließend persönlich.</p></noscript>
+      <p class="funnel__legal">Unverbindliche Modellrechnung. Maßgeblich sind die jeweils geltenden Richtlinien und die Entscheidung der Bewilligungsstelle.</p>
+    </div>
+  </main>
+  <script src="bafa.js" defer></script>
+</body>
+</html>
